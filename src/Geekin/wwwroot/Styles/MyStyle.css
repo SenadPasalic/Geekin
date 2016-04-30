@@ -1,12 +1,15 @@
 ﻿body {
-    background-color: #477C67;
+    background-color: #477c67;
 }
 
 #container
 {
-    width:900px;
-    margin:0 auto;
-    overflow:auto;
+    width:100%;
+    margin-left: 100px;
+    margin-right: 100px;
+    margin-top: 50px;
+   /* margin:0 auto; */
+   /*overflow:hidden; */
     background-color:red;
 }
 #header
@@ -15,7 +18,7 @@
 }
 #nav
 {
-    overflow:auto;
+   /* overflow:auto; */
 }
 #nav ul
 {
@@ -31,7 +34,7 @@
 }
 #main
 {
-    overflow:auto;
+   /* overflow:auto; */
 }
 #main_left
 {
