@@ -13,7 +13,8 @@
         <!--en rad med en cell och under en rad med två celler-->
         <form>
             <tr><td>Rubrik: </td><td><input type="textbox" value="Rubrik" name="Rubrikruta" /></td></tr>
-            <tr><td>Text: </td><td><input type="textbox" value="text" name="artikeltext"/>&nbsp;</td></tr>
+            <!--rows och cols måste sättas automatiskt beroende på textens storlek.-->
+            <tr><td>Text: </td><td><textarea rows="4" cols="50">  </textarea> </td></tr>
             <tr><td><input type="submit" value="Post" name="submit" /></td></tr>
         </form>
     </table>
