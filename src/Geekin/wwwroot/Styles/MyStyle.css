@@ -16,13 +16,13 @@
 }
 #myNavbar
 {
-    /*Fixes the responsive issue*/
+    /*Fixes the responsive issue (two click makes collapsed menu disappear)*/
     display:block !important;
     /*Size and position*/
     width:76%;   
     margin:0 auto;
-     /*Hide dropdown items*/
-    overflow:auto; 
+    /*Hide dropdown scroll*/
+    overflow:hidden;
     /*Opacity*/
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";       /* IE 8 */
     filter: alpha(opacity=80);  /* IE 5-7 */
@@ -34,7 +34,7 @@
 {
     list-style:none;
     height:30px;
-    padding:0px;
+    padding:0px 1px;
     margin:0px;
 }
 #nav ul li
@@ -125,4 +125,9 @@
 .searchbox
 {    
     margin-top: 2px;
+}
+/*Bild*/
+img.resize{
+   max-width:200%;
+   max-height:200%;
 }
