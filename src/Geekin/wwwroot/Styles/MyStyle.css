@@ -134,3 +134,29 @@ img.resize{
    top: -14px; /* Moves the image 2px closer to the top of the page */
    left: -14px;
 }
+
+/*Till tisdag*/
+/*Lägg länkarna i rad*/
+/*.nav-menu ul li { display: inline-block; float: left;line-height: 1; list-style: none;  padding: 0; position:relative;}
+
+/*Snyggare länkar*/
+/*.nav-menu li a {
+  color: white;
+  position: relative;
+  text-decoration: none;
+  font-family: oswald,sans-serif;
+  line-height: 58px;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  display: block;
+  padding: 0 16px;
+}*/
+
+/*"Box" on hoover*/
+/*.nav-menu li:first-child a, .nav-menu li a:hover {
+  /*border-bottom-color: $(tertiary.background.color);*/
+/*background-color: dodgerblue;
+}*/
+
