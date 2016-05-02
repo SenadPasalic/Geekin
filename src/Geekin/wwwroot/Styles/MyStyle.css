@@ -128,6 +128,7 @@
 }
 /*Bild*/
 img.resize{
-   max-width:200%;
-   max-height:200%;
+   max-width:180%;
+   max-height:180%;
+   align-items:center;
 }

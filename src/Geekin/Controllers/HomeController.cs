@@ -11,7 +11,13 @@ namespace Geekin.Controllers
     public class HomeController : Controller
     {
         // GET: /<controller>/
+        //Index
         public IActionResult Index()
+        {
+            return View();
+        }
+        //Admin
+        public IActionResult Admin()
         {
             return View();
         }
