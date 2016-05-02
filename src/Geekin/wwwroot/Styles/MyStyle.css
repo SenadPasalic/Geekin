@@ -1,5 +1,6 @@
 ﻿body {
-    background-color: #477C67;
+    /*funkar inte, skrivs över av container?*/
+    /*background-color:black;*/
 }
 
 #container
@@ -7,7 +8,7 @@
     width:900px;
     margin:0 auto;
     overflow:auto;
-    background-color:red;
+    background-color:cornflowerblue;
 }
 #header
 {
@@ -47,3 +48,75 @@
 {
     height:40px;
 }
+/*****************************************
+Main Menu CSS
+******************************************/
+/*.nav-menu { background: $(primary.background.color); margin: 0 auto; padding: 0; width: 100%; z-index: 299; }*/
+/*.nav-menu ul{ list-style:none;  margin:0 auto; padding:0; z-index: 999;}*/
+
+/*Lägg länkarna i rad*/
+.nav-menu ul li { display: inline-block; float: left;line-height: 1; list-style: none;  padding: 0; position:relative;}
+
+/*Snyggare länkar*/
+.nav-menu li a {
+  color: white;
+  position: relative;
+  text-decoration: none;
+  font-family: oswald,sans-serif;
+  line-height: 58px;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  display: block;
+  padding: 0 16px;
+}
+
+/*.blog_menus a{
+transition:all .2s ease-in-out;
+-moz-transition:all .2s ease-in-out;
+-o-transition:all .2s ease-in-out;
+-moz-transition:all .2s ease-in-out;
+-webkit-transition:all .2s ease-in-out;
+}*/
+
+/*"Box" on hoover*/
+.nav-menu li:first-child a, .nav-menu li a:hover {
+  /*border-bottom-color: $(tertiary.background.color);*/
+background-color: dodgerblue;
+}
+
+/*ul.sub-menu li {
+  display: block;
+  float: none;
+}*/
+
+/*.nav-menu ul ul.sub-menu {
+  visibility: hidden;
+  opacity: 0;
+  margin-top: 50px;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 200px;
+  background: #202020;
+  transition: all .15s ease-in-out;
+  -moz-transition: all .15s ease-in-out;
+  -o-transition: all .15s ease-in-out;
+  -moz-transition: all .15s ease-in-out;
+  -webkit-transition: all .15s ease-in-out;
+}*/
+
+/*.nav-menu ul li:hover ul {
+  visibility: visible;
+  opacity: 1;
+  margin-top: 0;
+  z-index: 10000;
+}*/
+
+/*.nav-menu li ul li a {
+  border-top: 0;
+  padding: 0 14px;
+  line-height: 36px;
+}*/
+
