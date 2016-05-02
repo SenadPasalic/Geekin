@@ -15,21 +15,7 @@
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <!-- FontAwesome icons -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
-    <title>@ViewBag.Title</title>
-
-    <script>
-        if (MooTools != undefined) {
-            var mHide = Element.prototype.hide;
-            Element.implement({
-                hide: function () {
-                    if (this.hasClass("deeper.dropdown")) {
-                        return this;
-                    }
-                    mHide.apply(this, arguments);
-                }
-            });
-        }
-    </script>
+    <title>@ViewBag.Title</title>   
 </head>
 <body>
     <div class="container-fluid" id="container">
@@ -43,7 +29,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#"> <img src="~/pictures/geekinlogo.jpg" class="resize" /> </a>                                        
+                    <a class="navbar-brand" href="/home/index"> <img src="~/pictures/geekinlogo.jpg" class="resize" /> </a>                                        
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav">
