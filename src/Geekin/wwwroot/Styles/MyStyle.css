@@ -128,7 +128,9 @@
 }
 /*Bild*/
 img.resize{
-   max-width:180%;
-   max-height:180%;
-   align-items:center;
+   max-width:240%;
+   max-height:245%;
+   position: relative; /* Declared position allows for location changes */
+   top: -14px; /* Moves the image 2px closer to the top of the page */
+   left: -14px;
 }
