@@ -8,26 +8,12 @@
     <title>Admin Page</title>
     <link href="~/styles/adminstyle.css" rel="stylesheet" />
          <script>
-            function resize() {
-                var kolumner = document.getElementById("cols").value;
-                if (isNaN(kolumner)===true)
-                {
-                    document.getElementById("checkout").innerHTML="Not a valid numbers for cols!";
-                }
-                else
-                {
-                    document.getElementById("textarea").cols = kolumner;
-                }
-                var rader = document.getElementById("rows").value;
-                if (isNaN(rader ===true))
-                {
-                    document.getElementById("checkout").innerHTML="Not a valid number for rows!";
-                }
-                else
-                {
-                    document.getElementById("textarea").rows = rader;
-                }
-                }
+             function resize() {
+                 var kolumner = document.getElementById("cols").value;
+                 var rader = document.getElementById("rows").value;
+                     document.getElementById("textarea").cols = kolumner;
+                     document.getElementById("textarea").rows = rader;
+             }
     </script>
     
 </head>
