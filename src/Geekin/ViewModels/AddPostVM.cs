@@ -8,11 +8,15 @@ namespace Geekin.ViewModels
 {
     public class AddPostVM
     {
-        [Display(Name = "Text")]
-        [Required(ErrorMessage = "Skriv in text som skall publiceras.")]
-        public string PostText { get; set; }
+        [Display(Name = "Title")]
+        [Required(ErrorMessage = "Title required.")]
+        public string Title { get; set; }
 
-        [Display(Name = "Länk")]
+        [Display(Name = "Content")]
+        [Required(ErrorMessage = "Did you forget the content?")]
+        public string Text { get; set; }
+
+        [Display(Name = "Link")]
         public string Link { get; set; }
 
         public DateTime TimePosted { get; set; }

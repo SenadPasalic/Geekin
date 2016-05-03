@@ -8,12 +8,18 @@
 
 
 <div asp-validation-summary="ValidationSummary.All"></div>
-<form asp-controller="Admin" asp-action="AddPost">
-    <label asp-for="PostText"></label>
+<form asp-controller="Admin" asp-action="AddPost">    
+    <label asp-for="Title"></label>
     <br />
-    <input asp-for="PostText" />
-    <span asp-validation-for="PostText"></span>
+    <input asp-for="Title" />
+    <span asp-validation-for="Title"></span>
     <br /><br>
+    @Html.TextArea("Text", new { @class = "form-control"})    
+    @*<label asp-for="Text"></label>
+    <br />
+    <input asp-for="Text" />
+    <span asp-validation-for="Text"></span>*@
+    <br />
     <label asp-for="Link"></label>
     <br />
     <input asp-for="Link" />
@@ -22,4 +28,3 @@
     <br />
     <input type="submit" value="Posta inlägg" class="btn btn-success" data-dismiss="modal" />
 </form>
-}
