@@ -134,7 +134,16 @@ img.resize{
    top: -14px; /* Moves the image 2px closer to the top of the page */
    left: -14px;
 }
-
+#main_left{
+    float:left;
+    margin: 0 1.5%;
+    width: 63%;
+}
+#main_right{
+    float:right;
+    margin: 0 1.5%;
+    width: 30%;
+}
 /*Till tisdag*/
 /*Lägg länkarna i rad*/
 /*.nav-menu ul li { display: inline-block; float: left;line-height: 1; list-style: none;  padding: 0; position:relative;}

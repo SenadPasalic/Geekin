@@ -8,18 +8,13 @@ using Microsoft.AspNet.Mvc;
 
 namespace Geekin.Controllers
 {
-    public class HomeController : Controller
+    public class AdminController : Controller
     {
         // GET: /<controller>/
-        //Home/Index
-        public IActionResult Index()
+        //Admin/AddPost
+        public IActionResult AddPost()
         {
             return View();
         }
-        //Admin
-        public IActionResult Admin()
-        {
-            return View();
-        }        
     }
 }

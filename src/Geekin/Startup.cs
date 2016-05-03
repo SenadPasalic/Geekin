@@ -18,6 +18,13 @@ namespace Geekin
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+
+            //Connection string
+            var connString = @"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename = C:\Users\Administrator\Documents\Geekin.mdf; Integrated Security = True; Connect Timeout = 30";
+
+            //services.AddEntityFramework()
+            //    .AddSqlServer()
+            //    .AddDbContext<DBContext>(o => o.UseSqlServer(connString));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
