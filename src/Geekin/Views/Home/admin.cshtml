@@ -17,18 +17,8 @@
             <!--rows och cols måste sättas automatiskt beroende på textens storlek.
              rows  = Specifies the visible number of lines in a text area
                 cols - Specifies the visible width of a text area-->
-            <tr><td>Text: </td><td><textarea rows="4" cols="50"> 
-                   
-                 </textarea> </td></tr>
-
-@{
-    if (rows => 4)
-    {
-        rows += rows;
-    }
-}
-
-            <tr><td><input type="submit" value="Post" name="submit" /></td></tr>
+            <tr><td> Text: </td><td><input type="textarea" value=" " name="brodtext" /></td></tr>
+<tr><td><input type="submit" value="Post" name="submit" /></td></tr>
         </form>
     </table>
 </body>
