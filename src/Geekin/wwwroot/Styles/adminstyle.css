@@ -8,3 +8,7 @@
 td { border: 1px solid black;
 
 }
+
+#textarea{width: auto;
+         height: auto;
+}
