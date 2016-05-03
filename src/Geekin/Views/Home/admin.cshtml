@@ -7,19 +7,26 @@
     <meta charset="utf-8" />
     <title>Admin Page</title>
     <link href="~/styles/adminstyle.css" rel="stylesheet" />
+    <script>
+        var $rows = document.getElementById("textarea").rows = "300";
+        var $cols = document.getElementById("textarea").cols = "300";
+        //rows = "300";
+        //cols = "300";
+    </script>
+    
 </head>
 <body>
     <table>
            <!--form is used in PHP to $_POST and $_GET variables
                if you have another soluion, free feel to post it-->
-        <form>
+        
             <tr><td>Rubrik: </td><td><input type="textbox" value="Rubrik" name="Rubrikruta"/></td></tr>
             <!--rows och cols måste sättas automatiskt beroende på textens storlek.
              rows  = Specifies the visible number of lines in a text area
                 cols - Specifies the visible width of a text area-->
-            <tr><td> Text: </td><td><textarea value=" " text " name="textarea" cols="50" rows="4"/></textarea></td></tr>
-<tr><td><input type="submit" value="Post" name="submit" /></td></tr>
-        </form>
+            <tr><td> Text: </td><td> <textarea id="textarea" cols="100" rows="100"></textarea></td></tr>
+            <tr><td><input type="submit" value="Post" name="submit" /></td></tr>
+        
     </table>
 </body>
 
