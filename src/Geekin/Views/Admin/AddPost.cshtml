@@ -1,0 +1,25 @@
+﻿@using Geekin.ViewModels
+@model AddPostVM
+@addTagHelper "*, Microsoft.AspNet.Mvc.TagHelpers"
+
+@{
+    ViewBag.Title = "Skriv ett inlägg";
+}
+
+
+<div asp-validation-summary="ValidationSummary.All"></div>
+<form asp-controller="Admin" asp-action="AddPost">
+    <label asp-for="PostText"></label>
+    <br />
+    <input asp-for="PostText" />
+    <span asp-validation-for="PostText"></span>
+    <br /><br>
+    <label asp-for="Link"></label>
+    <br />
+    <input asp-for="Link" />
+    <span asp-validation-for="Link"></span>
+    <br />
+    <br />
+    <input type="submit" value="Posta inlägg" class="btn btn-success" data-dismiss="modal" />
+</form>
+}
