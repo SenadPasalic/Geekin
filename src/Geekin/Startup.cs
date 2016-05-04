@@ -8,6 +8,7 @@ using Microsoft.AspNet.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Geekin.Models;
 using Microsoft.Data.Entity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Geekin
 {
@@ -25,6 +26,21 @@ namespace Geekin
             services.AddEntityFramework()
                 .AddSqlServer()
                 .AddDbContext<DBContext>(o => o.UseSqlServer(connString));
+
+            //Lagra användaren i databasen
+            services.AddIdentity<IdentityUser, IdentityRole>(o =>
+            {
+                //Krav på lösenordet
+                o.Password.RequiredLength = 8;
+                o.Password.RequireNonLetterOrDigit = false;
+                o.Cookies.ApplicationCookie.LoginPath = "/Home/Login";
+            })
+                .AddEntityFrameworkStores<IdentityDbContext>() //Vart det ska lagras
+                .AddDefaultTokenProviders(); //Standard inställingar, regler för lösenord
+
+            services.AddEntityFramework()
+                .AddSqlServer()
+                .AddDbContext<IdentityDbContext>(o => o.UseSqlServer(connString));
 
             // Kopplat mot DB
             services.AddTransient<IPostsRepository, DbPostsRepository>();
