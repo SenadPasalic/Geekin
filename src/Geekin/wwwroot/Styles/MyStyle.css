@@ -177,3 +177,6 @@ img.resize{
   border-color:red;
 }
 
+#form-control custom{
+    width: 30%;
+}
