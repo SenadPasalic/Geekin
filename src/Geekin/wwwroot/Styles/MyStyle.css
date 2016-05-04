@@ -169,3 +169,11 @@ img.resize{
 /*background-color: dodgerblue;
 }*/
 
+/* styles for validation helpers */
+.field-validation-error {
+    color: #b94a48;
+}
+.input-validation-error{  
+  border-color:red;
+}
+
