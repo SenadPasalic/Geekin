@@ -13,7 +13,6 @@ namespace Geekin
 {
     public class Startup
     {
-        //Test för att commita
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
@@ -26,6 +25,9 @@ namespace Geekin
             services.AddEntityFramework()
                 .AddSqlServer()
                 .AddDbContext<DBContext>(o => o.UseSqlServer(connString));
+
+            // Kopplat mot DB
+            services.AddTransient<IPostsRepository, DbPostsRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

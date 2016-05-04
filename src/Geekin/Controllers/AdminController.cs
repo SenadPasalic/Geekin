@@ -17,6 +17,7 @@ namespace Geekin.Controllers
         {
             _postsRepository = postsRepository;
         }
+        
         // GET: /<controller>/
         //Admin/AddPost
         public IActionResult AddPost()
