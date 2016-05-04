@@ -9,11 +9,12 @@ namespace Geekin.ViewModels
     public class LoginVM
     {
         [Display(Name = "E-mail")]
-        [Required(ErrorMessage = "Fyll i din e-postadress.")]
+        [Required(ErrorMessage = "Wrong input of e-mail.")]
+        [DataType(DataType.EmailAddress)]
         public string UserName { get; set; }
 
-        [Display(Name = "Lösenord")]
-        [Required(ErrorMessage = "Fyll i ditt lösenord.")]
+        [Display(Name = "Password")]
+        [Required(ErrorMessage = "Password required.")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
     }
