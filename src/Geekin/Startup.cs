@@ -6,12 +6,14 @@ using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Hosting;
 using Microsoft.AspNet.Http;
 using Microsoft.Extensions.DependencyInjection;
-
+using Geekin.Models;
+using Microsoft.Data.Entity;
 
 namespace Geekin
 {
     public class Startup
     {
+        //Test för att commita
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
@@ -21,9 +23,9 @@ namespace Geekin
             //Connection string
             var connString = @"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename = C:\Users\Administrator\Documents\Geekin.mdf; Integrated Security = True; Connect Timeout = 30";
 
-            //services.AddEntityFramework()
-            //    .AddSqlServer()
-            //    .AddDbContext<DBContext>(o => o.UseSqlServer(connString));
+            services.AddEntityFramework()
+                .AddSqlServer()
+                .AddDbContext<DBContext>(o => o.UseSqlServer(connString));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

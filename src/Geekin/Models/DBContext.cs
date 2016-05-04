@@ -13,7 +13,7 @@ namespace Geekin.Models
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<Post>().ToTable("Posts");
+            modelBuilder.Entity<Post>().ToTable("BlogPost");
         }
     }
 

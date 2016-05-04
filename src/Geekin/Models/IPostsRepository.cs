@@ -37,6 +37,14 @@ namespace Geekin.Models
         public void AddPost(AddPostVM viewModel, string postedBy)
         {
             //var user = _context.Users.
+            _context.Posts.Add(new Post
+            {
+                Title = viewModel.Title,
+                Text = viewModel.Text,
+                Link = viewModel.Link,
+                TimePosted = DateTime.Now
+            });
+            _context.SaveChanges();
         }
     }
 }
