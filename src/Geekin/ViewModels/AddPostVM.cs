@@ -14,6 +14,7 @@ namespace Geekin.ViewModels
 
         [Display(Name = "Content")]
         [Required(ErrorMessage = "Did you forget the content?")]
+        [DataType(DataType.MultilineText)]
         public string Text { get; set; }
 
         [Display(Name = "Link")]

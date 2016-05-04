@@ -3,28 +3,32 @@
 @addTagHelper "*, Microsoft.AspNet.Mvc.TagHelpers"
 
 @{
-    ViewBag.Title = "Skriv ett inlägg";
+    ViewBag.Title = "Create a new post";
 }
 
-
-<div asp-validation-summary="ValidationSummary.All"></div>
-<form asp-controller="Admin" asp-action="AddPost">    
-    <label asp-for="Title"></label>
-    <br />
-    <input asp-for="Title" />
-    <span asp-validation-for="Title"></span>
-    <br /><br>
-    @Html.TextArea("Text", new { @class = "form-control"})    
-    @*<label asp-for="Text"></label>
-    <br />
-    <input asp-for="Text" />
-    <span asp-validation-for="Text"></span>*@
-    <br />
-    <label asp-for="Link"></label>
-    <br />
-    <input asp-for="Link" />
-    <span asp-validation-for="Link"></span>
-    <br />
-    <br />
-    <input type="submit" value="Posta inlägg" class="btn btn-success" data-dismiss="modal" />
-</form>
+<body>
+    <div asp-validation-summary="ValidationSummary.All"></div>
+    <form asp-controller="Post" asp-action="AddPost">
+        <label asp-for="Title"></label>
+        <br />
+        <input asp-for="Title" placeholder="Title" onfocus="if (this.placeholder == 'Title') { this.placeholder = ''; }" />
+        <span asp-validation-for="Title"></span>
+        <br /><br>
+        @*@Html.EditorFor(model => model.Text, new { htmlAttributes = new { @class = "form-control"} })*@
+        @*<label asp-for="Text"></label>
+            <br />
+            <input asp-for="Text" />
+            <span asp-validation-for="Text"></span>*@
+        <br />
+        <label asp-for="Link" placeholder="Link"></label>
+        <br />
+        <input asp-for="Link" placeholder="Link" onfocus="if (this.placeholder == 'Link') { this.Link = ''; }"/>
+        <span asp-validation-for="Link"></span>
+        <br />
+        <br />
+        <input type="submit" value="Post" class="btn btn-success" data-dismiss="modal" />
+    </form>
+</body>
+    <script src="~/scripts/jquery.min.js"></script>
+    <script src="~/scripts/jquery.validate.min.js"></script>
+    <script src="~/scripts/jquery.validate.unobtrusive.min.js"></script>
