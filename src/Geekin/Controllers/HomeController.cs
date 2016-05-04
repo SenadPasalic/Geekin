@@ -20,6 +20,12 @@ namespace Geekin.Controllers
         public IActionResult Admin()
         {
             return View();
-        }        
+        }
+
+        //Login
+        public IActionResult Login()
+        {
+            return View();
+        }
     }
 }
