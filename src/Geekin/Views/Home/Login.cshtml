@@ -9,19 +9,23 @@
 <link href="~/styles/mystyle.css" rel="stylesheet" />
 <body>
     <form asp-controller="Home" asp-action="Login">
-        <label asp-for="UserName"></label>
         <br />
-        <input asp-for="UserName" class="form-control custom" placeholder="UserName" />
-        <span asp-validation-for="UserName"></span>
-        <br /><br>
-        <label asp-for="Password"></label>
-        <br />
-        <input asp-for="Password" class="form-control custom" placeholder="Password" />
-        <span asp-validation-for="Password"></span>
-        <br />
-        <br />
-        <input type="submit" value="Login" class="btn btn-success" data-dismiss="modal" />
-    </form>
+        <div class="col-md-5">
+            <label asp-for="UserName"></label>
+            <input asp-for="UserName" class="form-control custom" placeholder="UserName" />
+            <span asp-validation-for="UserName"></span>
+        </div>
+        <br /><br /><br /><br />
+        <div class="col-md-5">
+            <label asp-for="Password"></label>
+            <br />
+            <input asp-for="Password" class="form-control custom" placeholder="Password" />
+            <span asp-validation-for="Password"></span>
+            <br />
+            <br />
+            <input type="submit" value="Login" class="btn btn-success" data-dismiss="modal" />
+        </div>
+</form>
 </body>
 <script src="~/scripts/jquery.min.js"></script>
 <script src="~/scripts/jquery.validate.min.js"></script>
