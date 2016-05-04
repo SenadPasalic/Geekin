@@ -14,7 +14,7 @@ namespace Geekin.Models
         //public string PostedByFirstName { get; set; }
         //public string PostedByLastName { get; set; }
         public DateTime TimePosted { get; set; }
-        public string UserID { get; set; }
+        //public string UserID { get; set; }
         //public virtual User User { get; set; }
     }
 }
