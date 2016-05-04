@@ -14,7 +14,7 @@
         <input asp-for="Title" placeholder="Title" onfocus="if (this.placeholder == 'Title') { this.placeholder = ''; }" />
         <span asp-validation-for="Title"></span>
         <br /><br>
-        @*@Html.EditorFor(model => model.Text, new { htmlAttributes = new { @class = "form-control"} })*@
+        @Html.EditorFor(model => model.Text, new { htmlAttributes = new { @class = "form-control"} })
         @*<label asp-for="Text"></label>
             <br />
             <input asp-for="Text" />
