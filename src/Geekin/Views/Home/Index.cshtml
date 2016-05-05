@@ -1,4 +1,7 @@
-﻿<div class="row">
+﻿@model Geekin.ViewModels.PostListVM[]
+@addTagHelper "*, Microsoft.AspNet.Mvc.TagHelpers"
+
+<div class="row">
     <div>
         Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
 
@@ -18,6 +21,20 @@
             <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#newPost" style="float: right; margin-top: 25px">Nytt inlägg</button>
         }
         <center><h2 style="font-weight: 700; color: #555555; text-decoration: underline">Admin posts</h2></center>
+        
+        @foreach (var item in Model)
+        {
+            <b>@item.Title</b>
+            @Html.Raw(item.Text)
+            if(@item.Link != null)
+            {
+                <a href="@item.Link" target="_blank">@item.Link</a>
+            }
+            <div style="color: #999999">@item.TimePosted</div>
+            <br />
+            <br />
+        }
+
         <div id="commentRightBorder">
             @*@Component.Invoke("AdminPosts")*@
         </div>

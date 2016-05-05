@@ -6,6 +6,7 @@ using Microsoft.AspNet.Mvc;
 using Geekin.ViewModels;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using Geekin.Models;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -16,23 +17,27 @@ namespace Geekin.Controllers
         UserManager<IdentityUser> userManager; //klassvariabel
         SignInManager<IdentityUser> signInManager; //klassvariabel
         IdentityDbContext context; //klassvariabel      
+        IPostsRepository repository;
 
         //Konstruktor
         public HomeController(
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager,
-            IdentityDbContext context)
+            IdentityDbContext context,
+            IPostsRepository repository)
         {
             this.userManager = userManager; //sätter klassvariabeln
             this.signInManager = signInManager; //sätter klassvariabeln
             this.context = context; //sätter klassvariabeln 
+            this.repository = repository;
         } 
 
         // GET: /<controller>/
         //Home/Index
         public IActionResult Index()
         {
-            return View();
+            var model = repository.GetAll();
+            return View(model);
         }
         //Admin
         public IActionResult Admin()
