@@ -24,13 +24,16 @@
         
         @foreach (var item in Model)
         {
-            <b>@item.Title</b>
+            <h5><b>@item.Title</b></h5>
             @Html.Raw(item.Text)
-            if(@item.Link != null)
+            if (@item.Link != null)
             {
-                <a href="@item.Link" target="_blank">@item.Link</a>
-            }
-            <div style="color: #999999">@item.TimePosted</div>
+                <br />
+                <iframe width="420" height="345" src="@item.Link"></iframe>
+                //<iframe width="420" height="345" src="http://www.youtube.com/embed/XGSy3_Czz8k"></iframe>
+                //<a href="@item.Link" target="_blank">@item.Link</a>
+                }
+            <div style="color: #999999">Posted: @item.TimePosted</div>
             <br />
             <br />
         }
