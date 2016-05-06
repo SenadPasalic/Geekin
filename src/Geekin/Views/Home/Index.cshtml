@@ -1,6 +1,7 @@
 ﻿@model Geekin.ViewModels.PostListVM[]
 @addTagHelper "*, Microsoft.AspNet.Mvc.TagHelpers"
 
+
 <div class="row">
     <div>
         Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
@@ -29,7 +30,8 @@
             if (@item.Link != null)
             {
                 <br />
-                <iframe width="420" height="345" src="@item.Link"></iframe>
+                <br />                           
+                <iframe width="420" height="345" src="@item.Link" target="_top"></iframe>
                 //<iframe width="420" height="345" src="http://www.youtube.com/embed/XGSy3_Czz8k"></iframe>
                 //<a href="@item.Link" target="_blank">@item.Link</a>
                 }

@@ -41,7 +41,7 @@ namespace Geekin.Models
             {
                 Title = viewModel.Title,
                 Text = viewModel.Text,
-                Link = viewModel.Link,
+                Link = viewModel.Link.Replace("watch?v=", "v/"),
                 TimePosted = DateTime.Now
             });
             _context.SaveChanges();
