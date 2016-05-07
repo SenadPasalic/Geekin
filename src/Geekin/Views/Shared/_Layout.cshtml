@@ -17,6 +17,15 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
     <!-- Tab icon -->
     <link rel="icon" href="~/pictures/geekin.png">
+    <!-- TinyMce -->
+    <script src='//cdn.tinymce.com/4/tinymce.min.js'></script>
+    <script>
+      tinymce.init({
+          selector: '#mytextarea',
+          mode: "textareas",
+          theme: "modern",
+      });
+    </script>
     <title>@ViewBag.Title</title>   
 </head>
 <body>

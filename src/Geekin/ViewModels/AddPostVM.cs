@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
+
 namespace Geekin.ViewModels
 {
     public class AddPostVM
@@ -13,6 +14,7 @@ namespace Geekin.ViewModels
         public string Title { get; set; }
 
         [Display(Name = "Content")]
+        [UIHint("tinymce_jquery_full")] //AllowHtml
         [Required(ErrorMessage = "Did you forget the content?")]
         [DataType(DataType.MultilineText)]
         public string Text { get; set; }

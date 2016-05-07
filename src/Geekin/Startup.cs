@@ -9,6 +9,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Geekin.Models;
 using Microsoft.Data.Entity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.Mvc.Razor;
+
 
 namespace Geekin
 {
@@ -23,7 +25,7 @@ namespace Geekin
             //Connection string
             //var connString = @"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename = C:\Users\Administrator\Documents\Geekin.mdf; Integrated Security = True; Connect Timeout = 30";
             var connString = @"Data Source =.; Initial Catalog = Geekin; Integrated Security = True; Connect Timeout = 15; Encrypt = False; TrustServerCertificate = False; ApplicationIntent = ReadWrite; MultiSubnetFailover = False";
-
+                        
             services.AddEntityFramework()
                 .AddSqlServer()
                 .AddDbContext<DBContext>(o => o.UseSqlServer(connString));
