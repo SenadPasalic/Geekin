@@ -40,7 +40,7 @@ namespace Geekin.Models
             _context.Posts.Add(new Post
             {
                 Title = viewModel.Title,
-                Text = viewModel.Text,
+                Text = viewModel.mytextarea,
                 Link = viewModel.Link.Replace("watch?v=", "v/"),
                 TimePosted = DateTime.Now
             });

@@ -14,10 +14,10 @@ namespace Geekin.ViewModels
         public string Title { get; set; }
 
         [Display(Name = "Content")]
-        [UIHint("tinymce_jquery_full")] //AllowHtml
         [Required(ErrorMessage = "Did you forget the content?")]
         [DataType(DataType.MultilineText)]
-        public string Text { get; set; }
+        [UIHint("tinymce_jquery_full")] //AllowHtml
+        public string mytextarea { get; set; }
 
         [Display(Name = "Link")]
         public string Link { get; set; }

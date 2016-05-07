@@ -18,12 +18,9 @@
         <span asp-validation-for="Title"></span>
         <br /><br>
         @*@Html.EditorFor(model => model.Text, new { htmlAttributes = new { @class = "form-control" } })*@
-        <textarea asp-for="Text" id="mytextarea" name="mytextarea"></textarea>
-            @*@Html.TextArea("Text", new {cols=60, rows=10})*@
-            @*@Html.EditorFor(model => model.Text, new { htmlAttributes = new { @class = "form-control" } })*@
-        @*</textarea>*@
-
-        <span asp-validation-for="Text"></span>
+        @*<textarea asp-for="Text" id="mytextarea" name="mytextarea"></textarea>*@       
+        <textarea asp-for="mytextarea" id="mytextarea" name="mytextarea" rows="5" cols="40"></textarea>
+        <span asp-validation-for="mytextarea"></span>
         @*<label asp-for="Text"></label>
         <br />
         <input asp-for="Text" />
