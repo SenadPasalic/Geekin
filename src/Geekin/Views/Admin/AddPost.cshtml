@@ -6,6 +6,10 @@
     ViewBag.Title = "Create a new post";
 }
 
+<script>
+    var text = getElementById("mytextarea").value;
+</script>
+
 <body>
     <form asp-controller="Admin" asp-action="AddPost" method="post">
         <label asp-for="Title"></label>
@@ -13,8 +17,8 @@
         <input asp-for="Title" placeholder="Title" onfocus="if (this.placeholder == 'Title') { this.placeholder = ''; }" />
         <span asp-validation-for="Title"></span>
         <br /><br>
-        @Html.EditorFor(model => model.Text, new { htmlAttributes = new { @class = "form-control" } })
-        @*<textarea asp-for="Text" id="mytextarea" name="mytextarea">*@
+        @*@Html.EditorFor(model => model.Text, new { htmlAttributes = new { @class = "form-control" } })*@
+        <textarea asp-for="Text" id="mytextarea" name="mytextarea"></textarea>
             @*@Html.TextArea("Text", new {cols=60, rows=10})*@
             @*@Html.EditorFor(model => model.Text, new { htmlAttributes = new { @class = "form-control" } })*@
         @*</textarea>*@
