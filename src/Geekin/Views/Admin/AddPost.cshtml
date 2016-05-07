@@ -7,31 +7,32 @@
 }
 
 <script>
-    var textarea = document.getElementById("mytextarea").value;
-
+    var text = getElementById("mytextarea").value;
 </script>
 
 <body>
-    <form asp-controller="Admin" asp-action="AddPost">
+    <form asp-controller="Admin" asp-action="AddPost" method="post">
         <label asp-for="Title"></label>
         <br />
         <input asp-for="Title" placeholder="Title" onfocus="if (this.placeholder == 'Title') { this.placeholder = ''; }" />
         <span asp-validation-for="Title"></span>
         <br /><br>
-        @Html.EditorFor(model => model.Text, new { htmlAttributes = new { @class = "form-control"} })
-       <span asp-validation-for="Text"></span>
-            <label asp-for="Text"></label>
-            <br />
-            @*@Html.EditorFor(model => model.Text, new { htmlAttributes = new { @class = "form-control" } })*@
-            <textarea asp-for="Text" id="mytextarea" name="mytextarea"></textarea>
-            @*@Html.TextArea("Text", new {cols=60, rows=10})*@
-            @*@Html.EditorFor(model => model.Text, new { htmlAttributes = new { @class = "form-control" } })*@
-        @*</textarea>*@
-            <input asp-for="Link" placeholder="Link" onfocus="if (this.placeholder == 'Link') { this.Link = ''; }" />
-            <span asp-validation-for="Link"></span>
-            <br />
-            <br />
-            <input type="submit" value="Post" class="btn btn-success" data-dismiss="modal" />
+        @*@Html.EditorFor(model => model.Text, new { htmlAttributes = new { @class = "form-control" } })*@
+        @*<textarea asp-for="Text" id="mytextarea" name="mytextarea"></textarea>*@       
+        <textarea asp-for="mytextarea" id="mytextarea" name="mytextarea" rows="5" cols="40"></textarea>
+        <span asp-validation-for="mytextarea"></span>
+        @*<label asp-for="Text"></label>
+        <br />
+        <input asp-for="Text" />
+        <span asp-validation-for="Text"></span>*@
+        <br />
+        <label asp-for="Link" placeholder="Link"></label>
+        <br />
+        <input asp-for="Link" placeholder="Link" onfocus="if (this.placeholder == 'Link') { this.Link = ''; }" />
+        <span asp-validation-for="Link"></span>
+        <br />
+        <br />
+        <input type="submit" value="Post" class="btn btn-success" data-dismiss="modal" />
 </form>
 </body>
     <script src="~/scripts/jquery.min.js"></script>
