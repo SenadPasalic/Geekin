@@ -6,10 +6,6 @@
     ViewBag.Title = "Create a new post";
 }
 
-<script>
-    var text = getElementById("mytextarea").value;
-</script>
-
 <body>
     <form asp-controller="Admin" asp-action="AddPost" method="post">
         <label asp-for="Title"></label>

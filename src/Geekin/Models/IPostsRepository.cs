@@ -36,12 +36,18 @@ namespace Geekin.Models
         }
         public void AddPost(AddPostVM viewModel, string postedBy)
         {
+            if(viewModel.Link != null)
+            {
+                viewModel.Link = viewModel.Link.Replace("watch?v=", "v/");
+            }
+
+
             //var user = _context.Users.
             _context.Posts.Add(new Post
             {
                 Title = viewModel.Title,
                 Text = viewModel.mytextarea,
-                Link = viewModel.Link.Replace("watch?v=", "v/"),
+                Link = viewModel.Link,
                 TimePosted = DateTime.Now
             });
             _context.SaveChanges();
