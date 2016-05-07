@@ -12,14 +12,21 @@
         <br />
         <div class="col-md-5">
             <label asp-for="UserName"></label>
-            <input asp-for="UserName" class="form-control custom" placeholder="UserName" />
+            <!--
+                    märk stye="width: 300px" - den anger storleken på textlådan för lösenord
+                 -->
+            
+            <input asp-for="UserName" class="form-control custom" style="width:300px;" placeholder="UserName" />
             <span asp-validation-for="UserName"></span>
         </div>
         <br /><br /><br /><br />
         <div class="col-md-5">
             <label asp-for="Password"></label>
             <br />
-            <input asp-for="Password" class="form-control custom" placeholder="Password" />
+            <!--
+                märk stye="width: 300px" - den anger storleken på textlådan för lösenord
+            -->         
+            <input asp-for="Password" class="form-control custom" style="width:300px;" placeholder="Password" />
             <span asp-validation-for="Password"></span>
             <br />
             <br />
