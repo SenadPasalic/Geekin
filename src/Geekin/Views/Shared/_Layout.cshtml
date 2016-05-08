@@ -3,10 +3,8 @@
 <html>
 <head>
     @*<meta name="viewport" content="width=device-width" />*@
-    @* CSS *@
-    <link href="~/styles/mystyle.css" rel="stylesheet" />
     @* Bootstrap *@
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">    
     @* Navbar *@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -26,6 +24,8 @@
           theme: "modern",
       });
     </script>
+    @* CSS *@
+    <link href="~/styles/mystyle.css" rel="stylesheet" />
     <title>@ViewBag.Title</title>   
 </head>
 <body>
@@ -44,7 +44,7 @@
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="#">Home</a></li>
+                        <li class="active"><a href="/home/index">Home</a></li>
                         <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">Page 1 <span class="caret"></span></a>
                             <ul class="dropdown-menu">
