@@ -19,7 +19,7 @@ namespace Geekin.ViewModels
         [UIHint("tinymce_jquery_full")] //AllowHtml
         public string mytextarea { get; set; }
 
-        [Display(Name = "Link")]
+        [Display(Name = "YouTube link")]
         public string Link { get; set; }
 
         public DateTime TimePosted { get; set; }

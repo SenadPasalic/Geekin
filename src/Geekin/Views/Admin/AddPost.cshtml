@@ -10,7 +10,7 @@
     <form asp-controller="Admin" asp-action="AddPost" method="post">
         <label asp-for="Title"></label>
         <br />
-        <input asp-for="Title" placeholder="Title" onfocus="if (this.placeholder == 'Title') { this.placeholder = ''; }" />
+        <input asp-for="Title" placeholder="Title" />
         <span asp-validation-for="Title"></span>
         <br /><br>
         @*@Html.EditorFor(model => model.Text, new { htmlAttributes = new { @class = "form-control" } })*@
@@ -22,9 +22,9 @@
         <input asp-for="Text" />
         <span asp-validation-for="Text"></span>*@
         <br />
-        <label asp-for="Link" placeholder="Link"></label>
+        <label asp-for="Link"></label>
         <br />
-        <input asp-for="Link" placeholder="Link" onfocus="if (this.placeholder == 'Link') { this.Link = ''; }" />
+        <input asp-for="Link" placeholder="YouTube link" />
         <span asp-validation-for="Link"></span>
         <br />
         <br />
