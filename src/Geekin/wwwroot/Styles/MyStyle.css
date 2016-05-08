@@ -177,6 +177,9 @@ img.resize{
   border-color:red;
 }
 
-#form-control custom{
-    width: 30%;
+/* Karousel W3C*/
+.carousel-inner > .item > img,
+.carousel-inner > .item > a > img {
+    width: 70%;
+    margin: auto;
 }
