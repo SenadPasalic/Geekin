@@ -25,7 +25,7 @@ namespace Geekin
             //var connString = @"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename = C:\Users\Administrator\Documents\Geekin.mdf; Integrated Security = True; Connect Timeout = 30";
             //var connString = @"Data Source =.; Initial Catalog = Geekin; Integrated Security = True; Connect Timeout = 15; Encrypt = False; TrustServerCertificate = False; ApplicationIntent = ReadWrite; MultiSubnetFailover = False";
             //Alexis connenctionstrings
-           // var connString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\novas\Documents\geekin.mdf;Integrated Security=True;Connect Timeout=30";
+            var connString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\novas\Documents\geekin.mdf;Integrated Security=True;Connect Timeout=30";
 
             services.AddEntityFramework()
                 .AddSqlServer()

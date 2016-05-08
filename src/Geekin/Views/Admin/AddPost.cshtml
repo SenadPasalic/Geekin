@@ -14,7 +14,8 @@
         <span asp-validation-for="Title"></span>
         <br /><br>
         @*@Html.EditorFor(model => model.Text, new { htmlAttributes = new { @class = "form-control" } })*@
-        @*<textarea asp-for="Text" id="mytextarea" name="mytextarea"></textarea>*@       
+        @*<textarea asp-for="Text" id="mytextarea" name="mytextarea"></textarea>*@  
+        @*"mytextarea" istället för "textarea" för att kanske inte asp förstår vad som menas med textarea*@     
         <textarea asp-for="mytextarea" id="mytextarea" name="mytextarea" rows="5" cols="40"></textarea>
         <span asp-validation-for="mytextarea"></span>
         @*<label asp-for="Text"></label>
