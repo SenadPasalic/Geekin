@@ -6,6 +6,19 @@
     ViewBag.Title = "Create a new post";
 }
 
+<script>
+    /* TinyMCE */
+    tinymce.init({
+        /*Tar bort <p> et i nedre raden i TinyMCE editorn*/
+        forced_root_block: ""
+
+
+
+
+
+    });
+</script>
+
 <body>
     <form asp-controller="Admin" asp-action="AddPost" method="post">
         <label asp-for="Title"></label>

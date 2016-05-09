@@ -9,33 +9,30 @@
     <div id="myCarousel" class="carousel slide" data-ride="carousel">
         <!-- Indicators -->
         <ol class="carousel-indicators">
-            <li data-target="#myCarousel" data-slide-to="0"></li>
-            <li data-target="#myCarousel" data-slide-to="1" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
             <li data-target="#myCarousel" data-slide-to="2"></li>
             <li data-target="#myCarousel" data-slide-to="3"></li>
         </ol>
 
-        @{ 
+        @{
             var countToFour = 0;
-            
-            @foreach (var item in Model)
+
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner" role="listbox">
+                @foreach (var item in Model)
             {
                 if (@item.Link != null)
                 {
-                    <!-- Wrapper for slides -->
-                    <div class="carousel-inner" role="listbox">
                         @if (countToFour == 0)
                         {
-                            <div class="item">
-                                <div class="item active">
-                                    <iframe width="100%" height="600px" src="@item.Link" frameborder="0" allowfullscreen=""></iframe>
-                                    <div class="carousel-caption">
-                                        <h3>@item.Title</h3>
-                                        @*<p>The atmosphere in Chania has a touch of Florence and Venice.</p>*@
-                                    </div>
+                            <div class="item active">
+                                <iframe width="100%" height="600px" src="@item.Link" frameborder="0" allowfullscreen=""></iframe>
+                                <div class="carousel-caption">
+                                    <h3>@item.Title</h3>
+                                    @*<p>The atmosphere in Chania has a touch of Florence and Venice.</p>*@
                                 </div>
                             </div>
-
                         }
                         @if (countToFour != 0)
                         {
@@ -47,26 +44,26 @@
                                 </div>
                             </div>
                         }
-                    </div>
-                    countToFour++;
+                        countToFour++;
+                    }
+                    if (countToFour == 4)
+                    {
+                        break;
+                    }
                 }
-                if (countToFour == 4)
-                {
-                    break;
-                }
-            }
+            </div>
         }
 
 
-            @*<div class="item active">
+        @*<div class="item active">
                 <img src="img_chania.jpg" alt="Chania" width="460" height="345">
                 <div class="carousel-caption">
                     <h3>Chania</h3>
                     <p>The atmosphere in Chania has a touch of Florence and Venice.</p>
                 </div>
-            </div>*@   
-            
-                     
+            </div>*@
+
+
         @* </div> *@
 
         <!-- Left and right controls -->
@@ -97,15 +94,15 @@
         Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
 
         Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-               
-        
+
+
         @* Om user är admin visa knapp som länkar till addpost tex. *@
         @if (User.IsInRole("Admin"))
         {
             <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#newPost" style="float: right; margin-top: 25px">Nytt inlägg</button>
         }
         <center><h2 style="font-weight: 700; color: #555555; text-decoration: underline">Admin posts</h2></center>
-        
+
         @foreach (var item in Model)
         {
             <h5><b>@item.Title</b></h5>
@@ -113,7 +110,7 @@
             if (@item.Link != null)
             {
                 <br />
-                <br />                           
+                <br />
                 <iframe width="420" height="345" src="@item.Link" target="_top"></iframe>
                 //<iframe width="420" height="345" src="http://www.youtube.com/embed/XGSy3_Czz8k"></iframe>
                 //<a href="@item.Link" target="_blank">@item.Link</a>
