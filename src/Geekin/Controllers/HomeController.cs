@@ -44,6 +44,14 @@ namespace Geekin.Controllers
         {
             return View();
         }
+
+        //för att visa index 2
+        public IActionResult Index2()
+        {
+            var model = repository.GetAll();
+            return View(model);
+        }
+
         //Login
         public IActionResult Login()
         {

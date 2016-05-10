@@ -192,3 +192,11 @@ img.resize{
     left:285px;
     right:285px;   
 }
+
+/*Like button*/
+.fa-heart {
+    font-size: 1.5em;
+}
+.fa-heart:hover {
+    color: red;
+}

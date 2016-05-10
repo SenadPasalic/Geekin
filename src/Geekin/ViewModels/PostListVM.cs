@@ -13,5 +13,6 @@ namespace Geekin.ViewModels
         public string PostedByFirstname { get; set; }
         public string PostedByLastname { get; set; }
         public DateTime TimePosted { get; set; }
+        public int LikeCounter { get; set; }
     }
 }

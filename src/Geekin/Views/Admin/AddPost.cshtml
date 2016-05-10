@@ -6,17 +6,18 @@
     ViewBag.Title = "Create a new post";
 }
 
+
 <body>
     <form asp-controller="Admin" asp-action="AddPost" method="post">
         <label asp-for="Title"></label>
         <br />
-        <input asp-for="Title" placeholder="Title" />
+        <input asp-for="Title" placeholder="Title" style="width:300px;"/>
         <span asp-validation-for="Title"></span>
         <br /><br>
         @*@Html.EditorFor(model => model.Text, new { htmlAttributes = new { @class = "form-control" } })*@
         @*<textarea asp-for="Text" id="mytextarea" name="mytextarea"></textarea>*@  
         @*"mytextarea" istället för "textarea" för att kanske inte asp förstår vad som menas med textarea*@     
-        <textarea asp-for="mytextarea" id="mytextarea" name="mytextarea" rows="5" cols="40"></textarea>
+        <textarea asp-for="mytextarea" class="tinyMCE" id="mytextarea" name="mytextarea" rows="5" cols="40"></textarea>
         <span asp-validation-for="mytextarea"></span>
         @*<label asp-for="Text"></label>
         <br />
@@ -25,28 +26,14 @@
         <br />
         <label asp-for="Link"></label>
         <br />
-        <input asp-for="Link" placeholder="YouTube link" />
+        <input asp-for="Link" placeholder="YouTube link" style="width:300px;"/>
         <span asp-validation-for="Link"></span>
         <br />
         <br />
-        <input type="submit" value="Post" class="btn btn-success" data-dismiss="modal" />
+        <button type="submit" value="Post" class="btn btn-success" data-dismiss="modal"><span class="fa fa-upload" aria-hidden="true"></span> Post</button>
 </form>
 </body>
     <script src="~/scripts/jquery.min.js"></script>
     <script src="~/scripts/jquery.validate.min.js"></script>
     <script src="~/scripts/jquery.validate.unobtrusive.min.js"></script>
 
-    <script>
-    /* TinyMCE */
-    tinymce.init({        
-        plugins: [
-                'advlist autolink lists link image charmap print preview anchor',
-                'searchreplace visualblocks code fullscreen',
-                'insertdatetime media table contextmenu paste code',
-                'textcolor colorpicker'
-        ],
-        toolbar: 'forecolor backcolor | undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | media',
-        //Tar bort <p> et i nedre raden i TinyMCE editorn
-        forced_root_block: ""
-    });
-</script>

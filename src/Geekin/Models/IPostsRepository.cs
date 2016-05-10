@@ -30,7 +30,8 @@ namespace Geekin.Models
                     Title = o.Title,
                     Text = o.Text,
                     Link = o.Link,
-                    TimePosted = o.TimePosted
+                    TimePosted = o.TimePosted,
+                    //LikeCounter = o.LikeCounter
                 })
                 .ToArray();
         }
@@ -38,7 +39,7 @@ namespace Geekin.Models
         {
             if(viewModel.Link != null)
             {
-                viewModel.Link = viewModel.Link.Replace("watch?v=", "v/");
+                viewModel.Link = viewModel.Link.Replace("watch?v=", "embed/");
             }
 
 
@@ -52,5 +53,6 @@ namespace Geekin.Models
             });
             _context.SaveChanges();
         }
+
     }
 }
