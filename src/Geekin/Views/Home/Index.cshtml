@@ -25,34 +25,35 @@
                 if (@item.Link != null)
                 {
                         @if (countToFour == 0)
-                        {
-                            <div class="item active">
-                                <iframe height="600px" src="@item.Link" frameborder="0" allowfullscreen=""></iframe>
-                                <div class="carousel-caption">
-                                    <h3>@item.Title</h3>
-                                    @*<p>The atmosphere in Chania has a touch of Florence and Venice.</p>*@
-                                </div>
-                            </div>
+                        {<div class="carousel-caption">
+                    <div class="item active">
+                        <iframe height="600px" src="@item.Link" frameborder="0" allowfullscreen=""></iframe>
+                        <div class="carousel-caption">
+                            <h3>@item.Title</h3>
+                            @*<p>The atmosphere in Chania has a touch of Florence and Venice.</p>*@
+                        </div>
+                    </div>
+                </div>
                         }
-                        @if (countToFour != 0)
+                    @if (countToFour != 0)
                         {
-                            <div class="item">
-                                <iframe height="600px" src="@item.Link" frameborder="0" allowfullscreen=""></iframe>
-                                <div class="carousel-caption">
-                                    <h3>@item.Title</h3>
-                                    @*<p>The atmosphere in Chania has a touch of Florence and Venice.</p>*@
-                                </div>
+                        <div class="item">
+                            <iframe height="600px" src="@item.Link" frameborder="0" allowfullscreen=""></iframe>
+                            <div class="carousel-caption">
+                                <h3>@item.Title</h3>
+                                @*<p>The atmosphere in Chania has a touch of Florence and Venice.</p>*@
                             </div>
-                        }
-                        countToFour++;
+                        </div>
+                    }
+                    countToFour++;
                     }
                     if (countToFour == 4)
                     {
-                        break;
+                    break;
                     }
-                }
-            </div>
-        }
+                    }
+                </div>
+                        }
 
 
         @*<div class="item active">
