@@ -17,7 +17,8 @@
     "Microsoft.Extensions.Configuration.Abstractions": "1.0.0-rc1-final",
     "Microsoft.Extensions.Configuration.Json": "1.0.0-rc1-final",
     "NuGetEnablePackageRestore": "2.0.0",
-    "TinyMCE.MVC.JQuery": "3.4.7"
+    "TinyMCE.MVC.JQuery": "3.4.7",
+    "Twitter.Bootstrap.Less": "3.3.6"
   },
 
   "commands": {
