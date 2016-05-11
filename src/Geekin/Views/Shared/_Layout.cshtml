@@ -4,7 +4,7 @@
 <head>
     @*<meta name="viewport" content="width=device-width" />*@
     @* Bootstrap *@
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">    
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     @* Navbar *@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,82 +18,91 @@
     <!-- TinyMce -->
     <script src='//cdn.tinymce.com/4/tinymce.min.js'></script>
     <script>
-    /* TinyMCE */
+        /* TinyMCE */
         tinymce.init({
             selector: 'textarea#mytextarea',
-        plugins: [
-                'advlist autolink lists link image charmap print preview anchor',
-                'searchreplace visualblocks code fullscreen',
-                'insertdatetime media table contextmenu paste code',
-                'textcolor colorpicker'
-        ],
-        toolbar: 'forecolor backcolor | undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | media',
-        //Tar bort <p> et i nedre raden i TinyMCE editorn
-        forced_root_block: "",
-        //Tar bort File->New Document
-        removed_menuitems: 'newdocument'
-    });
+            plugins: [
+                    'advlist autolink lists link image charmap print preview anchor',
+                    'searchreplace visualblocks code fullscreen',
+                    'insertdatetime media table contextmenu paste code',
+                    'textcolor colorpicker'
+            ],
+            toolbar: 'forecolor backcolor | undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | media',
+            //Tar bort <p> et i nedre raden i TinyMCE editorn
+            forced_root_block: "",
+            //Tar bort File->New Document
+            removed_menuitems: 'newdocument'
+        });
     </script>
     @* CSS *@
     <link href="~/styles/mystyle.css" rel="stylesheet" />
-    <title>@ViewBag.Title</title>   
+    <title>@ViewBag.Title</title>
 </head>
 <body>
     <div class="container-fluid" id="container">
         <div id="header">1 Header</div>
         @* Navbar *@
-        <nav class="navbar navbar-inverse navbar-fixed-top" id="myNavbar">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="/home/index"> <img src="~/pictures/geekinlogo.jpg" class="resize" /> </a>                                        
-                </div>
-                <div class="collapse navbar-collapse" id="myNavbar">
-                    <ul class="nav nav-pills navbar-nav">
-                        <li class="active"><a href="/home/index">Home</a></li>
-                        <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Page 1 <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">Page 1-1</a></li>
-                                <li><a href="#">Page 1-2</a></li>
-                                <li><a href="#">Page 1-3</a></li>
+        <div class="row">
+            <nav class="navbar navbar-inverse navbar-fixed-top" id="myNavbar">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        @*<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>*@
+                        <a class="navbar-brand" href="/home/index"> <img src="~/pictures/geekinlogo.jpg" class="resize" /> </a>
+                    </div>
+                    <div class="collapse navbar-collapse" id="myNavbar">
+                        @* Navbar buttons *@
+                        <div class="col-md-4">
+                            <ul class="nav nav-pills navbar-nav">
+                                <li class="active"><a href="/home/index">Home</a></li>
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Page 1 <span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#">Page 1-1</a></li>
+                                        <li><a href="#">Page 1-2</a></li>
+                                        <li><a href="#">Page 1-3</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#">Page 2</a></li>
+                                <li><a href="#">Page 3</a></li>
                             </ul>
-                        </li>
-                        <li><a href="#">Page 2</a></li>
-                        <li><a href="#">Page 3</a></li>
-                    </ul>
-                    @* Search box *@
-                    <div class="searchbox col-md-5"> @* col-md-offset-3 *@
-                    <form action="" class="search-form">
-                        <div class="form-group has-feedback">
-                            <label for="search" class="sr-only">Search</label>
-                            <input type="text" class="form-control" name="search" id="search" placeholder="search">
-                            <span class="glyphicon glyphicon-search form-control-feedback"></span>
                         </div>
-                    </form>
-                </div>
-                    <ul class="nav navbar-nav navbar-right"> 
-                        <li><a href="http://facebook.com/keepongeekin"><span class="fa fa-facebook-official fa-1x"></span></a></li>
-                        <li><a href="https://www.instagram.com/geekeenboy/"><span class="fa fa-instagram"></span></a></li>
-                        <li><a href="http://twitter.com/geekeenboy"><span class="fa fa-twitter" ></span></a></li>
-                        <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                        <li><a href="/home/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li> 
-                    </ul>                                                           
-                </div>
+                        @* Search box *@
+                        <div class="searchbox col-md-5">
+                            @* col-md-offset-3 *@
+                            <form action="" class="search-form">
+                                <div class="form-group has-feedback">
+                                    <label for="search" class="sr-only">Search</label>
+                                    <input type="text" class="form-control" name="search" id="search" placeholder="search">
+                                    <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                                </div>
+                            </form>
+                        </div>
+                        @* Social media links *@
+                        <div class="col-md-3">
+                            <ul class="nav navbar-nav navbar-right">
+                                <li><a href="http://facebook.com/keepongeekin"><span class="fa fa-facebook-official fa-1x"></span></a></li>
+                                <li><a href="https://www.instagram.com/geekeenboy/"><span class="fa fa-instagram"></span></a></li>
+                                <li><a href="http://twitter.com/geekeenboy"><span class="fa fa-twitter"></span></a></li>
+                                <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                                <li><a href="/home/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                            </ul>
+                        </div>
+                    </div>
             </div>
         </nav>
-        <div id="main">
-            <div id="main_left">Article @RenderBody()               </div>
-            <div id="main_right">Sidebar</div>
-        </div>
-        <div id="footer">4 Footer</div>
+    </div>
+    <div id="main">
+        <div id="main_left">Article @RenderBody()               </div>
+        <div id="main_right">Sidebar</div>
+    </div>
+    <div id="footer">4 Footer</div>
     </div>
     <div>
-        
+
     </div>
 </body>
 </html>
