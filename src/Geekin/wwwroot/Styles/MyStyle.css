@@ -10,6 +10,7 @@
     overflow:hidden; 
     background-color: #f5eeee;
     padding:100px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 #header
 {
@@ -31,6 +32,7 @@
     -moz-opacity: 0.8;          /* Netscape */
     -khtml-opacity: 0.8;        /* Safari 1.x */
     opacity: 0.8;               /* Good browsers */
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 #nav ul
 {
@@ -298,8 +300,10 @@ a.back-to-top {
     -webkit-border-radius: 30px;
     -moz-border-radius: 30px;
     border-radius: 30px;    
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 a:hover.back-to-top {
 	background-color: #27AE61;
     box-shadow: 0 0 0 1px lightgreen;
+    box-shadow: 0 4px 8px 0 lightgreen, 0 6px 20px 0 lightgreen;
 }
