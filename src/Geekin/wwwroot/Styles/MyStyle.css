@@ -9,11 +9,13 @@
     margin:0 auto; 
     overflow:hidden; 
     background-color: #f5eeee;
+    padding:100px;
 }
 #header
 {
     height:90px;
 }
+/* Navbar */
 #myNavbar
 {
     /*Fixes the responsive issue (two click makes collapsed menu disappear)*/
@@ -41,20 +43,29 @@
 {
     float:left;
     margin:10px;
+    width: calc(100% / 6);
+    box-sizing: border-box;
+}
+#myNavbarItems li:hover {background-color: #111;}
+/* Navbar responsive */
+@media screen and ( max-width: 1080px ) {
+  .searchbox {
+     visibility:hidden;
+  }
 }
 #main
 {
    overflow:auto; 
 }
-#main_left
-{
+#main_left{
     float:left;
-    width:600px;
+    margin: 0 1.5%;
+    width: 63%;
 }
-#main_right
-{
-    float:left;
-    width:300px;
+#main_right{
+    float:right;
+    margin: 0 1.5%;
+    width: 30%;
 }
 #footer
 {
@@ -105,7 +116,7 @@
 }
 .search-form .form-group:hover,
 .search-form .form-group.hover {
-  width: 100%;
+  width: 200%;
   border-radius: 4px 25px 25px 4px;
 }
 .search-form .form-group span.form-control-feedback {
@@ -133,16 +144,6 @@ img.resize{
    position: relative; /* Declared position allows for location changes */
    top: -14px; /* Moves the image 2px closer to the top of the page */
    left: -14px;
-}
-#main_left{
-    float:left;
-    margin: 0 1.5%;
-    width: 63%;
-}
-#main_right{
-    float:right;
-    margin: 0 1.5%;
-    width: 30%;
 }
 /*Till tisdag*/
 /*Lägg länkarna i rad*/
@@ -180,7 +181,7 @@ img.resize{
 /* Karousel W3C*/
 .carousel-inner > .item  > iframe{
     width: 100%;
-    /*margin: auto;*/
+    margin: 0 auto;
 }
 
 .carousel{
@@ -259,4 +260,46 @@ img.resize{
 	-moz-transition: width 8.25s linear;
 	-o-transition: width 8.25s linear;
 	transition: width 8.25s linear;
+}
+
+/* Floating BackToTop button */
+/*body {
+	margin: 0;
+	padding: 0;
+	font-family: Arial, sans-serif;
+	font-size: 14px;
+	line-height: 150%;
+	position: relative;
+	height: 100%;
+}
+.headerContainer,
+.bodyContainer,
+.footerContainer {
+	max-width: 960px;
+	margin: 0 auto;
+	background: #FFF;
+}
+.padding {
+	padding: 20px;
+}
+.bodyContainer {
+	min-height: 500px;
+}*/
+a.back-to-top {
+    display: none;
+    width: 60px;
+    height: 60px;
+    text-indent: -9999px;
+    position: fixed;
+    z-index: 999;
+    right: 20px;
+    bottom: 20px;
+    background: lightgreen url("../pictures/up-arrow.png") no-repeat center 43%;    
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    border-radius: 30px;    
+}
+a:hover.back-to-top {
+	background-color: #27AE61;
+    box-shadow: 0 0 0 1px lightgreen;
 }

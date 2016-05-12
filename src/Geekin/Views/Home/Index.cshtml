@@ -4,10 +4,11 @@
 
 <script>
     //Heart Like
-    function heartLike(LikeCounter, i) {
-        var LikeCounter = LikeCounter + 1;
-        return LikeCounter;
-    }
+    var likes = 0;
+    function heartLike(likes) {
+        likes += 1;
+        document.getElementById("likes").innerHTML = likes;
+    };
     //Timer Slider
     $(document).ready(function () {
         //Events that reset and restart the timer animation when the slides change
@@ -58,8 +59,8 @@
                 {
                         @if (countToFour == 0)
                         {
-                            <div class="item active">
-                                <iframe height="600" src="@item.Link" frameborder="0" allowfullscreen="" controls="2"></iframe>
+                            <div class="item active embed-responsive embed-responsive-16by9">
+                                <iframe class="embed-responsive-item" src="@item.Link"></iframe>
                                 <div class="carousel-caption">
                                     <h3>@item.Title</h3>
                                     @*<p>The atmosphere in Chania has a touch of Florence and Venice.</p>*@
@@ -68,8 +69,8 @@
                         }
                         @if (countToFour != 0)
                         {
-                            <div class="item">
-                                <iframe height="600" src="@item.Link" frameborder="0" allowfullscreen="" controls="2"></iframe>
+                            <div class="item embed-responsive embed-responsive-16by9">
+                                <iframe class="embed-responsive-item" src="@item.Link"></iframe>
                                 <div class="carousel-caption">
                                     <h3>@item.Title</h3>
                                     @*<p>The atmosphere in Chania has a touch of Florence and Venice.</p>*@
@@ -150,11 +151,12 @@
                 //<a href="@item.Link" target="_blank">@item.Link</a>
             }
             <div class="heartLike">
-                <i class="fa fa-heart" aria-hidden="true" @item.LikeCounter= onclick="heartLike(@item.LikeCounter);">@item.LikeCounter</i>
-            </div>
+                <i class="fa fa-heart" aria-hidden="true" onclick="heartLike(@item.LikeCounter)"></i>
+                <p><a id="likes">@item.LikeCounter</a></p>  
+            </div>          
             <!-- LikeBtn.com BEGIN -->
-            <span class="btn likebtn-wrapper" data-theme="ublue" data-identifier="item_1"></span>
-            <script>(function (d, e, s) { if (d.getElementById("likebtn_wjs")) return; a = d.createElement(e); m = d.getElementsByTagName(e)[0]; a.async = 1; a.id = "likebtn_wjs"; a.src = s; m.parentNode.insertBefore(a, m) })(document, "script", "//w.likebtn.com/js/w/widget.js");</script>
+            @*<span class="btn likebtn-wrapper" data-theme="ublue" data-identifier="item_1"></span>
+            <script>(function (d, e, s) { if (d.getElementById("likebtn_wjs")) return; a = d.createElement(e); m = d.getElementsByTagName(e)[0]; a.async = 1; a.id = "likebtn_wjs"; a.src = s; m.parentNode.insertBefore(a, m) })(document, "script", "//w.likebtn.com/js/w/widget.js");</script>*@
             <!-- LikeBtn.com END -->
             <div style="color: #999999">Posted: @item.TimePosted</div>
             <br />

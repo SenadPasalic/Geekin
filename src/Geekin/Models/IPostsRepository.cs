@@ -49,7 +49,8 @@ namespace Geekin.Models
                 Title = viewModel.Title,
                 Text = viewModel.mytextarea,
                 Link = viewModel.Link,
-                TimePosted = DateTime.Now
+                TimePosted = DateTime.Now,
+                LikeCounter = 0
             });
             _context.SaveChanges();
         }
