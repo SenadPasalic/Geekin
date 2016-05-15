@@ -187,7 +187,7 @@ img.resize{
     margin: 0 auto;
 }
 .carousel{
-    /*position: relative;*/ /* Declared position allows for location changes */ 
+    /*position: relative; /* Declared position allows for location changes */ 
     position:absolute;
   
     left: 15%;
