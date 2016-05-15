@@ -23,5 +23,7 @@ namespace Geekin.ViewModels
         public string Link { get; set; }
 
         public DateTime TimePosted { get; set; }
+
+        public int LikeCounter { get; set; }
     }
 }
