@@ -1,10 +1,11 @@
 ﻿@addTagHelper "*, Microsoft.AspNet.Mvc.TagHelpers"
+
 <!DOCTYPE html>
 <html>
 <head>
     @*<meta name="viewport" content="width=device-width" />*@
     @* Bootstrap *@
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     @* Navbar *@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -33,17 +34,36 @@
             //Tar bort File->New Document
             removed_menuitems: 'newdocument'
         });
+
+        /* Sticky navbar */
+        $(document).ready(function () {
+
+            var menu = $('.navbar');
+            var origOffsetY = menu.offset().top;
+
+            function scroll() {
+                if ($(window).scrollTop() >= origOffsetY) {
+                    $('.navbar').addClass('sticky');
+                    $('.container').addClass('menu-padding');
+                } else {
+                    $('.navbar').removeClass('sticky');
+                    $('.container').removeClass('menu-padding');
+                }
+            }
+            document.onscroll = scroll;
+        });
     </script>
     @* CSS *@
     <link href="~/styles/mystyle.css" rel="stylesheet" />
     <title>@ViewBag.Title</title>
 </head>
 <body>
-    <div class="container-fluid" id="container">
-        <div id="header">1 Header</div>
+    <div id="header"><img src="~/pictures/geeking header lunapic 2.png" class="resizeHeader" /></div>
+    <div class="container-fluid">        @* id="container" *@
         @* Navbar *@
         <div class="row">
-            <nav class="navbar navbar-inverse navbar-fixed-top" id="myNavbar">
+            <nav class="navbar navbar-inverse" id="myNavbar">
+                @* navbar-fixed-top *@
                 <div class="container-fluid">
                     <div class="navbar-header">
                         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -95,35 +115,37 @@
                 </div>
             </nav>
         </div>
-        <div id="main">
-            <div id="main_left">Article @RenderBody()</div>
-            <div id="main_right">Sidebar</div>
-        </div>
-        <div id="footer">4 Footer</div>
     </div>
+
+    <div id="main">
+        <div id="main_left">@RenderBody()</div>
+        <div id="main_right">Sidebar</div>
+    </div>
+    <div id="footer">4 Footer</div>
+
     <div>
 
     </div>
     <script type="text/javascript">
-    /* Floating BackToTop button */
-    // create the back to top button
-    $('body').prepend('<a href="#" class="back-to-top">Back to Top</a>');
-    var amountScrolled = 300;
+        /* Floating BackToTop button */
+        // create the back to top button
+        $('body').prepend('<a href="#" class="back-to-top">Back to Top</a>');
+        var amountScrolled = 300;
 
-    $(window).scroll(function () {
-    if ($(window).scrollTop() > amountScrolled) {
-    $('a.back-to-top').fadeIn('slow');
-    } else {
-    $('a.back-to-top').fadeOut('slow');
-    }
-    });
+        $(window).scroll(function () {
+            if ($(window).scrollTop() > amountScrolled) {
+                $('a.back-to-top').fadeIn('slow');
+            } else {
+                $('a.back-to-top').fadeOut('slow');
+            }
+        });
 
-    $('a.back-to-top, a.simple-back-to-top').click(function () {
-    $('html, body').animate({
-    scrollTop: 0
-    }, 700);
-    return false;
-    });
+        $('a.back-to-top, a.simple-back-to-top').click(function () {
+            $('html, body').animate({
+                scrollTop: 0
+            }, 700);
+            return false;
+        });
     </script>
 </body>
 </html>
