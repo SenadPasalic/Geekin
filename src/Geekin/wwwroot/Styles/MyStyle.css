@@ -8,7 +8,7 @@
     
     overflow:hidden; 
     background-color: #f5eeee;
-    padding:100px;
+    /*padding:100px;*/
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 #header
@@ -54,10 +54,10 @@
 #myNavbarItems li:hover {background-color: #111;}
 
 #main
-{
+{    
    /*overflow:auto;*/ 
-   max-width: 100%;
-   overflow-x: hidden;
+   /*max-width: 100%;
+   overflow-x: hidden;*/
 }
 /*#main_left{
     float:left;
@@ -70,6 +70,9 @@
     width: 30%;
 }*/
 
+.emptyDiv{
+    height:20%;
+}
 #footer
 {
     height:40px;
@@ -189,15 +192,21 @@ img.resize{
 .carousel{
     /*position: relative; /* Declared position allows for location changes */ 
     position:absolute;
-  
+    
     left: 15%;
     top: 15%;
    
-    width: 70%;
-    height: auto;
+    width:70%;
+
+    /*width: 118%;
+    height: auto;    
+    margin-left:-9%;*/
 
     /*left:285px;
     right:285px;*/      
+}
+.hiddenDiv{
+    visibility:hidden;
 }
 
 /* Karusell pilarna */
@@ -337,24 +346,6 @@ a:hover.back-to-top {
     box-shadow: 0 0 0 1px lightgreen;
     box-shadow: 0 4px 8px 0 lightgreen, 0 6px 20px 0 lightgreen;
 }
-/* Responsive */
-@media screen and ( max-width: 1080px ) {
-  .searchbox {
-     visibility:hidden;
-  }
-  #main_right{
-      visibility:hidden;
-  }
-  #main_left{
-      width:auto;
-      /*float:left;*/      
-  }
-  /* Full width  */
-  /*.myContent{
-      position:absolute;
-      left: 0;              
-  }*/
-}
 
 .videoWrapper {
 	position: relative;
@@ -381,4 +372,43 @@ hr.style-six {
     border: 0;
     height: 1px;
     background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0));
+}
+/* Responsive */
+@media screen and ( max-width: 1080px ) {
+  .searchbox {
+     visibility:hidden;
+  }
+  #main_right{
+      visibility:hidden;
+  }
+  #main_left{
+      width:auto;
+      /*float:left;*/      
+  }
+  /* Full width  */
+  /*.myContent{
+      position:absolute;
+      left: 0;              
+  }*/
+}
+@media screen and ( max-width: 768px ) {
+    #container
+    {    
+        width:90%;
+        
+        overflow:hidden; 
+        background-color: #f5eeee;
+        padding:20px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+    .carousel {
+        /*position: relative; /* Declared position allows for location changes */
+        position: absolute;
+
+        left: 5%;
+        top: 5%;
+   
+        width: 90%;
+        height: auto;
+    }        
 }

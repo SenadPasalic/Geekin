@@ -28,10 +28,11 @@ namespace Geekin
             //Laptop
             //var connString = @"Data Source = (localdb)\MSSQLLocalDB; Initial Catalog = C:\USERS\ADMINISTRATOR\DOCUMENTS\GEEKIN.MDF; Integrated Security = True; Connect Timeout = 30; Encrypt = False; TrustServerCertificate = False; ApplicationIntent = ReadWrite; MultiSubnetFailover = False";
             //Azure            
-            //var connString = @"Server = tcp:geekin.database.windows.net,1433; Data Source = geekin.database.windows.net; Initial Catalog = Geekin; Persist Security Info = False; User ID =Senad Pasalic; Password =Azure89!; Pooling = False; MultipleActiveResultSets = False; Encrypt = True; TrustServerCertificate = False; Connection Timeout = 30;"; // Trusted_Connection = False; Encrypt = True;";            
+            var connString = @"Server = tcp:geekin.database.windows.net,1433; Data Source = geekin.database.windows.net; Initial Catalog = Geekin; Persist Security Info = False; User ID =Senad; Password =Azure89!; Pooling = False; MultipleActiveResultSets = False; Encrypt = True; TrustServerCertificate = False; Connection Timeout = 30; Trusted_Connection = False; Encrypt = True;";            
 
             //Alexis connenctionstrings
-            var connString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\novas\Documents\geekin.mdf;Integrated Security=True;Connect Timeout=30";
+            //var connString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\novas\Documents\geekin.mdf;Integrated Security=True;Connect Timeout=30";
+
             services.AddEntityFramework()
                 .AddSqlServer()
                 .AddDbContext<DBContext>(o => o.UseSqlServer(connString));
