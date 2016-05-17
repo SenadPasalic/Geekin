@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Mvc.Rendering;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -25,5 +26,9 @@ namespace Geekin.ViewModels
         public DateTime TimePosted { get; set; }
 
         public int LikeCounter { get; set; }
+        
+        //[Display(Name = "Category")]
+        //public IEnumerable<SelectListItem> Category { get; set; }
+        //public string SelectedValue { get; set; }
     }
 }

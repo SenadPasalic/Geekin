@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Mvc.Rendering;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,5 +15,8 @@ namespace Geekin.ViewModels
         public string PostedByLastname { get; set; }
         public DateTime TimePosted { get; set; }
         public int LikeCounter { get; set; }
+
+        public IEnumerable<SelectListItem> Category { get; set; }
+        public string SelectedValue { get; set; }
     }
 }

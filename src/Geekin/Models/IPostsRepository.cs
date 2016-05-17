@@ -1,4 +1,5 @@
 ﻿using Geekin.ViewModels;
+using Microsoft.AspNet.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,8 @@ namespace Geekin.Models
     {
         PostListVM[] GetAll();
         void AddPost(AddPostVM viewModel, string postedBy);
+        //AddCategoryVM GetRegisterEducationOptions();
+        //void AddCategory(AddCategoryVM model);
     }
 
     public class DbPostsRepository : IPostsRepository
@@ -21,6 +24,7 @@ namespace Geekin.Models
         {
             _context = context;
         }
+        //Hämta alla poster från db
         public PostListVM[] GetAll()
         {
             return _context.Posts
@@ -35,13 +39,13 @@ namespace Geekin.Models
                 })
                 .ToArray();
         }
+        //Skriv till db
         public void AddPost(AddPostVM viewModel, string postedBy)
         {
-            if(viewModel.Link != null)
+            if (viewModel.Link != null)
             {
                 viewModel.Link = viewModel.Link.Replace("watch?v=", "embed/");
             }
-
 
             //var user = _context.Users.
             _context.Posts.Add(new Post
@@ -54,6 +58,32 @@ namespace Geekin.Models
             });
             _context.SaveChanges();
         }
+        //Lägg till nya kategorier till dropdown list
+        //public AddCategoryVM GetRegisterEducationOptions()
+        //{
+        //    //Sätt kurser i en drodown list            
+        //    var courseOptions = _context.Posts.Select(e =>
+        //        new SelectListItem
+        //        {
+        //            Value = e.Id.ToString(),
+        //            Text = $"{e.Category}"
+        //        });
+        //    //Sätt de nya listorna till vy modellen
+        //    var categoryOptions = new AddCategoryVM()
+        //    {
+        //        Category = courseOptions
+        //    };
+        //    return categoryOptions;
+        //}
+        //public void AddCategory(AddCategoryVM model)
+        //{
+        //    Post category = new Post()
+        //    {
+        //        Category = model.Category
+        //    };
 
+        //    _context.Posts.Add(category);
+        //    _context.SaveChanges();
+        //}
     }
 }
