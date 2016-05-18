@@ -2,12 +2,39 @@
 @model PostListVM[]
 @addTagHelper "*, Microsoft.AspNet.Mvc.TagHelpers"
 
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="jquery.url.js"></script>
 
 <script>
-    $(document).ready(function () {
-        var href = $(this).attr("href");
-        window.alert(href.substr(href.lastIndexOf('/') + 1));
+    //check url with a alert
+    //$(document).ready(function () {
+    //    var myTitle = location.search.split('myTitle=')[1];
+    //    alert(myTitle);
+    //    return myTitle;
+    //});
+    $('.shareDiv a').on('click', function () {
+        var type = $(this).prop('type');
+        sharePage(type);
     });
+
+    function sharePage(type) {
+        var pageUrl = encodeURIComponent("https://jsfiddle.net/anthonyo/b5Ljko3v/");
+        var shareUrl;
+        switch (type) {
+            case 'fb':
+                shareUrl = 'https://www.facebook.com/sharer/sharer.php?u=' + pageUrl;
+                break;
+            case 'tweet':
+                shareUrl = 'https://twitter.com/intent/tweet?text=CheckOutMyPage&url=' + pageUrl;
+                break;
+            case 'gplus':
+                shareUrl = 'https://plus.google.com/share?url=' + pageUrl;
+                break;
+            default:
+                return false;
+        }
+        window.open(shareUrl, ' ', ' width=600, height=500');
+    }
 </script>
 
 
@@ -19,23 +46,33 @@
             <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#newPost" style="float: right; margin-top: 25px">Nytt inlägg</button>
         }
         @*<center><h2 style="font-weight: 700; color: #555555; text-decoration: underline">Admin posts</h2></center>*@
-
         @* Skriver ut alla posts *@
         @foreach (var item in Model)
-            {
-                //@if(item.Title == )
-                <h3><b>@item.Title</b></h3>
+        {
+            <h3><b>@item.Title</b></h3>
                 @Html.Raw(item.Text)
                 @if (@item.Link != null)
                 { <br />
                 <br />
-                <div class="videoWrapper">
-                    <iframe width="560" height="314" src="@item.Link" target="_top" allowfullscreen="allowfullscreen"></iframe>
-                </div>
+                    <div class="videoWrapper">
+                        <iframe width="560" height="314" src="@item.Link" target="_top" allowfullscreen="allowfullscreen"></iframe>
+                    </div>
                 }
                 <div class="heartLike">
                     <i class="fa fa-heart" aria-hidden="true" onclick="heartLike(@item.LikeCounter)"></i>
                     <p><a id="likes">@item.LikeCounter</a></p>
+                </div>
+                <div>Share this page</div>
+                <div class="shareDiv">
+                    <a href="#" type="fb">
+                        <div class="fa fa-facebook"></div>
+                    </a>
+                    <a href="#" type="tweet">
+                        <i class="fa fa-twitter"></i>
+                    </a>
+                    <a href="#" type="gplus">
+                        <i class="fa fa-google-plus"></i>
+                    </a>
                 </div>
             <!-- LikeBtn.com BEGIN -->
                 @*<span class="btn likebtn-wrapper" data-theme="ublue" data-identifier="item_1"></span>
@@ -44,8 +81,9 @@
                 <div style="color: #999999">Posted: @item.TimePosted</div>
                 <br />
                 <br />
-                <hr class="style-six">
+                    <hr class="style-six">
         }
+
 
         <div id="commentRightBorder">
             @*@Component.Invoke("AdminPosts")*@

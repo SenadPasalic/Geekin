@@ -140,7 +140,8 @@
             @foreach (var item in Model)
             {
                 @*<h3><b>@item.Title</b></h3>*@
-                <h3><b><a href="/home/blogpost/#@item.Title">@item.Title</a></b></h3>
+                //<h3><b><a href="/home/blogpost/?myParam=@item.Title">@item.Title</a></b></h3>
+                <h3><b>@Html.ActionLink(@item.Title, "BlogPost", "Home", new { myTitle = @item.Title }, null)</b></h3>
                 @Html.Raw(item.Text)
                 @if (@item.Link != null)
                 { <br />

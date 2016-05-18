@@ -11,6 +11,7 @@ namespace Geekin.Models
     public interface IPostsRepository
     {
         PostListVM[] GetAll();
+        PostListVM[] GetOne(string myTitle);
         void AddPost(AddPostVM viewModel, string postedBy);
         //AddCategoryVM GetRegisterEducationOptions();
         //void AddCategory(AddCategoryVM model);
@@ -37,6 +38,22 @@ namespace Geekin.Models
                     TimePosted = o.TimePosted,
                     //LikeCounter = o.LikeCounter
                 })
+                .ToArray();
+        }
+        //Hämta en post frpn bd
+        public PostListVM[] GetOne(string myTitle)
+        {
+            return _context.Posts
+                .OrderByDescending(o => o.TimePosted)
+                .Select(o => new PostListVM
+                {
+                    Title = o.Title,
+                    Text = o.Text,
+                    Link = o.Link,
+                    TimePosted = o.TimePosted,
+                    //LikeCounter = o.LikeCounter
+                })
+                .Where(o => o.Title == myTitle)
                 .ToArray();
         }
         //Skriv till db
