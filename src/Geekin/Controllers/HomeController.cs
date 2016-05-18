@@ -52,6 +52,13 @@ namespace Geekin.Controllers
             return View(model);
         }
 
+        //BlogPost
+        public IActionResult BlogPost()
+        {
+            var model = repository.GetAll();
+            return View(model);
+        }
+
         //Login
         public IActionResult Login()
         {

@@ -1,0 +1,54 @@
+﻿@using Geekin.ViewModels
+@model PostListVM[]
+@addTagHelper "*, Microsoft.AspNet.Mvc.TagHelpers"
+
+
+<script>
+    $(document).ready(function () {
+        var href = $(this).attr("href");
+        window.alert(href.substr(href.lastIndexOf('/') + 1));
+    });
+</script>
+
+
+<div id="container">
+    <div class="myContent">
+        @* Om user är admin visa knapp som länkar till addpost tex. *@
+        @if (User.IsInRole("Admin"))
+        {
+            <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#newPost" style="float: right; margin-top: 25px">Nytt inlägg</button>
+        }
+        @*<center><h2 style="font-weight: 700; color: #555555; text-decoration: underline">Admin posts</h2></center>*@
+
+        @* Skriver ut alla posts *@
+        @foreach (var item in Model)
+            {
+                //@if(item.Title == )
+                <h3><b>@item.Title</b></h3>
+                @Html.Raw(item.Text)
+                @if (@item.Link != null)
+                { <br />
+                <br />
+                <div class="videoWrapper">
+                    <iframe width="560" height="314" src="@item.Link" target="_top" allowfullscreen="allowfullscreen"></iframe>
+                </div>
+                }
+                <div class="heartLike">
+                    <i class="fa fa-heart" aria-hidden="true" onclick="heartLike(@item.LikeCounter)"></i>
+                    <p><a id="likes">@item.LikeCounter</a></p>
+                </div>
+            <!-- LikeBtn.com BEGIN -->
+                @*<span class="btn likebtn-wrapper" data-theme="ublue" data-identifier="item_1"></span>
+                    <script>(function (d, e, s) { if (d.getElementById("likebtn_wjs")) return; a = d.createElement(e); m = d.getElementsByTagName(e)[0]; a.async = 1; a.id = "likebtn_wjs"; a.src = s; m.parentNode.insertBefore(a, m) })(document, "script", "//w.likebtn.com/js/w/widget.js");</script>*@
+            <!-- LikeBtn.com END -->
+                <div style="color: #999999">Posted: @item.TimePosted</div>
+                <br />
+                <br />
+                <hr class="style-six">
+        }
+
+        <div id="commentRightBorder">
+            @*@Component.Invoke("AdminPosts")*@
+        </div>
+    </div>
+</div>
