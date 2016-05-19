@@ -139,15 +139,16 @@
             @* Skriver ut alla posts *@
             @foreach (var item in Model)
             {
-                <h3><b>@item.Title</b></h3>
+                @*<h3><b>@item.Title</b></h3>*@
+                //<h3><b><a href="/home/blogpost/?myParam=@item.Title">@item.Title</a></b></h3>
+                <h3><b>@Html.ActionLink(@item.Title, "BlogPost", "Home", new { myTitle = @item.Title }, null)</b></h3>
                 @Html.Raw(item.Text)
                 @if (@item.Link != null)
-                {
-                    <br />
-                    <br />
-                    <div class="videoWrapper">
-                        <iframe width="560" height="314" src="@item.Link" target="_top" allowfullscreen="allowfullscreen"></iframe>
-                    </div>
+                { <br />
+                <br />
+                <div class="videoWrapper">
+                    <iframe width="560" height="314" src="@item.Link" target="_top" allowfullscreen="allowfullscreen"></iframe>
+                </div>
                 }
                 <div class="heartLike">
                     <i class="fa fa-heart" aria-hidden="true" onclick="heartLike(@item.LikeCounter)"></i>
@@ -158,12 +159,6 @@
                     <script>(function (d, e, s) { if (d.getElementById("likebtn_wjs")) return; a = d.createElement(e); m = d.getElementsByTagName(e)[0]; a.async = 1; a.id = "likebtn_wjs"; a.src = s; m.parentNode.insertBefore(a, m) })(document, "script", "//w.likebtn.com/js/w/widget.js");</script>*@
             <!-- LikeBtn.com END -->
                 <div style="color: #999999">Posted: @item.TimePosted</div>
-                <!--Knappar Admin..-->
-                <form asp-controller="Admin" asp-action="Delete">
-                    <input type="hidden" name="blogPostId" value="@item.id"
-
-                </form>
-
                 <br />
                 <br />
                 <hr class="style-six">
@@ -173,4 +168,4 @@
                 @*@Component.Invoke("AdminPosts")*@
             </div>
         </div>
-    </div>
+</div>
