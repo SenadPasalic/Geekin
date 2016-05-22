@@ -36,7 +36,14 @@ namespace Geekin.Controllers
         //Home/Index
         public IActionResult Index()
         {
-            var model = repository.GetAll();
+           var model = repository.GetAllPosts();
+            //model.
+            //repository.GetAllCategories();
+
+            //var model = new PostListVM();
+            //model.Categories = repository.GetAllCategories();
+            //return View(model);
+
             return View(model);
         }
         //Admin
@@ -48,14 +55,14 @@ namespace Geekin.Controllers
         //för att visa index 2
         public IActionResult Index2()
         {
-            var model = repository.GetAll();
+            var model = repository.GetAllPosts();
             return View(model);
         }
 
         //BlogPost
         public IActionResult BlogPost(string myTitle)
         {
-            var model = repository.GetOne(myTitle);
+            var model = repository.GetOnePost(myTitle);
             return View(model);
         }
 
@@ -90,6 +97,39 @@ namespace Geekin.Controllers
                 viewModel.UserName, viewModel.Password, false, false);
 
             return RedirectToAction(nameof(HomeController.Index)); //då du blivit inloggad, hoppa till ... //.Index
+        }
+
+        //Delete BlogPost
+        [HttpPost]
+        public IActionResult DeleteBlogPost(int postId)
+        {
+            repository.DeleteBlogPost(postId);
+            return RedirectToAction(nameof(HomeController.Index));
+        }
+
+        //Edit BlogPost
+        [HttpPost]
+        public IActionResult EditBlogPost(int postId)
+        {
+            var model = repository.GetAllPosts().Where(o => o.Id == postId)
+                .Select(o => new PostListVM
+                {
+                    Id = postId,
+                    Title = o.Title,
+                    Text = o.Text,
+                    Link = o.Link
+                })
+                .Single();
+
+            return View(model);
+        }
+
+        //Update BlogPost
+        [HttpPost]
+        public IActionResult UpdateBlogPost(PostListVM model)
+        {
+            repository.UpdateBlogPost(model);
+            return RedirectToAction(nameof(HomeController.Index));
         }
     }
 }

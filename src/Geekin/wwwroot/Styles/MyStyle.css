@@ -431,3 +431,11 @@ hr.style-six {
     margin:0 auto;
     left:12%;
 }
+/* Edit/Delete buttons */
+#button-panel{
+    float:right;
+}
+/* Dropdown menu */
+.myDropdown{
+    z-index:50;
+}
