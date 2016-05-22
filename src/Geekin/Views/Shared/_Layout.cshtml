@@ -37,6 +37,21 @@
             removed_menuitems: 'newdocument'
         });
 
+        tinymce.init({
+            selector: 'textarea#Text',
+            plugins: [
+                    'advlist autolink lists link image charmap print preview anchor',
+                    'searchreplace visualblocks code fullscreen',
+                    'insertdatetime media table contextmenu paste code',
+                    'textcolor colorpicker'
+            ],
+            toolbar: 'forecolor backcolor | undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | media',
+            //Tar bort <p> et i nedre raden i TinyMCE editorn
+            forced_root_block: "",
+            //Tar bort File->New Document
+            removed_menuitems: 'newdocument'
+        });
+
         /* Sticky navbar */
         $(document).ready(function () {
 

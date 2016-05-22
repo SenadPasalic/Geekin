@@ -18,6 +18,7 @@ namespace Geekin.Models
         //public string UserID { get; set; }
         //public virtual User User { get; set; }
         public int LikeCounter { get; set; }
+        public string Category { get; set; }
 
 
         //public IEnumerable<SelectListItem> Category { get; set; }

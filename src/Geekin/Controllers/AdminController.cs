@@ -17,18 +17,20 @@ namespace Geekin.Controllers
         {
             _postsRepository = postsRepository;
         }
-        
+
         // GET: /<controller>/
         //Admin/AddPost
         public IActionResult AddPost()
         {
-            return View();
+            var model = new AddPostVM();
+            model.Categories = _postsRepository.GetAllCategories();
+            return View(model);
         }
 
         [HttpPost]
         public IActionResult AddPost(AddPostVM viewModel)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return View(viewModel);
             }

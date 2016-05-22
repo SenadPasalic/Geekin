@@ -34,6 +34,7 @@
             pause: false
         });
     });
+    
 </script>
 
 @* Karousel W3C *@
@@ -146,12 +147,16 @@
                 @if (@item.Link != null)
                 { <br />
                 <br />
+                //Video
                 <div class="videoWrapper">
                     <iframe width="560" height="314" src="@item.Link" target="_top" allowfullscreen="allowfullscreen"></iframe>
                 </div>
                 }
+                //Category
+                    <div>------------ @item.Category ---------------</div>
+                //Like
                 <div class="heartLike">
-                    <i class="fa fa-heart" aria-hidden="true" onclick="heartLike(@item.LikeCounter)"></i>
+                    <i class="fa fa-heart" aria+-hidden="true" onclick="heartLike(@item.LikeCounter)"></i>
                     <p><a id="likes">@item.LikeCounter</a></p>
                 </div>
             <!-- LikeBtn.com BEGIN -->
@@ -159,9 +164,21 @@
                     <script>(function (d, e, s) { if (d.getElementById("likebtn_wjs")) return; a = d.createElement(e); m = d.getElementsByTagName(e)[0]; a.async = 1; a.id = "likebtn_wjs"; a.src = s; m.parentNode.insertBefore(a, m) })(document, "script", "//w.likebtn.com/js/w/widget.js");</script>*@
             <!-- LikeBtn.com END -->
                 <div style="color: #999999">Posted: @item.TimePosted</div>
-                <br />
-                <br />
-                <hr class="style-six">
+                <!--Edit/Delete for ADMIN-->
+                <div id="button-panel">
+                    <form asp-controller="Home" asp-action="EditBlogPost">
+                        <input type="hidden" name="postId" value="@item.Id" />
+                        <button type="submit" class="btn btn-warning" style="display: inline;"><span class="fa fa-pencil"></span></button>
+                    </form>
+
+                    <form asp-controller="Home" asp-action="DeleteBlogPost">
+                        <input type="hidden" name="postId" value="@item.Id" />
+                        <button type="submit" class="btn btn-danger" style="display: inline;"><span class="fa fa-trash"></span></button>
+                    </form>
+                </div>
+                    <br />
+                    <br />
+                    <hr class="style-six">
             }
 
             <div id="commentRightBorder">

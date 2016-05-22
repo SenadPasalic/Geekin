@@ -10,9 +10,12 @@ namespace Geekin.Models
 {
     public interface IPostsRepository
     {
-        PostListVM[] GetAll();
-        PostListVM[] GetOne(string myTitle);
+        PostListVM[] GetAllPosts();
+        PostListVM[] GetOnePost(string myTitle);
+        AddCategoryVM[] GetAllCategories();
         void AddPost(AddPostVM viewModel, string postedBy);
+        void UpdateBlogPost(PostListVM model);
+        void DeleteBlogPost(int postId);
         //AddCategoryVM GetRegisterEducationOptions();
         //void AddCategory(AddCategoryVM model);
     }
@@ -26,22 +29,24 @@ namespace Geekin.Models
             _context = context;
         }
         //Hämta alla poster från db
-        public PostListVM[] GetAll()
+        public PostListVM[] GetAllPosts()
         {
             return _context.Posts
                 .OrderByDescending(o => o.TimePosted)
                 .Select(o => new PostListVM
                 {
+                    Id = o.Id,
                     Title = o.Title,
                     Text = o.Text,
                     Link = o.Link,
                     TimePosted = o.TimePosted,
+                    Category = o.Category
                     //LikeCounter = o.LikeCounter
                 })
                 .ToArray();
         }
-        //Hämta en post frpn bd
-        public PostListVM[] GetOne(string myTitle)
+        //Hämta en post från bd
+        public PostListVM[] GetOnePost(string myTitle)
         {
             return _context.Posts
                 .OrderByDescending(o => o.TimePosted)
@@ -56,6 +61,18 @@ namespace Geekin.Models
                 .Where(o => o.Title == myTitle)
                 .ToArray();
         }
+        //Hämta alla kategorier från db 
+        public AddCategoryVM[] GetAllCategories()
+        {
+            return _context.Category
+                .OrderBy(o => o.CategoryName)
+                .Select(o => new AddCategoryVM
+                {
+                    Id = o.Id,
+                    CategoryName = o.CategoryName
+                })
+                .ToArray();
+        }
         //Skriv till db
         public void AddPost(AddPostVM viewModel, string postedBy)
         {
@@ -68,13 +85,32 @@ namespace Geekin.Models
             _context.Posts.Add(new Post
             {
                 Title = viewModel.Title,
-                Text = viewModel.mytextarea,
+                Text = viewModel.Text,
                 Link = viewModel.Link,
                 TimePosted = DateTime.Now,
+                Category = viewModel.Category,
                 LikeCounter = 0
             });
             _context.SaveChanges();
         }
+        //Edit BlogPost
+        public void UpdateBlogPost(PostListVM model)
+        {
+            var post = _context.Posts.Single(o => o.Id == model.Id);
+            post.Title = model.Title;
+            post.Text = model.Text;
+            post.Link = model.Link;
+            _context.SaveChanges();
+        }
+        //Delete BlogPost
+        public void DeleteBlogPost(int postId)
+        {
+            var removeThisPost = _context.Posts.Single(o => o.Id == postId);
+            _context.Posts.Remove(removeThisPost);
+            _context.SaveChanges();
+        }
+
+
         //Lägg till nya kategorier till dropdown list
         //public AddCategoryVM GetRegisterEducationOptions()
         //{
@@ -102,5 +138,7 @@ namespace Geekin.Models
         //    _context.Posts.Add(category);
         //    _context.SaveChanges();
         //}
+
+
     }
 }
