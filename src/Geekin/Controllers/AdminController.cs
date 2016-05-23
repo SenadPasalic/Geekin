@@ -24,6 +24,7 @@ namespace Geekin.Controllers
         {
             var model = new AddPostVM();
             model.Categories = _postsRepository.GetAllCategories();
+            //var model = _postsRepository.GetAllPosts();
             return View(model);
         }
 

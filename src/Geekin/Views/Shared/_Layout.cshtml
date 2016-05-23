@@ -100,12 +100,21 @@
                         <ul class="nav navbar-nav nav-pills" id="myNavbarItems">
                             @*<li class="active"><a href="/home/index">Home</a></li>*@
                             <li class="dropdown">
-                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Page 1 <span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#">Page 1-1</a></li>
-                                    <li><a href="#">Page 1-2</a></li>
-                                    <li><a href="#">Page 1-3</a></li>
-                                </ul>
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Categories <span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        @*<li><a href="#">Page 1-1</a></li>
+                                            <li><a href="#">Page 1-2</a></li>
+                                            <li><a href="#">Page 1-3</a></li>*@
+                                        @*@foreach (var item in Model)
+                                        {
+                                            <li>
+                                                <a href="#" data-value=@item.Category>
+                                                    <h5>@item.Category</h5>
+                                                </a>
+                                            </li>
+                                        }*@
+                                        @Component.Invoke("CategoryList");
+                                    </ul>
                             </li>
                             <li><a href="#">Page 2</a></li>
                             <li><a href="#">Page 3</a></li>

@@ -12,6 +12,7 @@ namespace Geekin.Models
     {
         PostListVM[] GetAllPosts();
         PostListVM[] GetOnePost(string myTitle);
+        PostListVM[] SelectCategory(string myCategory);
         AddCategoryVM[] GetAllCategories();
         void AddPost(AddPostVM viewModel, string postedBy);
         void UpdateBlogPost(PostListVM model);
@@ -45,7 +46,25 @@ namespace Geekin.Models
                 })
                 .ToArray();
         }
-        //Hämta en post från bd
+        //Hämta alla poster från en kategori
+        public PostListVM[] SelectCategory(string myCategory)
+        {
+            return _context.Posts
+                .OrderByDescending(o => o.TimePosted)
+                .Where(o => o.Category == myCategory)
+                .Select(o => new PostListVM
+                {
+                    Id = o.Id,
+                    Title = o.Title,
+                    Text = o.Text,
+                    Link = o.Link,
+                    TimePosted = o.TimePosted,
+                    Category = o.Category
+                    //LikeCounter = o.LikeCounter
+                })
+                .ToArray();
+        }
+        //Hämta en post från db
         public PostListVM[] GetOnePost(string myTitle)
         {
             return _context.Posts
@@ -73,6 +92,7 @@ namespace Geekin.Models
                 })
                 .ToArray();
         }
+        
         //Skriv till db
         public void AddPost(AddPostVM viewModel, string postedBy)
         {

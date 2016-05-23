@@ -36,9 +36,14 @@ namespace Geekin.Controllers
         //Home/Index
         public IActionResult Index()
         {
-           var model = repository.GetAllPosts();
-            //model.
-            //repository.GetAllCategories();
+            //var model = repository.GetAllPosts();
+
+
+            MasterOneVM model = new MasterOneVM();
+            model.BlogPosts = repository.GetAllPosts();
+            model.Categories = repository.GetAllCategories();            
+
+
 
             //var model = new PostListVM();
             //model.Categories = repository.GetAllCategories();
@@ -63,6 +68,12 @@ namespace Geekin.Controllers
         public IActionResult BlogPost(string myTitle)
         {
             var model = repository.GetOnePost(myTitle);
+            return View(model);
+        }
+        //Category
+        public IActionResult Category(string myCategory)
+        {
+            var model = repository.SelectCategory(myCategory);
             return View(model);
         }
 
