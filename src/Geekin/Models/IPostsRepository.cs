@@ -11,7 +11,7 @@ namespace Geekin.Models
     public interface IPostsRepository
     {
         PostListVM[] GetAllPosts();
-        PostListVM[] GetOnePost(string myTitle);
+        PostListVM[] GetOnePost(int myTitle);
         PostListVM[] SelectCategory(string myCategory);
         AddCategoryVM[] GetAllCategories();
         void AddPost(AddPostVM viewModel, string postedBy);
@@ -65,10 +65,11 @@ namespace Geekin.Models
                 .ToArray();
         }
         //Hämta en post från db
-        public PostListVM[] GetOnePost(string myTitle)
+        public PostListVM[] GetOnePost(int myTitle)
         {
             return _context.Posts
                 .OrderByDescending(o => o.TimePosted)
+                .Where(o => o.Id == myTitle)
                 .Select(o => new PostListVM
                 {
                     Title = o.Title,
@@ -77,7 +78,6 @@ namespace Geekin.Models
                     TimePosted = o.TimePosted,
                     //LikeCounter = o.LikeCounter
                 })
-                .Where(o => o.Title == myTitle)
                 .ToArray();
         }
         //Hämta alla kategorier från db 
@@ -100,7 +100,7 @@ namespace Geekin.Models
             {
                 viewModel.Link = viewModel.Link.Replace("watch?v=", "embed/");
             }
-
+            
             //var user = _context.Users.
             _context.Posts.Add(new Post
             {

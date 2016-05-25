@@ -65,7 +65,7 @@ namespace Geekin.Controllers
         }
 
         //BlogPost
-        public IActionResult BlogPost(string myTitle)
+        public IActionResult BlogPost(int myTitle)
         {
             var model = repository.GetOnePost(myTitle);
             return View(model);

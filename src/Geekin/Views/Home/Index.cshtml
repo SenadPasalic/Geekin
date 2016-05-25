@@ -137,68 +137,68 @@
         }
         @*<center><h2 style="font-weight: 700; color: #555555; text-decoration: underline">Admin posts</h2></center>*@
 
-            @* Skriver ut alla posts *@
-            @foreach (var item in Model.BlogPosts)
+        @* Skriver ut alla posts *@
+        @foreach (var item in Model.BlogPosts)
+        {
+            @*<h3><b>@item.Title</b></h3>*@
+            //<h3><b><a href="/home/blogpost/?myParam=@item.Title">@item.Title</a></b></h3>
+            <h3><b>@Html.ActionLink(@item.Title, "BlogPost", "Home", new { myTitle = @item.Id }, null)</b></h3>
+            @if (@item.Category != null)
             {
-                @*<h3><b>@item.Title</b></h3>*@
-                //<h3><b><a href="/home/blogpost/?myParam=@item.Title">@item.Title</a></b></h3>
-                <h3><b>@Html.ActionLink(@item.Title, "BlogPost", "Home", new { myTitle = @item.Title }, null)</b></h3>
+                <h5><b>@Html.ActionLink(@item.Category, "Category", "Home", new { myCategory = @item.Category }, null)</b></h5>
+            }
+            <hr />
 
-                @if (item.Text.Length > 300)
-                {
-                    @Html.Raw(item.Text.Substring(0, 300));
-                    <b>
-                        @Html.ActionLink(" ...", "BlogPost", "Home", new { myTitle = @item.Title }, null)
-                    </b>
-                }
-                else
-                {
-                    @Html.Raw(item.Text);
-                    }
+            @if (item.Text.Length > 300)
+            {
+                @Html.Raw(item.Text.Substring(0, 300));
+                <b>
+                    @Html.ActionLink(" ... See More", "BlogPost", "Home", new { myTitle = @item.Id }, null) 
+                </b>
+            }
+            else
+            {
+                @Html.Raw(item.Text);
+            }
 
-                    @*@Html.Raw(item.Text)*@
-
-                    @if (@item.Link != null)
-                    { <br />
-                    <br />
-                        //Video
-                        <div class="videoWrapper">
-                            <iframe width="560" height="314" src="@item.Link" target="_top" allowfullscreen="allowfullscreen"></iframe>
-                        </div>
-                    }
-                    //Category
-                    <div>------------ @item.Category ---------------</div>
-                    //Like
-                    <div class="heartLike">
-                        <i class="fa fa-heart" aria+-hidden="true" onclick="heartLike(@item.LikeCounter)"></i>
-                        <p><a id="likes">@item.LikeCounter</a></p>
-                    </div>
-                    <!-- LikeBtn.com BEGIN -->
-                    @*<span class="btn likebtn-wrapper" data-theme="ublue" data-identifier="item_1"></span>
-                    <script>(function (d, e, s) { if (d.getElementById("likebtn_wjs")) return; a = d.createElement(e); m = d.getElementsByTagName(e)[0]; a.async = 1; a.id = "likebtn_wjs"; a.src = s; m.parentNode.insertBefore(a, m) })(document, "script", "//w.likebtn.com/js/w/widget.js");</script>*@
-                    <!-- LikeBtn.com END -->
-                    <div style="color: #999999">Posted: @item.TimePosted</div>
-                    <!--Edit/Delete for ADMIN-->
-                    <div id="button-panel">
-                        <form asp-controller="Home" asp-action="DeleteBlogPost">
-                            <input type="hidden" name="postId" value="@item.Id" />
-                            <button type="submit" class="btn btn-danger" style="display: inline;"><span class="fa fa-trash"></span></button>
-                        </form>
-                    </div>
-                    <div id="button-panel">
-                        <form asp-controller="Home" asp-action="EditBlogPost">
-                            <input type="hidden" name="postId" value="@item.Id" />
-                            <button type="submit" class="btn btn-warning" style="display: inline;"><span class="fa fa-pencil"></span></button>
-                        </form>
-                    </div>
-                    <br />
-                    <br />
-                    <br />
-                    <hr class="style-six">
-                    }
-
-                    <div id="commentRightBorder">
-                        @*@Component.Invoke("AdminPosts")*@
-                    </div>
-</div>
+            @if (@item.Link != null)
+            {
+                <br />
+                <br />
+                //Video
+                <div class="videoWrapper">
+                    <iframe width="560" height="314" src="@item.Link" target="_top" allowfullscreen="allowfullscreen"></iframe>
+                </div>
+            }
+            //Like
+            @*<div class="heartLike">
+                    <i class="fa fa-heart" aria+-hidden="true" onclick="heartLike(@item.LikeCounter)"></i>
+                    <p><a id="likes">@item.LikeCounter</a></p>
+                </div>*@
+                <!-- LikeBtn.com BEGIN -->
+            @*<span class="btn likebtn-wrapper" data-theme="ublue" data-identifier="item_1"></span>
+                <script>(function (d, e, s) { if (d.getElementById("likebtn_wjs")) return; a = d.createElement(e); m = d.getElementsByTagName(e)[0]; a.async = 1; a.id = "likebtn_wjs"; a.src = s; m.parentNode.insertBefore(a, m) })(document, "script", "//w.likebtn.com/js/w/widget.js");</script>*@
+                <!-- LikeBtn.com END -->
+                <!--Edit/Delete for ADMIN-->
+            <br />
+            <br />
+                <div id="button-panel">
+                    <form asp-controller="Home" asp-action="DeleteBlogPost">
+                        <input type="hidden" name="postId" value="@item.Id" />
+                        <button type="submit" class="btn btn-danger" style="display: inline;"><span class="fa fa-trash"></span></button>
+                    </form>
+                </div>
+                <div id="button-panel">
+                    <form asp-controller="Home" asp-action="EditBlogPost">
+                        <input type="hidden" name="postId" value="@item.Id" />
+                        <button type="submit" class="btn btn-warning" style="display: inline;"><span class="fa fa-pencil"></span></button>
+                    </form>
+                </div>
+                <br />
+                <br />
+                    <div id="button-panel" style="color: #999999">Posted @item.TimePosted.ToString("HH:mm dd-MM-yyyy")</div>
+                <br />
+                <hr class="style-six">
+        }
     </div>
+</div>

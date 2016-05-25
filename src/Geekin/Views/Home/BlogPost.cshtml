@@ -37,6 +37,38 @@
     }
 </script>
 
+@* Facebook *@
+<div id="fb-root"></div>
+<script>
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.6";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+</script>
+@* Twitter *@
+<script>
+    window.twttr = (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0],
+          t = window.twttr || {};
+        if (d.getElementById(id)) return t;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "https://platform.twitter.com/widgets.js";
+        fjs.parentNode.insertBefore(js, fjs);
+
+        t._e = [];
+        t.ready = function (f) {
+            t._e.push(f);
+        };
+
+        return t;
+    }(document, "script", "twitter-wjs"));
+</script>
+@* Google+ *@
+<script src="https://apis.google.com/js/platform.js" async defer></script>
 
 <div id="container">
     <div class="myContent">
@@ -58,11 +90,33 @@
                     <iframe width="560" height="314" src="@item.Link" target="_top" allowfullscreen="allowfullscreen"></iframe>
                 </div>
             }
-            <div class="heartLike">
-                <i class="fa fa-heart" aria-hidden="true" onclick="heartLike(@item.LikeCounter)"></i>
-                <p><a id="likes">@item.LikeCounter</a></p>
+
+            //Get URL path
+            //string url = Request.Url.GetLeftPart(UriPartial.Authority);
+            //string strPathAndQuery = HttpContext.Current.Request.Url.PathAndQuery;
+            //string strPathAndQuery = Request.RawUrl;
+            //string url = window.location.href;
+            <br />
+            <div id="button-panel">
+                <div style="color: #999999">Posted @item.TimePosted.ToString("HH:mm dd-MM-yyyy")</div>
             </div>
-                <div>Share this page</div>
+            <br />
+            <div id="share-panel">
+                <div style="color: #999999">Share this post</div>
+                @*Facebook like and share (data-layout="standard")*@
+                <div class="fb-like" data-href="http://keepongeekin.azurewebsites.net/Home/BlogPost?myTitle=@item.Title" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
+                @*Twitter*@
+                <a class="twitter-share-button socialButton" href="https://twitter.com/intent/tweet?text=KeepOnGeekin.azurewebsites.net" data-size="default">Tweet</a>
+                @*Goolge+*@
+                <div class="g-plus" data-action="share" data-annotation="bubble"></div>
+                <div class="g-plusone"></div>
+            </div>
+
+            @*<div class="heartLike">
+                    <i class="fa fa-heart" aria-hidden="true" onclick="heartLike(@item.LikeCounter)"></i>
+                    <p><a id="likes">@item.LikeCounter</a></p>
+                </div>*@
+            @*<div>Share this page</div>
                 <div class="shareDiv">
                     <a href="#" type="fb">
                         <div class="fa fa-facebook"></div>
@@ -73,20 +127,9 @@
                     <a href="#" type="gplus">
                         <i class="fa fa-google-plus"></i>
                     </a>
-                </div>
-            <!-- LikeBtn.com BEGIN -->
-                @*<span class="btn likebtn-wrapper" data-theme="ublue" data-identifier="item_1"></span>
-                    <script>(function (d, e, s) { if (d.getElementById("likebtn_wjs")) return; a = d.createElement(e); m = d.getElementsByTagName(e)[0]; a.async = 1; a.id = "likebtn_wjs"; a.src = s; m.parentNode.insertBefore(a, m) })(document, "script", "//w.likebtn.com/js/w/widget.js");</script>*@
-            <!-- LikeBtn.com END -->
-                <div style="color: #999999">Posted: @item.TimePosted</div>
-                <br />
-                <br />
-                <hr class="style-six">
+            </div>*@
+            <hr class="style-six">
         }
-
-
-        <div id="commentRightBorder">
-            @*@Component.Invoke("AdminPosts")*@
-        </div>
     </div>
 </div>
+

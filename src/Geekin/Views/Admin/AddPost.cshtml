@@ -51,6 +51,8 @@
             <input asp-for="Category" type="text" id="vl" hidden="hidden"/>
             <span asp-validation-for="Category"></span>
         </div>
+        @* Add a new Category *@
+
         <script>
             $(".dropdown-menu").on('click', 'li a', function () {
                 var selText = $(this).children("h4").html();

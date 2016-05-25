@@ -497,16 +497,21 @@ hr.style-six {
     margin: 0 auto;
 }
 
-/* Edit/Delete ADMIN*/
+/* Edit/Delete ADMIN */
 #button-panel {
     float:right;
     margin: 2px;
 }
 
-
-
+/* Dropdown */
 .myDropdown2 {
     height: 150px;
     max-height: 200px;    
     overflow-y: auto;
+}
+
+
+/* Share like buttons*/
+.fb-like{
+    bottom: 5px;
 }
