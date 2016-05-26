@@ -1,5 +1,8 @@
 ﻿body {
-    background-color: skyblue;
+    /*background-color: skyblue;*/
+    background-image: url('../pictures/colorful_blurry_background_iv-wallpaper-2048x1536.jpg');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
 }
 
 #container {

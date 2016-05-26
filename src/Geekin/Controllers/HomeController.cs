@@ -18,18 +18,21 @@ namespace Geekin.Controllers
         SignInManager<IdentityUser> signInManager; //klassvariabel
         IdentityDbContext context; //klassvariabel      
         IPostsRepository repository;
+        DBContext dbContext;
 
         //Konstruktor
         public HomeController(
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager,
             IdentityDbContext context,
-            IPostsRepository repository)
+            IPostsRepository repository,
+            DBContext dbContext)
         {
             this.userManager = userManager; //sätter klassvariabeln
             this.signInManager = signInManager; //sätter klassvariabeln
             this.context = context; //sätter klassvariabeln 
             this.repository = repository;
+            this.dbContext = dbContext;
         } 
 
         // GET: /<controller>/
@@ -89,25 +92,75 @@ namespace Geekin.Controllers
                 return View(viewModel);
 
             // Skapa DB-schemat
-            await context.Database.EnsureCreatedAsync();
+            //await context.Database.EnsureCreatedAsync();
 
             // Skapa användaren
-            var result = await userManager.CreateAsync(
-                new IdentityUser(viewModel.UserName), viewModel.Password);
+            //var result = await userManager.CreateAsync(
+            //new IdentityUser(viewModel.UserName), viewModel.Password);
 
             // Visa ev. fel-meddelande
             //if (!result.Succeeded)
             //{
             //    ModelState.AddModelError(nameof(LoginVM.UserName),
             //        result.Errors.First().Description);
-                
+
             //    return View(viewModel);
             //}
+
+            await context.Database.EnsureCreatedAsync();
+
+            //Skapa användaren
+            var result = await userManager.CreateAsync(
+                new IdentityUser(viewModel.UserName), viewModel.Password);
+
+
+            // Visa ev. fel-meddelande
+            if (!result.Succeeded)
+            {
+                ModelState.AddModelError(nameof(LoginVM.UserName),
+                    result.Errors.First().Description);
+
+                return View(viewModel);
+            }
 
             await signInManager.PasswordSignInAsync(
                 viewModel.UserName, viewModel.Password, false, false);
 
+
+
             return RedirectToAction(nameof(HomeController.Index)); //då du blivit inloggad, hoppa till ... //.Index
+
+
+            //var owner = User.Identity.Name; //namnet på den inloggade
+            //var user = dbContext.Users.Single(o => o.UserName == viewModel.UserName);
+
+            //if (user.RegistrationComplete)
+            //{
+            //    var result = await signInManager.PasswordSignInAsync(viewModel.UserName, viewModel.Password, false, false);
+            //    //om admin eller lärare loggar in, skall de få en annan view
+            //    //if (await userManager.IsInRoleAsync(aspUser, "Admin"))
+            //    //{
+            //    //    return RedirectToAction(nameof(AdminController.Index), "Admin");
+            //    //}
+            //    //else if (await userManager.IsInRoleAsync(aspUser, "Lärare"))
+            //    //{
+            //    //    return RedirectToAction(nameof(TeacherController.Index), "Teacher");
+            //    //}
+            //    if (result.Succeeded)
+            //        return RedirectToAction(nameof(HomeController.Index), "home");
+            //    else
+            //    {
+            //        ModelState.AddModelError(nameof(LoginVM.UserName), "FEEEL");
+            //        return View(viewModel);
+            //    }
+
+            //}
+
+            //else
+            //{
+            //    ModelState.AddModelError(nameof(LoginVM.UserName), "Du har inte fullföljt registreringen");
+            //    return View(viewModel);
+            //}
         }
 
         //Delete BlogPost
