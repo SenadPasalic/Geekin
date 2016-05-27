@@ -2,6 +2,10 @@
 @model MasterOneVM
 @addTagHelper "*, Microsoft.AspNet.Mvc.TagHelpers"
 
+@{
+    ViewBag.Title = "Keep On Geekin'";
+}
+
 <script>
     //Heart Like
     var likes = 0;
@@ -129,14 +133,6 @@
 
             Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.*@
 
-
-        @* Om user är admin visa knapp som länkar till addpost tex. *@
-        @if (User.IsInRole("Admin"))
-        {
-            <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#newPost" style="float: right; margin-top: 25px">Nytt inlägg</button>
-        }
-        @*<center><h2 style="font-weight: 700; color: #555555; text-decoration: underline">Admin posts</h2></center>*@
-
         @* Skriver ut alla posts *@
         @foreach (var item in Model.BlogPosts)
         {
@@ -145,7 +141,7 @@
             <h3><b>@Html.ActionLink(@item.Title, "BlogPost", "Home", new { myTitle = @item.Id }, null)</b></h3>
             @if (@item.Category != null)
             {
-                <h5><b>@Html.ActionLink(@item.Category, "Category", "Home", new { myCategory = @item.Category }, null)</b></h5>
+                <div class="categoryLink"><h5><b>@Html.ActionLink(@item.Category, "Category", "Home", new { myCategory = @item.Category }, null)</b></h5></div>
             }
             <hr />
 
@@ -182,6 +178,8 @@
                 <!--Edit/Delete for ADMIN-->
             <br />
             <br />
+            @if (User.Identity.IsAuthenticated)
+            {
                 <div id="button-panel">
                     <form asp-controller="Home" asp-action="DeleteBlogPost">
                         <input type="hidden" name="postId" value="@item.Id" />
@@ -194,11 +192,14 @@
                         <button type="submit" class="btn btn-warning" style="display: inline;"><span class="fa fa-pencil"></span></button>
                     </form>
                 </div>
+            }
                 <br />
                 <br />
-                    <div id="button-panel" style="color: #999999">Posted @item.TimePosted.ToString("HH:mm dd-MM-yyyy")</div>
+            
+                    <div id="button-panel" style="color: #999999"><i class="fa fa-clock-o" aria-hidden="true"></i> @item.TimePosted.ToString("HH:mm dd-MM-yyyy")</div>
                 <br />
                 <hr class="style-six">
+                <br />
         }
     </div>
 </div>

@@ -9,6 +9,6 @@
             <h5>@item.CategoryName</h5>
         </a>*@
 
-        <h5><b>@Html.ActionLink(@item.CategoryName, "Category", "Home", new { myCategory = @item.CategoryName }, null)</b></h5>    
+        <div class="categoryDrop categoryDropAdd"><b>@Html.ActionLink(@item.CategoryName, "Category", "Home", new { myCategory = @item.CategoryName }, null)</b></div>
     </li>
 }

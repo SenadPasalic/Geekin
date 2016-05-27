@@ -77,6 +77,7 @@ namespace Geekin.Models
                     Link = o.Link,
                     TimePosted = o.TimePosted,
                     //LikeCounter = o.LikeCounter
+                    Category = o.Category
                 })
                 .ToArray();
         }

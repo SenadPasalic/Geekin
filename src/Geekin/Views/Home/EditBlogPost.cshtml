@@ -7,7 +7,7 @@
 }
 
 
-<body>
+<div id="container">
     <form asp-controller="Home" asp-action="UpdateBlogPost" method="post">
         <label asp-for="Title"></label>
         <br />
@@ -34,8 +34,8 @@
         <input asp-for="Id" type="hidden" value="@Model.Id" />
         <button type="submit" value="Post" class="btn btn-success" data-dismiss="modal"><span class="fa fa-upload" aria-hidden="true"></span> Post</button>
     </form>
-</body>
-<script src="~/scripts/jquery.min.js"></script>
-<script src="~/scripts/jquery.validate.min.js"></script>
-<script src="~/scripts/jquery.validate.unobtrusive.min.js"></script>
+</div>
+    <script src="~/scripts/jquery.min.js"></script>
+    <script src="~/scripts/jquery.validate.min.js"></script>
+    <script src="~/scripts/jquery.validate.unobtrusive.min.js"></script>
 

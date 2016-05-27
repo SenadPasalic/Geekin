@@ -7,6 +7,10 @@ using Geekin.ViewModels;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Geekin.Models;
+using System.Security.Claims;
+using Microsoft.AspNet.Authorization;
+//using System.Web.Security;
+
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -70,7 +74,12 @@ namespace Geekin.Controllers
         //BlogPost
         public IActionResult BlogPost(int myTitle)
         {
-            var model = repository.GetOnePost(myTitle);
+            //var model = repository.GetOnePost(myTitle);
+
+            MasterOneVM model = new MasterOneVM();
+            model.BlogPosts = repository.GetOnePost(myTitle);
+            model.Categories = repository.GetAllCategories();
+
             return View(model);
         }
         //Category
@@ -106,25 +115,39 @@ namespace Geekin.Controllers
 
             //    return View(viewModel);
             //}
+                        //Skapa DB-schemat
+                        //await context.Database.EnsureCreatedAsync();
 
-            await context.Database.EnsureCreatedAsync();
-
-            //Skapa användaren
-            var result = await userManager.CreateAsync(
-                new IdentityUser(viewModel.UserName), viewModel.Password);
+                        ////Skapa användaren
+                        //var result = await userManager.CreateAsync(
+                        //    new IdentityUser(viewModel.UserName), viewModel.Password);
 
 
-            // Visa ev. fel-meddelande
-            if (!result.Succeeded)
-            {
-                ModelState.AddModelError(nameof(LoginVM.UserName),
-                    result.Errors.First().Description);
+                        // Visa ev. fel-meddelande
+                        //if (!result.Succeeded)
+                        //{
+                        //    ModelState.AddModelError(nameof(LoginVM.UserName),
+                        //        result.Errors.First().Description);
 
-                return View(viewModel);
-            }
+                        //    return View(viewModel);
+                        //}
 
-            await signInManager.PasswordSignInAsync(
-                viewModel.UserName, viewModel.Password, false, false);
+                        //Logga in
+                        await signInManager.PasswordSignInAsync(
+                            viewModel.UserName, viewModel.Password, false, false);
+
+
+           // var user2 = dbContext.Users.Single(o => o.UserName == viewModel.UserName); //namnet på den inloggade
+            //var currentUser = dbContext.Users.Single(o => o.Id == viewModel.UserName); //namnet på den inloggade
+            var user = User.Identity.Name; //namnet på den inloggade
+            //var userId = await userManager.FindByIdAsync(User.Identity.GetUserId());
+            //string currentUserId = User.Identity.GetUserId();
+
+            //Roles.AddUserToRole(user, "Admin");
+
+            //Sätt role
+            //var currentUser = userManager.FindByNameAsync(user);
+            //var roleresult = userManager.AddToRoleAsync(currentUser.Id, "Admin");
 
 
 
