@@ -20,6 +20,8 @@ namespace Geekin.Models
         public int LikeCounter { get; set; }
         public string Category { get; set; }
 
+        public string PostedBy { get; set; }
+
 
         //public IEnumerable<SelectListItem> Category { get; set; }
         //public string SelectedValue { get; set; }

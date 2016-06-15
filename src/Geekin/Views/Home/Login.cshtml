@@ -10,29 +10,27 @@
 <div id="container">
     <form asp-controller="Home" asp-action="Login">
         <br />
-        <div class="col-md-5">
-            <label asp-for="UserName"></label>
-            <!--
-                    märk stye="width: 300px" - den anger storleken på textlådan för lösenord
-                 -->
-
-            <input asp-for="UserName" class="form-control custom" style="width:300px;" placeholder="UserName" />
-            <span asp-validation-for="UserName"></span>
-        </div>
+        
+                @*<label asp-for="UserName"></label>*@
+            <div class="input-group margin-bottom-sm">
+                <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>                
+                <input asp-for="UserName" class="form-control custom loginForm" placeholder="UserName" />
+                <span asp-validation-for="UserName"></span>
+            </div>
+        
         <br /><br /><br /><br />
-        <div class="col-md-5">
-            <label asp-for="Password"></label>
+        <div class="input-group">
+            @*<label asp-for="Password"></label>*@
             <br />
-            <!--
-                märk stye="width: 300px" - den anger storleken på textlådan för lösenord
-            -->
-            <input asp-for="Password" class="form-control custom" style="width:300px;" placeholder="Password" />
+            <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
+            <input asp-for="Password" class="form-control custom loginForm" placeholder="Password" />
             <span asp-validation-for="Password"></span>
+        </div>
             <br />
             <br />
             <input type="submit" value="Login" class="btn btn-success" data-dismiss="modal" />
-        </div>
-    </form>
+
+</form>
 </div>
 @*<script src="~/scripts/jquery.min.js"></script>
     <script src="~/scripts/jquery.validate.min.js"></script>

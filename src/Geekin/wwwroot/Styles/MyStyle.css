@@ -30,8 +30,8 @@ img.resizeHeader {
     /*Fixes the responsive issue*/
     display: block !important;
     /*Size and position*/
-    width: 76%;
-    margin: 0 12%;
+    width: 77%;
+    margin: 0 11.5%;
     /*Hide dropdown scroll (skapade kaos med dropdownen)*/
     /*overflow: hidden;*/
     /*Opacity*/
@@ -163,11 +163,11 @@ img.resizeHeader {
 }
 /*Bild*/
 img.resize {
-    max-width: 240%;
-    max-height: 245%;
+    /*max-width: 100%;*/
+    max-height: 250%;
     position: relative; /* Declared position allows for location changes */
-    top: -14px; /* Moves the image 2px closer to the top of the page */
-    left: -14px;
+    top: -15px; /* Moves the image 2px closer to the top of the page */
+    left: -10px;
 }
 /*Till tisdag*/
 /*Lägg länkarna i rad*/
@@ -198,7 +198,6 @@ img.resize {
 .field-validation-error {
     color: #b94a48;
 }
-
 .input-validation-error {
     border-color: red;
 }
@@ -213,7 +212,7 @@ img.resize {
     /*position: relative; /* Declared position allows for location changes */
     position: relative;
     width: 83.72%;
-    margin: 0 auto;
+    margin: -10px auto;
     /*width: 86%;
     margin-left: 7%;*/
     /*position:absolute;
@@ -405,95 +404,7 @@ hr.style-six {
 }
 
 
-/* Responsive */
-@media screen and ( max-width: 1080px ) {
-    .searchbox {
-        visibility: hidden;
-    }
 
-    #main_right {
-        visibility: hidden;
-    }
-
-    #main_left {
-        width: auto;
-        /*float:left;*/
-    }
-    /* Full width  */
-    /*.myContent{
-      position:absolute;
-      left: 0;              
-  }*/
-}
-
-@media screen and (max-width: 768px) {
-    html, body {
-        max-width: 100%;
-        overflow-x: hidden;
-    }
-
-    #container {
-        width: 96%;
-        margin-left: 2%;
-        overflow: hidden;
-        background-color: #f5eeee;
-        padding: 20px 20px;
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    }
-
-    .carousel {
-        width: 100%;
-        margin-left: 0;
-    }
-
-    #myNavbar {        
-        width: 100%;
-        margin-left: 0;
-    }
-
-    .videoWrapper {
-        position: relative;
-        width: 117%;
-        /*padding-bottom: 56.25%; /* 16:9 */
-        left: -23px;
-        /*padding-top: 25px;
-	    height: 0;*/
-    }
-
-        .videoWrapper iframe {
-            position: absolute;
-            /*top: 0;
-	    left: 0;*/
-            width: 100%;
-            height: 100%;
-        }
-
-    img.resizeHeader {
-        width: 100%;
-        /*max-width:100%;
-        max-height:100%;*/
-        position: relative;
-        top: 3px;
-        margin-left: 0;
-        padding-bottom: 5px;
-    }
-
-    /* Line under post */
-    hr.style-six {
-        /*Style 1*/
-        /*border: 0;
-        height: 0;
-        border-top: 1px solid rgba(0, 0, 0, 0.1);
-        border-bottom: 1px solid rgba(255, 255, 255, 0.3);*/
-        /*Style 2*/
-        border: 0;
-        height: 1px;
-        position:absolute;
-        width:90%;
-        margin-left:-5%;
-        background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0));
-    }
-}
 
 
 
@@ -606,12 +517,13 @@ a:hover {
 /* Footer */
 .footer, .push {
     height: 4em;
-    margin-left: 15%;
-    width: 70%;
+    margin-left: 11.5%;
+    width: 77%;
     overflow: hidden;
     background-color: transparent;
     background: rgba(0, 0, 0, 0.8);
     padding: 40px;
+    border-radius: 5px 5px 0 0;
     
     /*Opacity*/
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)"; /* IE 8 */
@@ -624,4 +536,126 @@ a:hover {
 .footer p{
     color:#999999;
     text-align: center;
+}
+
+
+/* Responsive */
+@media screen and ( max-width: 1080px ) {
+    .searchbox {
+        visibility: hidden;
+    }
+
+    #main_right {
+        visibility: hidden;
+    }
+
+    #main_left {
+        width: auto;
+        /*float:left;*/
+    }
+    /* Full width  */
+    /*.myContent{
+      position:absolute;
+      left: 0;              
+  }*/
+}
+
+@media screen and (max-width: 768px) {
+    html, body {
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
+    #container {
+        width: 96%;
+        margin-left: 2%;
+        overflow: hidden;
+        background-color: #f5eeee;
+        padding: 20px 20px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+
+    .carousel {
+        width: 100%;
+        margin-left: 0;
+        margin: 0 auto;
+    }
+
+    #myNavbar {        
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .videoWrapper {
+        position: relative;
+        width: 117%;
+        /*padding-bottom: 56.25%; /* 16:9 */
+        left: -23px;
+        /*padding-top: 25px;
+	    height: 0;*/
+    }
+
+        .videoWrapper iframe {
+            position: absolute;
+            /*top: 0;
+	    left: 0;*/
+            width: 100%;
+            height: 100%;
+        }
+
+    img.resizeHeader {
+        width: 100%;
+        /*max-width:100%;
+        max-height:100%;*/
+        position: relative;
+        top: 3px;
+        margin-left: 0;
+        padding-bottom: 5px;
+    }
+
+    /* Line under post */
+    hr.style-six {
+        /*Style 1*/
+        /*border: 0;
+        height: 0;
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.3);*/
+        /*Style 2*/
+        border: 0;
+        height: 1px;
+        position:absolute;
+        width:90%;
+        margin-left:-5%;
+        background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0));
+    }
+    .footer{
+        width: 100%;
+        margin: 0;
+        border-radius: 0;
+    }
+}
+
+.categoryLines{
+    margin: 0 auto;
+}
+
+.categoryLine{
+    display: inline-block;
+}
+
+/* Hidden AddNewCategory*/
+.hideMe{
+    display:none;
+}
+
+/* Input textboxes*/
+input[type=text] {
+    padding: 4px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+}
+
+.loginForm{
+    width:40%;
+    height:50px;
 }

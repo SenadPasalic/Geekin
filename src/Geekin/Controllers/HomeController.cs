@@ -41,16 +41,31 @@ namespace Geekin.Controllers
 
         // GET: /<controller>/
         //Home/Index
-        public IActionResult Index()
+        public async Task<IActionResult> Index(string search)
         {
             //var model = repository.GetAllPosts();
 
-
             MasterOneVM model = new MasterOneVM();
-            model.BlogPosts = repository.GetAllPosts();
-            model.Categories = repository.GetAllCategories();            
 
+            //if (User.Identity.IsAuthenticated)
+            //{
+            //    var user = await userManager.FindByNameAsync(User.Identity.Name);
+            //    model.IsUserAdmin = await userManager.IsInRoleAsync(user, "Admin");
+            //}
 
+            var posts = from m in dbContext.Posts
+                         select m;
+            
+            //Search
+            if (!String.IsNullOrEmpty(search))
+            {
+                model.BlogPosts = repository.GetSearch(search);                                    
+            }
+            else
+            {                
+                model.BlogPosts = repository.GetAllPosts();
+            }
+                model.Categories = repository.GetAllCategories();
 
             //var model = new PostListVM();
             //model.Categories = repository.GetAllCategories();
@@ -199,7 +214,7 @@ namespace Geekin.Controllers
         public IActionResult EditBlogPost(int postId)
         {
             var model = repository.GetAllPosts().Where(o => o.Id == postId)
-                .Select(o => new PostListVM
+                .Select(o => new AddPostVM
                 {
                     Id = postId,
                     Title = o.Title,

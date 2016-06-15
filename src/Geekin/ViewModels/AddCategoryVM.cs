@@ -11,6 +11,7 @@ namespace Geekin.ViewModels
     {
         //[Display(Name = "Category")]
         public int Id { get; set; }
+
         public string CategoryName { get; set; }
     }
 }

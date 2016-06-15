@@ -9,5 +9,6 @@ namespace Geekin.ViewModels
     {
         public PostListVM[] BlogPosts { get; set; }
         public AddCategoryVM[] Categories { get; set; }
+        public bool IsUserAdmin { get; set; }
     }
 }

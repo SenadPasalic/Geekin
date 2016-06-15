@@ -4,7 +4,8 @@
 @addTagHelper "*, Microsoft.AspNet.Mvc.TagHelpers"
 
 @{
-    ViewBag.Title = @Model[0].Category;
+    // Category will return error if empty
+    ViewBag.Title = @Model[0].Category;    
 }
 
 

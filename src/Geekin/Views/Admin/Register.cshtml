@@ -1,5 +1,5 @@
 ﻿@using Geekin.ViewModels
-@model LoginVM
+@model RegisterVM
 @addTagHelper "*, Microsoft.AspNet.Mvc.TagHelpers"
 
 @{
@@ -8,29 +8,35 @@
 
 <link href="~/styles/mystyle.css" rel="stylesheet" />
 <div id="container">
-    <form asp-controller="Home" asp-action="Login">
+    <form asp-controller="Admin" asp-action="Register">
         <br />
         <div class="col-md-5">
-            <label asp-for="UserName"></label>
-            <!--
-                    märk stye="width: 300px" - den anger storleken på textlådan för lösenord
-                 -->
-
-            <input asp-for="UserName" class="form-control custom" style="width:300px;" placeholder="UserName" />
-            <span asp-validation-for="UserName"></span>
+            <label asp-for="Email"></label>
+            <input asp-for="Email" class="form-control custom" style="width:300px;" placeholder="Email" />
+            <span asp-validation-for="Email"></span>
         </div>
         <br /><br /><br /><br />
         <div class="col-md-5">
             <label asp-for="Password"></label>
-            <br />
-            <!--
-                märk stye="width: 300px" - den anger storleken på textlådan för lösenord
-            -->
             <input asp-for="Password" class="form-control custom" style="width:300px;" placeholder="Password" />
             <span asp-validation-for="Password"></span>
+        </div>
+        <br /><br /><br /><br />
+        <div class="col-md-5">
+            <label asp-for="ConfirmPassword"></label>
+            <input asp-for="ConfirmPassword" class="form-control custom" style="width:300px;" placeholder="Confirm password" />
+            <span asp-validation-for="ConfirmPassword"></span>
+        </div>
+        <br /><br /><br /><br />
+        <div class="col-md-5">
+            <label asp-for="UserName"></label>
+            <input asp-for="UserName" class="form-control custom" style="width:300px;" placeholder="Username" />
+            <span asp-validation-for="UserName"></span>
+        </div>
             <br />
             <br />
-            <input type="submit" value="Login" class="btn btn-success" data-dismiss="modal" />
+        <div id="button-panel">
+            <input type="submit" value="Register" class="btn btn-success" data-dismiss="modal" />
         </div>
     </form>
 </div>

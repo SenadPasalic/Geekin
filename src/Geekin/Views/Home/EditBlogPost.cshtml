@@ -1,5 +1,5 @@
 ﻿@using Geekin.ViewModels
-@model PostListVM
+@model AddPostVM
 @addTagHelper "*, Microsoft.AspNet.Mvc.TagHelpers"
 
 @{
@@ -30,10 +30,13 @@
         <span asp-validation-for="Link"></span>
         @*<select asp-for="Category"></select>*@
         <br />
-        <br />
+        <br />        
+
         <input asp-for="Id" type="hidden" value="@Model.Id" />
-        <button type="submit" value="Post" class="btn btn-success" data-dismiss="modal"><span class="fa fa-upload" aria-hidden="true"></span> Post</button>
-    </form>
+        <div id="button-panel">
+            <button type="submit" value="Post" class="btn btn-success" data-dismiss="modal"><span class="fa fa-upload" aria-hidden="true"></span> Publish</button>
+        </div>  
+</form>
 </div>
     <script src="~/scripts/jquery.min.js"></script>
     <script src="~/scripts/jquery.validate.min.js"></script>

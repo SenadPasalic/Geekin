@@ -15,10 +15,10 @@ namespace Geekin.Models
         PostListVM[] SelectCategory(string myCategory);
         AddCategoryVM[] GetAllCategories();
         void AddPost(AddPostVM viewModel, string postedBy);
+        void AddNewCategory(AddPostVM viewModel);
         void UpdateBlogPost(PostListVM model);
         void DeleteBlogPost(int postId);
-        //AddCategoryVM GetRegisterEducationOptions();
-        //void AddCategory(AddCategoryVM model);
+        PostListVM[] GetSearch(string search);
     }
 
     public class DbPostsRepository : IPostsRepository
@@ -41,7 +41,8 @@ namespace Geekin.Models
                     Text = o.Text,
                     Link = o.Link,
                     TimePosted = o.TimePosted,
-                    Category = o.Category
+                    Category = o.Category,
+                    PostedBy = o.PostedBy
                     //LikeCounter = o.LikeCounter
                 })
                 .ToArray();
@@ -59,7 +60,8 @@ namespace Geekin.Models
                     Text = o.Text,
                     Link = o.Link,
                     TimePosted = o.TimePosted,
-                    Category = o.Category
+                    Category = o.Category,
+                    PostedBy = o.PostedBy
                     //LikeCounter = o.LikeCounter
                 })
                 .ToArray();
@@ -77,7 +79,8 @@ namespace Geekin.Models
                     Link = o.Link,
                     TimePosted = o.TimePosted,
                     //LikeCounter = o.LikeCounter
-                    Category = o.Category
+                    Category = o.Category,
+                    PostedBy = o.PostedBy
                 })
                 .ToArray();
         }
@@ -110,7 +113,17 @@ namespace Geekin.Models
                 Link = viewModel.Link,
                 TimePosted = DateTime.Now,
                 Category = viewModel.Category,
-                LikeCounter = 0
+                LikeCounter = 0,
+                PostedBy = viewModel.PostedBy
+            });
+            _context.SaveChanges();
+        }
+        //Add new category
+        public void AddNewCategory(AddPostVM viewModel)
+        {
+            _context.Category.Add(new Category
+            {
+                CategoryName = viewModel.NewCategory
             });
             _context.SaveChanges();
         }
@@ -131,35 +144,25 @@ namespace Geekin.Models
             _context.SaveChanges();
         }
 
-
-        //Lägg till nya kategorier till dropdown list
-        //public AddCategoryVM GetRegisterEducationOptions()
-        //{
-        //    //Sätt kurser i en drodown list            
-        //    var courseOptions = _context.Posts.Select(e =>
-        //        new SelectListItem
-        //        {
-        //            Value = e.Id.ToString(),
-        //            Text = $"{e.Category}"
-        //        });
-        //    //Sätt de nya listorna till vy modellen
-        //    var categoryOptions = new AddCategoryVM()
-        //    {
-        //        Category = courseOptions
-        //    };
-        //    return categoryOptions;
-        //}
-        //public void AddCategory(AddCategoryVM model)
-        //{
-        //    Post category = new Post()
-        //    {
-        //        Category = model.Category
-        //    };
-
-        //    _context.Posts.Add(category);
-        //    _context.SaveChanges();
-        //}
-
-
+        //Get Search
+        public PostListVM[] GetSearch(string search)
+        {
+            return _context.Posts
+                .OrderByDescending(o => o.TimePosted)
+                .Where(o => o.Title.Contains(search)                
+                        || o.Text.Contains(search)
+                        || o.Category.Contains(search))
+                .Select(o => new PostListVM
+                {
+                    Id = o.Id,
+                    Title = o.Title,
+                    Text = o.Text,
+                    Link = o.Link,
+                    TimePosted = o.TimePosted,
+                    //LikeCounter = o.LikeCounter
+                    Category = o.Category
+                })
+                .ToArray();
+        }
     }
 }
