@@ -86,6 +86,7 @@ namespace Geekin.Controllers
             return View(model);
         }
 
+
         //BlogPost
         public IActionResult BlogPost(int myTitle)
         {
