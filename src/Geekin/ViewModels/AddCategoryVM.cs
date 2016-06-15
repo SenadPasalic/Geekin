@@ -10,7 +10,8 @@ namespace Geekin.ViewModels
     public class AddCategoryVM
     {
         //[Display(Name = "Category")]
-        //public IEnumerable<SelectListItem> Category { get; set; }
-        //public string SelectedValue { get; set; }
+        public int Id { get; set; }
+
+        public string CategoryName { get; set; }
     }
 }

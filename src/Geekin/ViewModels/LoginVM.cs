@@ -8,9 +8,9 @@ namespace Geekin.ViewModels
 {
     public class LoginVM
     {
-        [Display(Name = "E-mail")]
-        [Required(ErrorMessage = "E-mail required.")]
-        [DataType(DataType.EmailAddress)]
+        [Display(Name = "Username")]
+        [Required(ErrorMessage = "Username required.")]
+        //[DataType(DataType.EmailAddress)]
         public string UserName { get; set; }
 
         [Display(Name = "Password")]

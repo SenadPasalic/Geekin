@@ -9,8 +9,10 @@
     @* Navbar *@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    @*<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">*@
+    <!-- jQery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <!-- Bootstrap -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <!-- FontAwesome icons -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
@@ -22,6 +24,21 @@
         /* TinyMCE */
         tinymce.init({
             selector: 'textarea#mytextarea',
+            plugins: [
+                    'advlist autolink lists link image charmap print preview anchor',
+                    'searchreplace visualblocks code fullscreen',
+                    'insertdatetime media table contextmenu paste code',
+                    'textcolor colorpicker'
+            ],
+            toolbar: 'forecolor backcolor | undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | media',
+            //Tar bort <p> et i nedre raden i TinyMCE editorn
+            forced_root_block: "",
+            //Tar bort File->New Document
+            removed_menuitems: 'newdocument'
+        });
+
+        tinymce.init({
+            selector: 'textarea#Text',
             plugins: [
                     'advlist autolink lists link image charmap print preview anchor',
                     'searchreplace visualblocks code fullscreen',
@@ -52,14 +69,20 @@
             }
             document.onscroll = scroll;
         });
+
+        $(document).ready(function () {
+            $('.dropdown-toggle').dropdown();
+        });
     </script>
     @* CSS *@
     <link href="~/styles/mystyle.css" rel="stylesheet" />
+
     <title>@ViewBag.Title</title>
 </head>
 <body>
     <div id="header"><img src="~/pictures/geeking header lunapic 2.png" class="resizeHeader" /></div>
-    <div class="container-fluid">        @* id="container" *@
+    <div class="container-fluid">
+        @* id="container" *@
         @* Navbar *@
         <div class="row">
             <nav class="navbar navbar-inverse" id="myNavbar">
@@ -75,14 +98,23 @@
                     </div>
                     <div class="navbar-collapse collapse" id="myNavbarCollapsed">
                         @* Navbar buttons *@
-                        <ul class="nav navbar-nav nav-pills nav-stacked" id="myNavbarItems">
-                            <li class="active"><a href="/home/index">Home</a></li>
+                        <ul class="nav navbar-nav nav-pills" id="myNavbarItems">
+                            @*<li class="active"><a href="/home/index">Home</a></li>*@
                             <li class="dropdown">
-                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Page 1 <span class="caret"></span></a>
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Categories <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="#">Page 1-1</a></li>
-                                    <li><a href="#">Page 1-2</a></li>
-                                    <li><a href="#">Page 1-3</a></li>
+                                    @*<li><a href="#">Page 1-1</a></li>
+                                        <li><a href="#">Page 1-2</a></li>
+                                        <li><a href="#">Page 1-3</a></li>*@
+                                    @*@foreach (var item in Model)
+                                        {
+                                            <li>
+                                                <a href="#" data-value=@item.Category>
+                                                    <h5>@item.Category</h5>
+                                                </a>
+                                            </li>
+                                        }*@
+                                    @Component.Invoke("CategoryList")
                                 </ul>
                             </li>
                             <li><a href="#">Page 2</a></li>
@@ -107,10 +139,20 @@
                             <li><a href="http://facebook.com/keepongeekin"><span class="fa fa-facebook-official fa-1x"></span></a></li>
                             <li><a href="https://www.instagram.com/geekeenboy/"><span class="fa fa-instagram"></span></a></li>
                             <li><a href="http://twitter.com/geekeenboy"><span class="fa fa-twitter"></span></a></li>
-                            <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                            <li><a href="/home/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-                        </ul>
+                            @* Register and Login button *@
+                            @*<li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                                <li><a href="/home/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>*@
 
+                            @* If user logged in *@
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                var user = User.Identity.Name;
+                                <li><div class="navbar-text"><b>@user</b></div></li>
+
+                                <li><a href='@Url.Action("AddPost", "Admin")'><span class="fa fa-upload"></span> New post</a></li>
+                                <li><a href='@Url.Action("LogOut", "Admin")'><span class="fa fa-sign-out"></span> Logout</a></li>
+                            }
+                        </ul>
                     </div>
                 </div>
             </nav>
@@ -120,32 +162,34 @@
     <div id="main">
         <div id="main_left">@RenderBody()</div>
         <div id="main_right">Sidebar</div>
-    </div>
-    <div id="footer">4 Footer</div>
+    </div>    
+        <div class="footer">
+            <p>Copyright © 2016</p>
+        </div>
 
-    <div>
+        <div>
 
-    </div>
-    <script type="text/javascript">
-        /* Floating BackToTop button */
-        // create the back to top button
-        $('body').prepend('<a href="#" class="back-to-top">Back to Top</a>');
-        var amountScrolled = 300;
+        </div>
+        <script type="text/javascript">
+            /* Floating BackToTop button */
+            // create the back to top button
+            $('body').prepend('<a href="#" class="back-to-top">Back to Top</a>');
+            var amountScrolled = 300;
 
-        $(window).scroll(function () {
-            if ($(window).scrollTop() > amountScrolled) {
-                $('a.back-to-top').fadeIn('slow');
-            } else {
-                $('a.back-to-top').fadeOut('slow');
-            }
-        });
+            $(window).scroll(function () {
+                if ($(window).scrollTop() > amountScrolled) {
+                    $('a.back-to-top').fadeIn('slow');
+                } else {
+                    $('a.back-to-top').fadeOut('slow');
+                }
+            });
 
-        $('a.back-to-top, a.simple-back-to-top').click(function () {
-            $('html, body').animate({
-                scrollTop: 0
-            }, 700);
-            return false;
-        });
-    </script>
+            $('a.back-to-top, a.simple-back-to-top').click(function () {
+                $('html, body').animate({
+                    scrollTop: 0
+                }, 700);
+                return false;
+            });
+        </script>
 </body>
 </html>

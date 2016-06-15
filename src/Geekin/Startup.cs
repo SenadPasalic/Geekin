@@ -20,18 +20,19 @@ namespace Geekin
         {
             services.AddMvc();
 
-            //Connection string
+            //Connection strings
             //Senads connenctionstrings
             //var connString = @"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename = C:\Users\Administrator\Documents\Geekin.mdf; Integrated Security = True; Connect Timeout = 30";
             //Stationär
             //var connString = @"Data Source =.; Initial Catalog = Geekin; Integrated Security = True; Connect Timeout = 15; Encrypt = False; TrustServerCertificate = False; ApplicationIntent = ReadWrite; MultiSubnetFailover = False";
             //Laptop
             //var connString = @"Data Source = (localdb)\MSSQLLocalDB; Initial Catalog = C:\USERS\ADMINISTRATOR\DOCUMENTS\GEEKIN.MDF; Integrated Security = True; Connect Timeout = 30; Encrypt = False; TrustServerCertificate = False; ApplicationIntent = ReadWrite; MultiSubnetFailover = False";
-            //Azure            
-            //var connString = @"Server = tcp:geekin.database.windows.net,1433; Data Source = geekin.database.windows.net; Initial Catalog = Geekin; Persist Security Info = False; User ID =Senad; Password =Azure89!; Pooling = False; MultipleActiveResultSets = False; Encrypt = True; TrustServerCertificate = False; Connection Timeout = 30; Trusted_Connection = False; Encrypt = True;";            
-            
+            //Azure geekin           
+            var connString = @"Server = tcp:geekin.database.windows.net,1433; Data Source = geekin.database.windows.net; Initial Catalog = Geekin; Persist Security Info = False; User ID =Senad; Password =Azure89!; Pooling = False; MultipleActiveResultSets = False; Encrypt = True; TrustServerCertificate = False; Connection Timeout = 30; Trusted_Connection = False; Encrypt = True;";
+            //Azure User
+            var identityConnString = @"Server = tcp:geekinuser.database.windows.net,1433; Data Source = geekinuser.database.windows.net; Initial Catalog = User; Persist Security Info = False; User ID = Senad; Password =Azure89!; Pooling = False; MultipleActiveResultSets = False; Encrypt = True; TrustServerCertificate = False; Connection Timeout = 30;";
             //Alexis connenctionstrings
-            var connString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\novas\Documents\geekin.mdf;Integrated Security=True;Connect Timeout=30";
+            //var connString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\novas\Documents\geekin.mdf;Integrated Security=True;Connect Timeout=30";
 
             services.AddEntityFramework()
                 .AddSqlServer()
@@ -50,7 +51,7 @@ namespace Geekin
 
             services.AddEntityFramework()
                 .AddSqlServer()
-                .AddDbContext<IdentityDbContext>(o => o.UseSqlServer(connString));
+                .AddDbContext<IdentityDbContext>(o => o.UseSqlServer(identityConnString));
 
             // Kopplat mot DB
             services.AddTransient<IPostsRepository, DbPostsRepository>();
@@ -63,6 +64,14 @@ namespace Geekin
             app.UseStaticFiles();
 
             app.UseDeveloperExceptionPage();
+
+            app.UseIdentity()
+                .UseCookieAuthentication(o =>
+            {
+                o.AutomaticChallenge = true;
+                //o.LoginPath = new PathString("/Members/Login/");
+            });
+
             app.UseMvcWithDefaultRoute();
         }
 

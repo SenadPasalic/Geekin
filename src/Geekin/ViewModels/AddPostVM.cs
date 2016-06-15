@@ -10,6 +10,8 @@ namespace Geekin.ViewModels
 {
     public class AddPostVM
     {
+        public int Id { get; set; }
+
         [Display(Name = "Title")]
         [Required(ErrorMessage = "Title required.")]
         public string Title { get; set; }
@@ -18,7 +20,7 @@ namespace Geekin.ViewModels
         [Required(ErrorMessage = "Did you forget the content?")]
         [DataType(DataType.MultilineText)]
         [UIHint("tinymce_jquery_full")] //AllowHtml
-        public string mytextarea { get; set; }
+        public string Text { get; set; }
 
         [Display(Name = "YouTube link")]
         public string Link { get; set; }
@@ -26,9 +28,20 @@ namespace Geekin.ViewModels
         public DateTime TimePosted { get; set; }
 
         public int LikeCounter { get; set; }
-        
+
+        [Display(Name = "Category")]
+        [Required(ErrorMessage = "Did you forget the category?")]
+        public string Category { get; set; }
+
+
+        public string PostedBy { get; set; }
+
         //[Display(Name = "Category")]
         //public IEnumerable<SelectListItem> Category { get; set; }
         //public string SelectedValue { get; set; }
+
+        public AddCategoryVM[] Categories { get; set; }
+
+        public string NewCategory { get; set; }
     }
 }

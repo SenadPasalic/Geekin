@@ -8,15 +8,17 @@ namespace Geekin.ViewModels
 {
     public class PostListVM
     {
+        public int Id { get; set; }
         public string Title { get; set; }
         public string Text { get; set; }
+        public string mytextarea { get; set; }
         public string Link { get; set; }
-        public string PostedByFirstname { get; set; }
-        public string PostedByLastname { get; set; }
+        public string PostedBy { get; set; }
         public DateTime TimePosted { get; set; }
         public int LikeCounter { get; set; }
 
-        public IEnumerable<SelectListItem> Category { get; set; }
-        public string SelectedValue { get; set; }
+        public string Category { get; set; }
+
+        public AddCategoryVM[] Categories { get; set; }
     }
 }

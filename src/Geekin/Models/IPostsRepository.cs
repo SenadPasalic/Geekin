@@ -10,11 +10,15 @@ namespace Geekin.Models
 {
     public interface IPostsRepository
     {
-        PostListVM[] GetAll();
-        PostListVM[] GetOne(string myTitle);
+        PostListVM[] GetAllPosts();
+        PostListVM[] GetOnePost(int myTitle);
+        PostListVM[] SelectCategory(string myCategory);
+        AddCategoryVM[] GetAllCategories();
         void AddPost(AddPostVM viewModel, string postedBy);
-        //AddCategoryVM GetRegisterEducationOptions();
-        //void AddCategory(AddCategoryVM model);
+        void AddNewCategory(AddPostVM viewModel);
+        void UpdateBlogPost(PostListVM model);
+        void DeleteBlogPost(int postId);
+        PostListVM[] GetSearch(string search);
     }
 
     public class DbPostsRepository : IPostsRepository
@@ -26,10 +30,48 @@ namespace Geekin.Models
             _context = context;
         }
         //Hämta alla poster från db
-        public PostListVM[] GetAll()
+        public PostListVM[] GetAllPosts()
         {
             return _context.Posts
                 .OrderByDescending(o => o.TimePosted)
+                .Select(o => new PostListVM
+                {
+                    Id = o.Id,
+                    Title = o.Title,
+                    Text = o.Text,
+                    Link = o.Link,
+                    TimePosted = o.TimePosted,
+                    Category = o.Category,
+                    PostedBy = o.PostedBy
+                    //LikeCounter = o.LikeCounter
+                })
+                .ToArray();
+        }
+        //Hämta alla poster från en kategori
+        public PostListVM[] SelectCategory(string myCategory)
+        {
+            return _context.Posts
+                .OrderByDescending(o => o.TimePosted)
+                .Where(o => o.Category == myCategory)
+                .Select(o => new PostListVM
+                {
+                    Id = o.Id,
+                    Title = o.Title,
+                    Text = o.Text,
+                    Link = o.Link,
+                    TimePosted = o.TimePosted,
+                    Category = o.Category,
+                    PostedBy = o.PostedBy
+                    //LikeCounter = o.LikeCounter
+                })
+                .ToArray();
+        }
+        //Hämta en post från db
+        public PostListVM[] GetOnePost(int myTitle)
+        {
+            return _context.Posts
+                .OrderByDescending(o => o.TimePosted)
+                .Where(o => o.Id == myTitle)
                 .Select(o => new PostListVM
                 {
                     Title = o.Title,
@@ -37,25 +79,24 @@ namespace Geekin.Models
                     Link = o.Link,
                     TimePosted = o.TimePosted,
                     //LikeCounter = o.LikeCounter
+                    Category = o.Category,
+                    PostedBy = o.PostedBy
                 })
                 .ToArray();
         }
-        //Hämta en post frpn bd
-        public PostListVM[] GetOne(string myTitle)
+        //Hämta alla kategorier från db 
+        public AddCategoryVM[] GetAllCategories()
         {
-            return _context.Posts
-                .OrderByDescending(o => o.TimePosted)
-                .Select(o => new PostListVM
+            return _context.Category
+                .OrderBy(o => o.CategoryName)
+                .Select(o => new AddCategoryVM
                 {
-                    Title = o.Title,
-                    Text = o.Text,
-                    Link = o.Link,
-                    TimePosted = o.TimePosted,
-                    //LikeCounter = o.LikeCounter
+                    Id = o.Id,
+                    CategoryName = o.CategoryName
                 })
-                .Where(o => o.Title == myTitle)
                 .ToArray();
         }
+        
         //Skriv till db
         public void AddPost(AddPostVM viewModel, string postedBy)
         {
@@ -63,44 +104,65 @@ namespace Geekin.Models
             {
                 viewModel.Link = viewModel.Link.Replace("watch?v=", "embed/");
             }
-
+            
             //var user = _context.Users.
             _context.Posts.Add(new Post
             {
                 Title = viewModel.Title,
-                Text = viewModel.mytextarea,
+                Text = viewModel.Text,
                 Link = viewModel.Link,
                 TimePosted = DateTime.Now,
-                LikeCounter = 0
+                Category = viewModel.Category,
+                LikeCounter = 0,
+                PostedBy = viewModel.PostedBy
             });
             _context.SaveChanges();
         }
-        //Lägg till nya kategorier till dropdown list
-        //public AddCategoryVM GetRegisterEducationOptions()
-        //{
-        //    //Sätt kurser i en drodown list            
-        //    var courseOptions = _context.Posts.Select(e =>
-        //        new SelectListItem
-        //        {
-        //            Value = e.Id.ToString(),
-        //            Text = $"{e.Category}"
-        //        });
-        //    //Sätt de nya listorna till vy modellen
-        //    var categoryOptions = new AddCategoryVM()
-        //    {
-        //        Category = courseOptions
-        //    };
-        //    return categoryOptions;
-        //}
-        //public void AddCategory(AddCategoryVM model)
-        //{
-        //    Post category = new Post()
-        //    {
-        //        Category = model.Category
-        //    };
+        //Add new category
+        public void AddNewCategory(AddPostVM viewModel)
+        {
+            _context.Category.Add(new Category
+            {
+                CategoryName = viewModel.NewCategory
+            });
+            _context.SaveChanges();
+        }
+        //Edit BlogPost
+        public void UpdateBlogPost(PostListVM model)
+        {
+            var post = _context.Posts.Single(o => o.Id == model.Id);
+            post.Title = model.Title;
+            post.Text = model.Text;
+            post.Link = model.Link;
+            _context.SaveChanges();
+        }
+        //Delete BlogPost
+        public void DeleteBlogPost(int postId)
+        {
+            var removeThisPost = _context.Posts.Single(o => o.Id == postId);
+            _context.Posts.Remove(removeThisPost);
+            _context.SaveChanges();
+        }
 
-        //    _context.Posts.Add(category);
-        //    _context.SaveChanges();
-        //}
+        //Get Search
+        public PostListVM[] GetSearch(string search)
+        {
+            return _context.Posts
+                .OrderByDescending(o => o.TimePosted)
+                .Where(o => o.Title.Contains(search)                
+                        || o.Text.Contains(search)
+                        || o.Category.Contains(search))
+                .Select(o => new PostListVM
+                {
+                    Id = o.Id,
+                    Title = o.Title,
+                    Text = o.Text,
+                    Link = o.Link,
+                    TimePosted = o.TimePosted,
+                    //LikeCounter = o.LikeCounter
+                    Category = o.Category
+                })
+                .ToArray();
+        }
     }
 }

@@ -1,0 +1,42 @@
+﻿@using Geekin.ViewModels
+@model RegisterVM
+@addTagHelper "*, Microsoft.AspNet.Mvc.TagHelpers"
+
+@{
+    ViewBag.Title = "Register";
+}
+
+<link href="~/styles/mystyle.css" rel="stylesheet" />
+<div id="container">
+    <form asp-controller="Admin" asp-action="Register">
+        <br />
+        <div class="col-md-5">
+            <label asp-for="Email"></label>
+            <input asp-for="Email" class="form-control custom" style="width:300px;" placeholder="Email" />
+            <span asp-validation-for="Email"></span>
+        </div>
+        <br /><br /><br /><br />
+        <div class="col-md-5">
+            <label asp-for="Password"></label>
+            <input asp-for="Password" class="form-control custom" style="width:300px;" placeholder="Password" />
+            <span asp-validation-for="Password"></span>
+        </div>
+        <br /><br /><br /><br />
+        <div class="col-md-5">
+            <label asp-for="ConfirmPassword"></label>
+            <input asp-for="ConfirmPassword" class="form-control custom" style="width:300px;" placeholder="Confirm password" />
+            <span asp-validation-for="ConfirmPassword"></span>
+        </div>
+        <br /><br /><br /><br />
+        <div class="col-md-5">
+            <label asp-for="UserName"></label>
+            <input asp-for="UserName" class="form-control custom" style="width:300px;" placeholder="Username" />
+            <span asp-validation-for="UserName"></span>
+        </div>
+            <br />
+            <br />
+        <div id="button-panel">
+            <input type="submit" value="Register" class="btn btn-success" data-dismiss="modal" />
+        </div>
+    </form>
+</div>

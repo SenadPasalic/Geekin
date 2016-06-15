@@ -1,0 +1,44 @@
+﻿@using Geekin.ViewModels
+@model AddPostVM
+@addTagHelper "*, Microsoft.AspNet.Mvc.TagHelpers"
+
+@{
+    ViewBag.Title = "Edit post";
+}
+
+
+<div id="container">
+    <form asp-controller="Home" asp-action="UpdateBlogPost" method="post">
+        <label asp-for="Title"></label>
+        <br />
+        <input asp-for="Title" placeholder="Title" style="width:300px;" />
+        <span asp-validation-for="Title"></span>
+        <br /><br>
+        @*@Html.EditorFor(model => model.Text, new { htmlAttributes = new { @class = "form-control" } })*@
+        @*<textarea asp-for="Text" id="mytextarea" name="mytextarea"></textarea>*@
+        @*"mytextarea" istället för "textarea" för att asp kanske inte förstår vad som menas med textarea*@
+        <textarea asp-for="Text" class="tinyMCE" id="Text" name="Text" rows="5" cols="40"></textarea>
+        <span asp-validation-for="Text"></span>
+        @*<label asp-for="Text"></label>
+            <br />
+            <input asp-for="Text" />
+            <span asp-validation-for="Text"></span>*@
+        <br />
+        <label asp-for="Link"></label>
+        <br />
+        <input asp-for="Link" placeholder="YouTube link" style="width:300px;" />
+        <span asp-validation-for="Link"></span>
+        @*<select asp-for="Category"></select>*@
+        <br />
+        <br />        
+
+        <input asp-for="Id" type="hidden" value="@Model.Id" />
+        <div id="button-panel">
+            <button type="submit" value="Post" class="btn btn-success" data-dismiss="modal"><span class="fa fa-upload" aria-hidden="true"></span> Publish</button>
+        </div>  
+</form>
+</div>
+    <script src="~/scripts/jquery.min.js"></script>
+    <script src="~/scripts/jquery.validate.min.js"></script>
+    <script src="~/scripts/jquery.validate.unobtrusive.min.js"></script>
+

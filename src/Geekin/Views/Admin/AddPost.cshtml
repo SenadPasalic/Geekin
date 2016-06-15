@@ -3,38 +3,176 @@
 @addTagHelper "*, Microsoft.AspNet.Mvc.TagHelpers"
 
 @{
-    ViewBag.Title = "Create a new post";
+    ViewBag.Title = "New post";
 }
 
 
-<body>
+<div id="container">
     <form asp-controller="Admin" asp-action="AddPost" method="post">
         <label asp-for="Title"></label>
         <br />
-        <input asp-for="Title" placeholder="Title" style="width:300px;"/>
+        <input asp-for="Title" placeholder="Title" style="width:35%;" />
         <span asp-validation-for="Title"></span>
         <br /><br>
         @*@Html.EditorFor(model => model.Text, new { htmlAttributes = new { @class = "form-control" } })*@
-        @*<textarea asp-for="Text" id="mytextarea" name="mytextarea"></textarea>*@  
-        @*"mytextarea" istället för "textarea" för att kanske inte asp förstår vad som menas med textarea*@     
-        <textarea asp-for="mytextarea" class="tinyMCE" id="mytextarea" name="mytextarea" rows="5" cols="40"></textarea>
-        <span asp-validation-for="mytextarea"></span>
+        @*<textarea asp-for="Text" id="mytextarea" name="mytextarea"></textarea>*@
+        <textarea asp-for="Text" class="tinyMCE" id="Text" name="Text" rows="5" cols="40"></textarea>
+        <span asp-validation-for="Text"></span>
         @*<label asp-for="Text"></label>
-        <br />
-        <input asp-for="Text" />
-        <span asp-validation-for="Text"></span>*@
+            <br />
+            <input asp-for="Text" />
+            <span asp-validation-for="Text"></span>*@
         <br />
         <label asp-for="Link"></label>
         <br />
-        <input asp-for="Link" placeholder="YouTube link" style="width:300px;"/>
+        <input asp-for="Link" placeholder="YouTube link" style="width:70%;" />
         <span asp-validation-for="Link"></span>
-        @*<select asp-for="Category"></select>*@
         <br />
         <br />
-        <button type="submit" value="Post" class="btn btn-success" data-dismiss="modal"><span class="fa fa-upload" aria-hidden="true"></span> Post</button>
-</form>
-</body>
-    <script src="~/scripts/jquery.min.js"></script>
+        @* Dropdown list for Category *@
+        <div>
+            <div class="categoryLine">
+                <label asp-for="Category"></label>
+                <br />
+                <div class="myDropdown">
+                    <div class="btn-group">
+                        <a class="btn btn-default dropdown-toggle btn-blog " data-toggle="dropdown" href="#" id="dropdownMenu1" style="width:200px;">
+                            <span class="selection pull-left">Select a category </span>
+                            <span class="pull-right glyphiconglyphicon-chevron-down caret" style="float:right;margin-top:10px;"></span>
+                        </a>
+
+                        <ul class="dropdown-menu myDropdown2" role="menu" aria-labelledby="dropdownMenu1">
+                            @foreach (var item in Model.Categories)
+                            {
+                                <li>
+                                    <a href="#" data-value=@item.CategoryName>
+                                        <h4>@item.CategoryName</h4>
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <input asp-for="@Model.Category" type="text" id="vl" hidden="hidden" />         @* hidden="hidden"*@
+            <span asp-validation-for="@Model.Category"></span>
+            <div class="categoryLine">
+                @*<span class="input-group-btn">*@
+                <button id="plusButton1" class="btn btn-success" type="button"><span class="fa fa-plus" aria-hidden="true"></span></button>
+                <div class="hideMe">
+                    <input asp-for="@Model.NewCategory" type="text" id="TextBoxNewCategory" placeholder="New category"/>
+                    <button id="plusButton2" type="submit" name="command" value="submit2" class="btn btn-success"><span class="fa fa-plus" aria-hidden="true"></span></button>
+                </div>
+                    @*</span>*@
+                </div>
+            </div>
+
+            @*@Model.PostedBy = User.Identity.Name*@
+
+
+
+            <input asp-for="@Model.PostedBy" type="text" hidden="hidden" value="@User.Identity.Name" />
+
+            @*<input asp-for="@Model.Categories[0].CategoryName" type="text" id="vl" />         @* hidden="hidden"*@
+            @*<span asp-validation-for="@Model.Categories[0].CategoryName"></span>*@
+            @*@Html.ValidationMessageFor(x => x.Category)
+                <asp:RequiredFieldValidator ID="dropdownMenu1" runat="server" ControlToValidate="dropdown-menu" InitialValue="Please select" ErrorMessage="Please select something" />*@
+
+            @* Add a new Category *@
+            <script>
+                $(".dropdown-menu").on('click', 'li a', function () {
+                    var selText = $(this).children("h4").html();
+                    $(this).parent('li').siblings().removeClass('active');
+                    $('#vl').val($(this).attr('data-value'));
+                    $(this).parents('.btn-group').find('.selection').html(selText);
+                    $(this).parents('li').addClass("active");
+                });
+
+
+                @* Dropdown list *@
+                //Dropdown list
+                //https://css-tricks.com/long-dropdowns-solution/
+                var maxHeight = 400;
+
+                $(function () {
+                    $(".dropdown > li").hover(function () {
+                        var $container = $(this),
+                        $list = $container.find("ul"),
+                        $anchor = $container.find("a"),
+                        height = $list.height() * 1.1,       // make sure there is enough room at the bottom
+                        multiplier = height / maxHeight;     // needs to move faster if list is taller
+
+                        // need to save height here so it can revert on mouseout
+                        $container.data("origHeight", $container.height());
+
+                        // so it can retain it's rollover color all the while the dropdown is open
+                        $anchor.addClass("hover");
+
+                        // make sure dropdown appears directly below parent list item
+                        $list
+                        .show()
+                        .css({
+                            paddingTop: $container.data("origHeight")
+                        });
+
+                        // don't do any animation if list shorter than max
+                        if (multiplier > 1) {
+                            $container
+                            .css({
+                                height: maxHeight,
+                                overflow: "hidden"
+                            })
+                            .mousemove(function (e) {
+                                var offset = $container.offset();
+                                var relativeY = ((e.pageY - offset.top) * multiplier) - ($container.data("origHeight") * multiplier);
+                                if (relativeY > $container.data("origHeight")) {
+                                    $list.css("top", -relativeY + $container.data("origHeight"));
+                                };
+                            });
+                        }
+
+                    }, function () {
+
+                        var $el = $(this);
+
+                        // put things back to normal
+                        $el
+                        .height($(this).data("origHeight"))
+                        .find("ul")
+                        .css({ top: 0 })
+                        .hide()
+                        .end()
+                        .find("a")
+                        .removeClass("hover");
+
+                    });
+
+                    // Add down arrow only to menu items with submenus
+                    $(".dropdown > li:has('ul')").each(function () {
+                        $(this).find("a:first").append("<img src='images/down-arrow.png' />");
+                    });
+
+                });
+
+                //hide-show
+                $(document).ready(function () {
+                    $("#plusButton1").click(function () {
+                        $(this).find('span').toggleClass('fa-plus fa-times');
+                        $(this).toggleClass('btn-success btn-danger');
+                        $(".hideMe").toggle("slide");
+                    });
+                });
+            </script>
+
+            <br />
+            <br />
+            <div id="button-panel">
+                <button type="submit" name="command" value="submit1" class="btn btn-success" data-dismiss="modal"><span class="fa fa-upload" aria-hidden="true"></span> Publish</button>
+            </div>
+    </form>
+</div>
+
+@*<script src="~/scripts/jquery.min.js"></script>
     <script src="~/scripts/jquery.validate.min.js"></script>
-    <script src="~/scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/scripts/jquery.validate.unobtrusive.min.js"></script>*@
 
