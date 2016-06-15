@@ -13,6 +13,7 @@ namespace Geekin.Models
         PostListVM[] GetAllPosts();
         PostListVM[] GetOnePost(int myTitle);
         PostListVM[] SelectCategory(string myCategory);
+        PostListVM[] SelectTag(int myTag);
         AddCategoryVM[] GetAllCategories();
         void AddPost(AddPostVM viewModel, string postedBy);
         void AddNewCategory(AddPostVM viewModel);
@@ -42,7 +43,8 @@ namespace Geekin.Models
                     Link = o.Link,
                     TimePosted = o.TimePosted,
                     Category = o.Category,
-                    PostedBy = o.PostedBy
+                    PostedBy = o.PostedBy,
+                    Tags = o.Tags
                     //LikeCounter = o.LikeCounter
                 })
                 .ToArray();
@@ -62,6 +64,26 @@ namespace Geekin.Models
                     TimePosted = o.TimePosted,
                     Category = o.Category,
                     PostedBy = o.PostedBy
+                    //LikeCounter = o.LikeCounter
+                })
+                .ToArray();
+        }
+        //Hämta alla poster från en tag
+        public PostListVM[] SelectTag(int myTag)
+        {
+            return _context.Posts
+                .OrderByDescending(o => o.TimePosted)
+                .Where(o => o.Id == myTag)
+                .Select(o => new PostListVM
+                {
+                    Id = o.Id,
+                    Title = o.Title,
+                    Text = o.Text,
+                    Link = o.Link,
+                    TimePosted = o.TimePosted,
+                    Category = o.Category,
+                    PostedBy = o.PostedBy,
+                    Tags = o.Tags
                     //LikeCounter = o.LikeCounter
                 })
                 .ToArray();
@@ -114,7 +136,8 @@ namespace Geekin.Models
                 TimePosted = DateTime.Now,
                 Category = viewModel.Category,
                 LikeCounter = 0,
-                PostedBy = viewModel.PostedBy
+                PostedBy = viewModel.PostedBy,
+                Tags = viewModel.Tags
             });
             _context.SaveChanges();
         }

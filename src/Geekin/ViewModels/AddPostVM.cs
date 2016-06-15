@@ -25,6 +25,9 @@ namespace Geekin.ViewModels
         [Display(Name = "YouTube link")]
         public string Link { get; set; }
 
+        [Display(Name = "Tags")]
+        public string Tags { get; set; }
+
         public DateTime TimePosted { get; set; }
 
         public int LikeCounter { get; set; }

@@ -103,6 +103,12 @@ namespace Geekin.Controllers
             var model = repository.SelectCategory(myCategory);
             return View(model);
         }
+        //Tags
+        public IActionResult Tags(int myTag)
+        {
+            var model = repository.SelectTag(myTag);
+            return View(model);
+        }
 
         //Login
         public IActionResult Login()

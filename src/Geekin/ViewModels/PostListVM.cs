@@ -20,5 +20,7 @@ namespace Geekin.ViewModels
         public string Category { get; set; }
 
         public AddCategoryVM[] Categories { get; set; }
+
+        public string Tags { get; set; }
     }
 }

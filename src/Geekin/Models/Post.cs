@@ -22,7 +22,7 @@ namespace Geekin.Models
 
         public string PostedBy { get; set; }
 
-
+        public string Tags { get; set; }
         //public IEnumerable<SelectListItem> Category { get; set; }
         //public string SelectedValue { get; set; }
     }

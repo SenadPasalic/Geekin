@@ -167,6 +167,15 @@
                     <iframe width="560" height="314" src="@item.Link" target="_top" allowfullscreen="allowfullscreen" frameBorder="0"></iframe>
                 </div>
             }
+            <br />
+            <br />
+            //Tags
+            <a class="tag">
+                @if (item.Tags != null)
+                {
+                    @Html.ActionLink(@item.Tags, "Tags", "Home", new { myTag = @item.Id }, null)
+                }
+            </a>
             //Like
             @*<div class="heartLike">
                     <i class="fa fa-heart" aria+-hidden="true" onclick="heartLike(@item.LikeCounter)"></i>
