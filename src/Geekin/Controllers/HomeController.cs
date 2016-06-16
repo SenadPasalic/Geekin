@@ -105,9 +105,9 @@ namespace Geekin.Controllers
             return View(model);
         }
         //Tags
-        public IActionResult Tags(int myTag)
+        public IActionResult Tags(string myTag)
         {
-            var model = repository.SelectTag(myTag);
+            var model = repository.SelectTag(myTag);            
             return View(model);
         }
 
@@ -226,7 +226,8 @@ namespace Geekin.Controllers
                     Id = postId,
                     Title = o.Title,
                     Text = o.Text,
-                    Link = o.Link
+                    Link = o.Link,
+                    Tags = o.Tags
                 })
                 .Single();
 

@@ -97,15 +97,25 @@
                 </div>
             }
 
-            //Get URL path
-            //string url = Request.Url.GetLeftPart(UriPartial.Authority);
-            //string strPathAndQuery = HttpContext.Current.Request.Url.PathAndQuery;
-            //string strPathAndQuery = Request.RawUrl;
-            //string url = window.location.href;
+            @if (User.Identity.IsAuthenticated)
+            {
+                <div id="button-panel">
+                    <form asp-controller="Home" asp-action="DeleteBlogPost">
+                        <input type="hidden" name="postId" value="@item.Id" />
+                        <button type="submit" class="btn btn-danger" style="display: inline;"><span class="fa fa-trash"></span></button>
+                    </form>
+                </div>
+                <div id="button-panel">
+                    <form asp-controller="Home" asp-action="EditBlogPost">
+                        <input type="hidden" name="postId" value="@item.Id" />
+                        <button type="submit" class="btn btn-warning" style="display: inline;"><span class="fa fa-pencil"></span></button>
+                    </form>
+                </div>
+            }
             <br />
             <br />
             <div id="button-panel">
-                <div id="button-panel" style="color: #999999"><i class="fa fa-clock-o" aria-hidden="true"></i> @item.TimePosted.ToString("HH:mm dd-MM-yyyy")</div>
+                <div id="button-panel" style="color: #999999"><i class="fa fa-clock-o" aria-hidden="true"></i> @item.TimePosted.ToString("HH:mm dd-MM-yyyy") by @item.PostedBy</div>
             </div>
             <br />
             <br />
