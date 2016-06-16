@@ -417,12 +417,6 @@ hr.style-six {
     background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0));
 }
 
-
-
-
-
-
-
 /* Sticky navbar */
 /*.content {
     margin-top:10px;
@@ -670,14 +664,22 @@ input[type=text] {
     .carousel {
         width: 100%;
         margin-left: 0;
-        margin: 0 auto;
+        margin: -10px auto;
     }
 
     #myNavbar {        
         width: 100%;
         margin-left: 0;
+        margin: 0;
     }
-
+    .searchbox {
+        visibility:visible;
+        padding: 0 0 40px 0;
+    }
+    .search-form .form-group:hover,
+    .search-form .form-group.hover {
+        width: 100%;
+    }
     .videoWrapper {
         position:absolute;
         width: 96.2%;
