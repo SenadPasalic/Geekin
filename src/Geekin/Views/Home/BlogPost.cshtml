@@ -8,6 +8,17 @@
 
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="jquery.url.js"></script>
+<div id="fb-root"></div>
+
+@* Facebook comments *@
+<script>
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.6";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
 
 <script>
     //check url with a alert
@@ -75,18 +86,18 @@
 <script src="https://apis.google.com/js/platform.js" async defer></script>
 
 <div id="container">
-    <div class="myContent">        
+    <div class="myContent">
         @*<center><h2 style="font-weight: 700; color: #555555; text-decoration: underline">Admin posts</h2></center>*@
+        @* Breadcrumb *@
+        <ol class="breadcrumb">
+            <li><a href="/Home/Index">Home</a></li>
+            <li><a href="/Home/Category?myCategory=@Model.BlogPosts[0].Category">@Model.BlogPosts[0].Category</a></li>
+            <li class="active">@Model.BlogPosts[0].Title</li>
+        </ol>
+
         @* Skriver ut alla posts *@
         @foreach (var item in Model.BlogPosts)
         {
-            @* Breadcrumb *@
-            <ol class="breadcrumb">
-                <li><a href="/Home/Index">Home</a></li>
-                <li><a href="/Home/Category?myCategory=@item.Category">@item.Category</a></li>
-                <li class="active">@item.Title</li>
-            </ol>
-
             <h3><b>@item.Title</b></h3>
             @Html.Raw(item.Text)
             @if (@item.Link != null)
@@ -96,7 +107,6 @@
                     <iframe width="560" height="314" src="@item.Link" target="_top" allowfullscreen="allowfullscreen" frameBorder="0"></iframe>
                 </div>
             }
-
             @if (User.Identity.IsAuthenticated)
             {
                 <div id="button-panel">
@@ -118,7 +128,10 @@
                 <div id="button-panel" style="color: #999999"><i class="fa fa-clock-o" aria-hidden="true"></i> @item.TimePosted.ToString("HH:mm dd-MM-yyyy") by @item.PostedBy</div>
             </div>
             <br />
+            
             <br />
+            <br />
+            //Share and like
             <div id="share-panel">
                 <div style="color: #999999">Share this post</div>
                 @*Facebook like and share (data-layout="standard")*@
@@ -129,6 +142,8 @@
                 <div class="g-plus" data-action="share" data-annotation="bubble"></div>
                 <div class="g-plusone"></div>
             </div>
+            //Fb comments
+            <div class="fb-comments" data-href="http://keepongeekin.azurewebsites.net/Home/BlogPost?myTitle=@item.Title" data-width="100%" data-numposts="5"></div>
 
             @*<div class="heartLike">
                     <i class="fa fa-heart" aria-hidden="true" onclick="heartLike(@item.LikeCounter)"></i>
@@ -147,6 +162,8 @@
                         </a>
                 </div>*@
             <hr class="style-six">
+            <br />
+            <br />
         }
     </div>
 </div>

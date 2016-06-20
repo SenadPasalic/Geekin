@@ -30,8 +30,10 @@
       "frameworkAssemblies": {
         "System.Web": "4.0.0.0"
       }
-    },
-    "dnxcore50": { }
+    }
+
+
+
   },
 
   "exclude": [
