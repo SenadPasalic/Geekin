@@ -398,7 +398,7 @@ a.back-to-top {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
     background-color: transparent;
-    background: rgba(0, 0, 0, 0.55) url("../pictures/up-arrow.png") no-repeat center 43%;
+    background: rgba(65, 255, 0, 0.55) url("../pictures/up-arrow.png") no-repeat center 43%;
 }
 
 a:hover.back-to-top {
