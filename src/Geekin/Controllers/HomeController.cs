@@ -10,6 +10,9 @@ using Geekin.Models;
 using System.Security.Claims;
 using Microsoft.AspNet.Authorization;
 //using System.Web.Security;
+using MVCEmail.Models;
+using System.Net;
+using System.Net.Mail;
 
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
@@ -73,28 +76,22 @@ namespace Geekin.Controllers
 
             return View(model);
         }
-        //Admin
-        public IActionResult Admin()
-        {
-            return View();
-        }
-
-        //för att visa index 2
-        public IActionResult Index2()
-        {
-            var model = repository.GetAllPosts();
-            return View(model);
-        }
-
 
         //BlogPost
-        public IActionResult BlogPost(int myTitle)
+        public IActionResult BlogPost(int myTitle, string search)
         {
-            //var model = repository.GetOnePost(myTitle);
-
             MasterOneVM model = new MasterOneVM();
-            model.BlogPosts = repository.GetOnePost(myTitle);
-            model.Categories = repository.GetAllCategories();
+
+            //Search
+            if (!String.IsNullOrEmpty(search))
+            {
+                model.BlogPosts = repository.GetSearch(search);
+            }
+            else
+            {
+                model.BlogPosts = repository.GetOnePost(myTitle);
+                model.Categories = repository.GetAllCategories();
+            }
 
             return View(model);
         }
@@ -105,9 +102,9 @@ namespace Geekin.Controllers
             return View(model);
         }
         //Tags
-        public IActionResult Tags(int myTag)
+        public IActionResult Tags(string myTag)
         {
-            var model = repository.SelectTag(myTag);
+            var model = repository.SelectTag(myTag);            
             return View(model);
         }
 
@@ -226,7 +223,8 @@ namespace Geekin.Controllers
                     Id = postId,
                     Title = o.Title,
                     Text = o.Text,
-                    Link = o.Link
+                    Link = o.Link,
+                    Tags = o.Tags
                 })
                 .Single();
 
@@ -239,6 +237,50 @@ namespace Geekin.Controllers
         {
             repository.UpdateBlogPost(model);
             return RedirectToAction(nameof(HomeController.Index));
+        }
+
+        //Contact with mail
+        public IActionResult Contact()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Contact(EmailFormModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var body = "<p>Email From: {0} ({1})</p><p>Message:</p><p>{2}</p>";
+                var message = new MailMessage();
+                message.To.Add(new MailAddress("keepgeeking@gmail.com"));  // replace with valid value 
+                message.From = new MailAddress(model.FromEmail);  // replace with valid value
+                message.Subject = "Your email subject";
+                message.Body = string.Format(body, model.FromName, model.FromEmail, model.Message);
+                message.IsBodyHtml = true;
+
+                using (var smtp = new SmtpClient())
+                {
+                    var credential = new NetworkCredential
+                    {
+                        UserName = "keepgeeking@gmail.com",  // replace with valid value
+                        Password = "dinmAmma!!11!!"  // replace with valid value
+                    };
+                    smtp.Credentials = credential;
+                    smtp.Host = "smtp-mail.outlook.com";
+                    smtp.Port = 587;
+                    smtp.EnableSsl = true;
+                    await smtp.SendMailAsync(message);
+                    return RedirectToAction("Sent");
+                }
+            }
+            return View(model);
+        }
+
+        //Sent contact mail
+        public ActionResult Sent()
+        {
+            return View();
         }
     }
 }

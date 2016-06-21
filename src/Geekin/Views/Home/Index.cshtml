@@ -55,12 +55,12 @@
         @{
             var countToFour = 0;
 
-            <!-- Wrapper for slides -->
+        <!-- Wrapper for slides -->
             <div class="carousel-inner" role="listbox">
                 @foreach (var item in Model.BlogPosts)
-            {
-                if (@item.Link != null)
                 {
+                    if (@item.Link != null)
+                    {
                         @if (countToFour == 0)
                         {
                             <div class="item active embed-responsive embed-responsive-16by9">
@@ -92,11 +92,11 @@
         }
 
         @*<div class="item active">
-                <img src="img_chania.jpg" alt="Chania" width="460" height="345">
-                <div class="carousel-caption">
-                    <h3>Chania</h3>
-                    <p>The atmosphere in Chania has a touch of Florence and Venice.</p>
-                </div>
+            <img src="img_chania.jpg" alt="Chania" width="460" height="345">
+            <div class="carousel-caption">
+            <h3>Chania</h3>
+            <p>The atmosphere in Chania has a touch of Florence and Venice.</p>
+            </div>
             </div>*@
 
 
@@ -117,7 +117,7 @@
 </div>
 
 <div id="container">
-    <div class="myContent">
+    <div class="myContentLeft">
         @*Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
 
             Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
@@ -137,7 +137,7 @@
         {
             @*<h3><b>@item.Title</b></h3>*@
             //<h3><b><a href="/home/blogpost/?myParam=@item.Title">@item.Title</a></b></h3>
-            <h3><b>@Html.ActionLink(@item.Title, "BlogPost", "Home", new { myTitle = @item.Id }, null)</b></h3>
+            <div class="myLink"><h3><b>@Html.ActionLink(@item.Title, "BlogPost", "Home", new { myTitle = @item.Id }, null)</b></h3></div>
             @if (@item.Category != null)
             {
                 <div class="categoryLink"><h5><b>@Html.ActionLink(@item.Category, "Category", "Home", new { myCategory = @item.Category }, null)</b></h5></div>
@@ -149,9 +149,7 @@
             @if (item.Text.Length > 300)
             {
                 @Html.Raw(item.Text.Substring(0, 300));
-                <b>
-                    @Html.ActionLink(" ... See More", "BlogPost", "Home", new { myTitle = @item.Id }, null)
-                </b>
+                <div class="myLink"><b>@Html.ActionLink(" ... See More", "BlogPost", "Home", new { myTitle = @item.Id }, null)</b></div>
             }
             else
             {
@@ -170,22 +168,27 @@
             <br />
             <br />
             //Tags
-            <a class="tag">
-                @if (item.Tags != null)
+            @if (item.Tags != null)
+            {
+                string[] splitTags = item.Tags.Split(null);
+
+                for (int i = 0; i < splitTags.Length; i++)
                 {
-                    @Html.ActionLink(@item.Tags, "Tags", "Home", new { myTag = @item.Id }, null)
+                    <div class="tag myLink">
+                        @Html.ActionLink(splitTags[i], "Tags", "Home", new { myTag = splitTags[i] }, null)
+                    </div>
                 }
-            </a>
+            }
             //Like
             @*<div class="heartLike">
-                    <i class="fa fa-heart" aria+-hidden="true" onclick="heartLike(@item.LikeCounter)"></i>
-                    <p><a id="likes">@item.LikeCounter</a></p>
+                <i class="fa fa-heart" aria+-hidden="true" onclick="heartLike(@item.LikeCounter)"></i>
+                <p><a id="likes">@item.LikeCounter</a></p>
                 </div>*@
-                <!-- LikeBtn.com BEGIN -->
+        <!-- LikeBtn.com BEGIN -->
             @*<span class="btn likebtn-wrapper" data-theme="ublue" data-identifier="item_1"></span>
                 <script>(function (d, e, s) { if (d.getElementById("likebtn_wjs")) return; a = d.createElement(e); m = d.getElementsByTagName(e)[0]; a.async = 1; a.id = "likebtn_wjs"; a.src = s; m.parentNode.insertBefore(a, m) })(document, "script", "//w.likebtn.com/js/w/widget.js");</script>*@
-                <!-- LikeBtn.com END -->
-                <!--Edit/Delete for ADMIN-->
+        <!-- LikeBtn.com END -->
+        <!--Edit/Delete for ADMIN-->
             <br />
             <br />
             @if (Model.IsUserAdmin)
@@ -208,11 +211,88 @@
                 </div>
             }
             <br />
-                <br />
-                <div id="button-panel" style="color: #999999"><i class="fa fa-clock-o" aria-hidden="true"></i> @item.TimePosted.ToString("HH:mm dd-MM-yyyy") by @item.PostedBy</div>
-                    <br />
-                    <hr class="style-six">
-                    <br />
+            <br />
+            <div id="button-panel" style="color: #999999"><i class="fa fa-clock-o" aria-hidden="true"></i> @item.TimePosted.ToString("HH:mm dd-MM-yyyy") by @item.PostedBy</div>
+            <br />
+            <hr class="style-six" style="width:40%">
+            <br />
         }
     </div>
+    <div class="myContentRight">
+        <center><div><h4>Featured tags</h4></div></center>
+        @{
+            List<string[]> splitTags3 = new List<string[]>();
+            //List<string[]> allSplitTags = new List<string[]>();            
+
+            string[] splitTags2 = { };
+
+            foreach (var item in Model.BlogPosts)
+            {
+                @if (item.Tags != null)
+                {
+                    splitTags2 = item.Tags.Split(null);
+                    splitTags3.Add(splitTags2);
+                }
+            }
+
+            @*
+
+                //string[] sizedTags = { };
+                List<string[]> sizedTags = new List<string[]>();
+                int m = 0;
+                int size = 0;
+
+                for (int i = 0; i < splitTags2.Count; i++)
+                {
+                    for (int j = 0; j < splitTags2.Count; j++)
+                    {
+                        for (int k = 0; k < splitTags2[i][k].Length; k++)
+                        {
+                            for (int l = k + 1; l < splitTags2[i][k].Length; l++)
+                            {
+                                if (splitTags2[i][k] == splitTags2[j][l])
+                                {
+                                    sizedTags[m] = splitTags2[i];
+                                    m++;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                for (int i = 0; i < sizedTags.Count; i++)
+                {
+                    @Html.ActionLink(sizedTags[i] + "  ", "Tags", "Home", new { myTag = sizedTags[i] }, null)
+                }*@
+
+            @*for (int i = 0; i < splitTags2.Length; i++)
+                {
+                    @Html.ActionLink(splitTags2[i] + "  ", "Tags", "Home", new { myTag = splitTags2[i] }, null)
+                }*@
+
+        string[][] allSplitTags = splitTags3.ToArray();
+
+        for (int i = 0; i < splitTags3.Count; i++)
+        {
+            for (int j = 0; j < splitTags3.Count; j++)
+            {
+                for (int k = 0; k < splitTags3[i].Length; k++)
+                {
+                    for (int l = 1; l < splitTags3[j].Length; l++)
+                    {
+                        if (splitTags3[i][k] != splitTags3[j][l])
+                        {
+                            //allSplitTags[0][m] = splitTags3[j][l];
+                            //if (allSplitTags[0][0] != splitTags3[j][l])
+                            //{
+                                <center>@Html.ActionLink(splitTags3[j][l] + "  ", "Tags", "Home", new { myTag = splitTags3[j][l] }, null)</center>
+                            //}                            
+                        }
+                    }
+                }
+            }
+        }
+    }
+</div>
+
 </div>

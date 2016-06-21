@@ -73,6 +73,15 @@
         $(document).ready(function () {
             $('.dropdown-toggle').dropdown();
         });
+
+        //Change navbar color
+        $(document).ready(function () {
+            var a = document.getElementById("gameColor");
+
+            a.onclick = function () {
+
+            }
+        });
     </script>
     @* CSS *@
     <link href="~/styles/mystyle.css" rel="stylesheet" />
@@ -161,9 +170,10 @@
 
     <div id="main">
         <div id="main_left">@RenderBody()</div>
-        <div id="main_right">Sidebar</div>
+        <div id="main_right"></div>
     </div>    
         <div class="footer">
+            <p><a href="/home/contact" class="footerLink">CONTACT US</a>  |  <a href="#" class="footerLink">ABOUT</a></p>
             <p>Copyright © 2016</p>
         </div>
 

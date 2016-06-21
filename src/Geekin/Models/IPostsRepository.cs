@@ -13,7 +13,7 @@ namespace Geekin.Models
         PostListVM[] GetAllPosts();
         PostListVM[] GetOnePost(int myTitle);
         PostListVM[] SelectCategory(string myCategory);
-        PostListVM[] SelectTag(int myTag);
+        PostListVM[] SelectTag(string myTag);
         AddCategoryVM[] GetAllCategories();
         void AddPost(AddPostVM viewModel, string postedBy);
         void AddNewCategory(AddPostVM viewModel);
@@ -69,11 +69,12 @@ namespace Geekin.Models
                 .ToArray();
         }
         //Hämta alla poster från en tag
-        public PostListVM[] SelectTag(int myTag)
+        public PostListVM[] SelectTag(string myTag)
         {
             return _context.Posts
                 .OrderByDescending(o => o.TimePosted)
-                .Where(o => o.Id == myTag)
+                //.Where(o => o.Id == myTag)
+                .Where(o => o.Tags.Contains(myTag))
                 .Select(o => new PostListVM
                 {
                     Id = o.Id,
@@ -83,7 +84,7 @@ namespace Geekin.Models
                     TimePosted = o.TimePosted,
                     Category = o.Category,
                     PostedBy = o.PostedBy,
-                    Tags = o.Tags
+                    Tags = myTag
                     //LikeCounter = o.LikeCounter
                 })
                 .ToArray();
@@ -157,6 +158,7 @@ namespace Geekin.Models
             post.Title = model.Title;
             post.Text = model.Text;
             post.Link = model.Link;
+            post.Tags = model.Tags;
             _context.SaveChanges();
         }
         //Delete BlogPost
