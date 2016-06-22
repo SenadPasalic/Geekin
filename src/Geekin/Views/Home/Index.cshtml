@@ -116,7 +116,7 @@
     </div>
 </div>
 
-<div id="container">
+<div id="containerIndex">
     <div class="myContentLeft">
         @*Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
 
@@ -137,10 +137,10 @@
         {
             @*<h3><b>@item.Title</b></h3>*@
             //<h3><b><a href="/home/blogpost/?myParam=@item.Title">@item.Title</a></b></h3>
-            <div class="myLink"><h3><b>@Html.ActionLink(@item.Title, "BlogPost", "Home", new { myTitle = @item.Id }, null)</b></h3></div>
+            <div class="myLink" title="Title"><h3><b>@Html.ActionLink(@item.Title, "BlogPost", "Home", new { myTitle = @item.Id }, null)</b></h3></div>
             @if (@item.Category != null)
             {
-                <div class="categoryLink"><h5><b>@Html.ActionLink(@item.Category, "Category", "Home", new { myCategory = @item.Category }, null)</b></h5></div>
+                <div class="categoryLink" title="Category"><h5><b>@Html.ActionLink(@item.Category, "Category", "Home", new { myCategory = @item.Category }, null)</b></h5></div>
             }
 
             @*<div style="color: #999999"><p>@item.PostedBy</p></div>*@
@@ -149,7 +149,7 @@
             @if (item.Text.Length > 300)
             {
                 @Html.Raw(item.Text.Substring(0, 300));
-                <div class="myLink"><b>@Html.ActionLink(" ... See More", "BlogPost", "Home", new { myTitle = @item.Id }, null)</b></div>
+                <div class="myLink" title="See more"><b>@Html.ActionLink(" ... See More", "BlogPost", "Home", new { myTitle = @item.Id }, null)</b></div>
             }
             else
             {
@@ -174,7 +174,7 @@
 
                 for (int i = 0; i < splitTags.Length; i++)
                 {
-                    <div class="tag myLink">
+                    <div class="tag myLink" title="Tag">
                         @Html.ActionLink(splitTags[i], "Tags", "Home", new { myTag = splitTags[i] }, null)
                     </div>
                 }
@@ -219,7 +219,7 @@
         }
     </div>
     <div class="myContentRight">
-        <center><div><h4>Featured tags</h4></div></center>
+        <center><div><i class="fa fa-tags" aria-hidden="true" style="color:cornflowerblue"></i><h4>Featured tags</h4></div></center>
         @{
             List<string[]> splitTags3 = new List<string[]>();
             //List<string[]> allSplitTags = new List<string[]>();            

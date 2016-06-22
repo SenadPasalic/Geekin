@@ -1,29 +1,37 @@
 ﻿body {
     /*background-color: skyblue;*/
-    background-image: url('../pictures/colorful_blurry_background_iv-wallpaper-2048x1536.jpg');
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-    min-height:1080px;
+    background-image: url('../pictures/geeking background4-01-01 optimized.png'), url('../pictures/colorful_blurry_background_iv-wallpaper-2048x1536 optimized.jpg');
+    background-size: 400px 150px, 100% 100%;
+    background-repeat: space, no-repeat;
+    background-position: 0 0, 0 0;
+    min-height: 1080px;    
 }
-
+#containerIndex{
+    margin-left: 22.5%;
+    width: 55%;
+    overflow: hidden;
+    background-color: #f5eeee;
+    padding: 60px;    
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);    
+}
 #container {
     /*width:990px;*/
     margin-left: 22.5%;
     width: 55%;
     overflow: hidden;
     background-color: #f5eeee;
-    padding: 60px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding: 60px;    
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);    
+
+    margin: 20px auto 0 auto;
 }
 
 img.resizeHeader {
-    width: 50%;
+    width: 60%;
     /*max-width:100%;
     max-height:100%;*/
     position: relative;
-    top: 3px;
-    margin-left: 25%;
-    padding-bottom: 5px;
+    margin-left: 20%;
 }
 /* Navbar */
 #myNavbar {
@@ -33,7 +41,7 @@ img.resizeHeader {
     /*width: 77%;
     margin: 0 11.5%;*/
     width: 100%;
-    margin: 0;
+    margin: 0 0;    
     /*Hide dropdown scroll (skapade kaos med dropdownen)*/
     /*overflow: hidden;*/
     /*Opacity*/
@@ -46,8 +54,7 @@ img.resizeHeader {
     z-index: 6;
     /*spetsiga hörn*/
     border-radius: 0 0 0 0;
-
-
+    
 
     background-color: transparent;
     background: rgba(0, 0, 0, 0.8);
@@ -88,6 +95,7 @@ img.resizeHeader {
     max-width: 100%;
     overflow-x: hidden;
 }
+
 .myContentLeft{
     overflow: hidden;
     width: 70%;
@@ -244,7 +252,7 @@ img.resize {
     position: relative;
     /*width: 83.72%;*/
     width: 74.2%;
-    margin: -10px auto;
+    margin: 0 auto;
     /*width: 86%;
     margin-left: 7%;*/
     /*position:absolute;
@@ -398,7 +406,7 @@ a.back-to-top {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
     background-color: transparent;
-    background: rgba(65, 255, 0, 0.55) url("../pictures/up-arrow.png") no-repeat center 43%;
+    background: rgba(65, 255, 0, 0.26) url("../pictures/up-arrow.png") no-repeat center 43%;
 }
 
 a:hover.back-to-top {
@@ -456,6 +464,10 @@ hr.style-six {
     /*Size and position*/
     width: 76%;
     margin: 0 auto;
+}
+
+.nav-wrapper{
+    margin: 0 auto -28px auto;
 }
 
 /* Edit/Delete ADMIN */
@@ -622,7 +634,7 @@ input[type=text] {
     padding: 5px;
     border-top-left-radius: 4px;
     border-bottom-left-radius: 4px;
-    margin: 0 30px 0 0;
+    margin: 2px 30px 2px 0;
     text-decoration: none;
 } 
 .tag:hover {
@@ -656,6 +668,10 @@ input[type=text] {
 
 /* Responsive */
 @media screen and ( max-width: 1080px ) {
+    body{        
+        background-size: 350px 150px, 100% 100%;        
+    }
+    
     .searchbox {
         visibility: hidden;
     }
@@ -679,8 +695,16 @@ input[type=text] {
     html, body {
         max-width: 100%;
         overflow-x: hidden;
+        background-size: 300px 110px, 100% 100%; 
     }
-
+    #containerIndex{
+        width: 96%;
+        margin-left: 2%;
+        overflow: hidden;
+        background-color: #f5eeee;
+        padding: 20px 20px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
     #container {
         width: 96%;
         margin-left: 2%;
@@ -688,6 +712,8 @@ input[type=text] {
         background-color: #f5eeee;
         padding: 20px 20px;
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        
+        margin: -10px auto;
     }
 
     .myContentLeft{
@@ -705,8 +731,13 @@ input[type=text] {
     #myNavbar {        
         width: 100%;
         margin-left: 0;
-        margin: 0;
+        margin: 0 0;
     }
+    
+    .nav-wrapper{
+        margin: 0 auto -8px auto;
+    }
+
     .searchbox {
         visibility:visible;
         padding: 0 0 40px 0;
