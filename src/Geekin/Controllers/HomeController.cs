@@ -293,5 +293,11 @@ namespace Geekin.Controllers
         {
             return View();
         }
+
+        //Advertising
+        public IActionResult Advertising()
+        {
+            return View();
+        }
     }
 }
