@@ -14,23 +14,23 @@
         document.getElementById("likes").innerHTML = likes;
     };
     //Timer Slider
-    $(document).ready(function () {
-        //Events that reset and restart the timer animation when the slides change
-        $("#transition-timer-carousel").on("slide.bs.carousel", function (event) {
-            //The animate class gets removed so that it jumps straight back to 0%
-            $(".transition-timer-carousel-progress-bar", this)
-                .removeClass("animate").css("width", "0%");
-        }).on("slid.bs.carousel", function (event) {
-            //The slide transition finished, so re-add the animate class so that
-            //the timer bar takes time to fill up
-            $(".transition-timer-carousel-progress-bar", this)
-                .addClass("animate").css("width", "100%");
-        });
+    //$(document).ready(function () {
+    //    //Events that reset and restart the timer animation when the slides change
+    //    $("#transition-timer-carousel").on("slide.bs.carousel", function (event) {
+    //        //The animate class gets removed so that it jumps straight back to 0%
+    //        $(".transition-timer-carousel-progress-bar", this)
+    //            .removeClass("animate").css("width", "0%");
+    //    }).on("slid.bs.carousel", function (event) {
+    //        //The slide transition finished, so re-add the animate class so that
+    //        //the timer bar takes time to fill up
+    //        $(".transition-timer-carousel-progress-bar", this)
+    //            .addClass("animate").css("width", "100%");
+    //    });
 
-        //Kick off the initial slide animation when the document is ready
-        $(".transition-timer-carousel-progress-bar", "#transition-timer-carousel")
-            .css("width", "100%");
-    });
+    //    //Kick off the initial slide animation when the document is ready
+    //    $(".transition-timer-carousel-progress-bar", "#transition-timer-carousel")
+    //        .css("width", "100%");
+    //});
     //Bootstrap carousel timer
     $(document).ready(function () {
         $("#transition-timer-carousel").carousel({
@@ -43,7 +43,7 @@
 @* Karousel W3C *@
 <div class="carousel">
     <br>
-    <div id="transition-timer-carousel" class="carousel slide transition-timer-carousel" data-ride="carousel">
+    <div id="transition-timer-carousel" class="carousel slide transition-timer-carousel" data-ride="carousel" data-interval="false">
         <!-- Indicators -->
         <ol class="carousel-indicators">
             <li data-target="#transition-timer-carousel" data-slide-to="0" class="active"></li>
@@ -64,10 +64,9 @@
                         @if (countToFour == 0)
                         {
                             <div class="item active embed-responsive embed-responsive-16by9">
-                                <iframe src="@item.Link"></iframe>
+                                <iframe id="youtube" src="@item.Link"></iframe>
                                 <div class="carousel-caption">
                                     <h3>@item.Title</h3>
-                                    @*<p>The atmosphere in Chania has a touch of Florence and Venice.</p>*@
                                 </div>
                             </div>
                         }
@@ -77,7 +76,6 @@
                                 <iframe src="@item.Link"></iframe>
                                 <div class="carousel-caption">
                                     <h3>@item.Title</h3>
-                                    @*<p>The atmosphere in Chania has a touch of Florence and Venice.</p>*@
                                 </div>
                             </div>
                         }
@@ -112,7 +110,7 @@
             <span class="sr-only">Next</span>
         </a>
         <!-- Timer "progress bar" -->
-        <hr class="transition-timer-carousel-progress-bar animate" />
+        @*<hr class="transition-timer-carousel-progress-bar animate" />*@
     </div>
 </div>
 
@@ -148,8 +146,10 @@
 
             @if (item.Text.Length > 300)
             {
-                @Html.Raw(item.Text.Substring(0, 300));
-                <div class="myLink" title="See more"><b>@Html.ActionLink(" ... See More", "BlogPost", "Home", new { myTitle = @item.Id }, null)</b></div>
+                <div class="myLink">
+                    @Html.Raw(item.Text.Substring(0, 300));
+                </div>
+                <div class="myLink" title="See more"><b>@Html.ActionLink("... See More", "BlogPost", "Home", new { myTitle = @item.Id }, null)</b></div>
             }
             else
             {
@@ -179,16 +179,7 @@
                     </div>
                 }
             }
-            //Like
-            @*<div class="heartLike">
-                <i class="fa fa-heart" aria+-hidden="true" onclick="heartLike(@item.LikeCounter)"></i>
-                <p><a id="likes">@item.LikeCounter</a></p>
-                </div>*@
-        <!-- LikeBtn.com BEGIN -->
-            @*<span class="btn likebtn-wrapper" data-theme="ublue" data-identifier="item_1"></span>
-                <script>(function (d, e, s) { if (d.getElementById("likebtn_wjs")) return; a = d.createElement(e); m = d.getElementsByTagName(e)[0]; a.async = 1; a.id = "likebtn_wjs"; a.src = s; m.parentNode.insertBefore(a, m) })(document, "script", "//w.likebtn.com/js/w/widget.js");</script>*@
-        <!-- LikeBtn.com END -->
-        <!--Edit/Delete for ADMIN-->
+            <!--Edit/Delete for ADMIN-->
             <br />
             <br />
             @if (Model.IsUserAdmin)
@@ -212,7 +203,8 @@
             }
             <br />
             <br />
-            <div id="button-panel" style="color: #999999"><i class="fa fa-clock-o" aria-hidden="true"></i> @item.TimePosted.ToString("HH:mm dd-MM-yyyy") by @item.PostedBy</div>
+            var myMonth = @item.TimePosted.ToString("MMMM").ToUpper().First() + String.Join("", @item.TimePosted.ToString("MMMM").Skip(1));
+            <div id="button-panel" style="color: #999999"><i class="fa fa-clock-o" aria-hidden="true"></i> @item.TimePosted.ToString("HH:mm - dd " + @myMonth + ", yyyy") by @item.PostedBy</div>
             <br />
             <hr class="style-six" style="width:40%">
             <br />
@@ -222,7 +214,6 @@
         <center><div><i class="fa fa-tags" aria-hidden="true" style="color:cornflowerblue"></i><h4>Featured tags</h4></div></center>
         @{
             List<string[]> splitTags3 = new List<string[]>();
-            //List<string[]> allSplitTags = new List<string[]>();            
 
             string[] splitTags2 = { };
 
@@ -235,64 +226,209 @@
                 }
             }
 
-            @*
 
-                //string[] sizedTags = { };
-                List<string[]> sizedTags = new List<string[]>();
-                int m = 0;
-                int size = 0;
+            string[][] result = new string[200][];
 
-                for (int i = 0; i < splitTags2.Count; i++)
-                {
-                    for (int j = 0; j < splitTags2.Count; j++)
-                    {
-                        for (int k = 0; k < splitTags2[i][k].Length; k++)
-                        {
-                            for (int l = k + 1; l < splitTags2[i][k].Length; l++)
-                            {
-                                if (splitTags2[i][k] == splitTags2[j][l])
-                                {
-                                    sizedTags[m] = splitTags2[i];
-                                    m++;
-                                }
-                            }
-                        }
-                    }
-                }
-
-                for (int i = 0; i < sizedTags.Count; i++)
-                {
-                    @Html.ActionLink(sizedTags[i] + "  ", "Tags", "Home", new { myTag = sizedTags[i] }, null)
-                }*@
-
-            @*for (int i = 0; i < splitTags2.Length; i++)
-                {
-                    @Html.ActionLink(splitTags2[i] + "  ", "Tags", "Home", new { myTag = splitTags2[i] }, null)
-                }*@
-
-        string[][] allSplitTags = splitTags3.ToArray();
-
-        for (int i = 0; i < splitTags3.Count; i++)
-        {
-            for (int j = 0; j < splitTags3.Count; j++)
+            result[0] = new string[20];
+            int k = 0;
+            for (int i = 0; i < splitTags3.Count; i++)
             {
-                for (int k = 0; k < splitTags3[i].Length; k++)
+                for (int j = 0; j < splitTags3[i].Length; j++)
                 {
-                    for (int l = 1; l < splitTags3[j].Length; l++)
-                    {
-                        if (splitTags3[i][k] != splitTags3[j][l])
-                        {
-                            //allSplitTags[0][m] = splitTags3[j][l];
-                            //if (allSplitTags[0][0] != splitTags3[j][l])
-                            //{
-                                <center>@Html.ActionLink(splitTags3[j][l] + "  ", "Tags", "Home", new { myTag = splitTags3[j][l] }, null)</center>
-                            //}                            
-                        }
-                    }
+                    result[0][k] = result[0][k] + string.Join(" ", splitTags3[i][j]);
+                    //result[0][0] = result[0][0] + " ";
+                    k++;
                 }
             }
+
+            List<String> duplicates = new List<string>();
+            List<String> singles = new List<string>();
+            List<String> all = new List<string>();
+
+
+            duplicates = result[0].GroupBy(x => x)
+                             .Where(g => g.Count() > 1)
+                             .Select(g => g.Key)
+                             .ToList();
+
+
+            singles = result[0].GroupBy(n => n)
+                             .Where(g => g.Count() == 1)
+                             .Select(g => g.Key)
+                             .ToList();
+
+            duplicates.RemoveAll(item => item == null);
+            singles.RemoveAll(item => item == null);
+
+
+            //sortera duplicates & singles
+            //k = 0;
+            //for (int i = 0; i < singles.Count; i++)
+            //{
+            //    all[k] = singles[k];
+            //    k++;
+            //}
+            //for (int i = 0; i < duplicates.Count; i++)
+            //{
+            //    all[k] = duplicates[i];
+            //    k++;
+            //}
+            //all.Sort();
+
+
+
+            <br />
+
+            @*for (int i = 0; i < all.Count; i++)
+            {
+                <div class="myLink" title="Tag">
+                    <center>@Html.ActionLink(all[i], "Tags", "Home", new { myTag = all[i] }, null)</center>
+                </div>
+            }*@
+            for (int i = 0; i < duplicates.Count; i++)
+                {
+                    <div class="myLink" title="Tag">
+                        <center>@Html.ActionLink(duplicates[i], "Tags", "Home", new { myTag = duplicates[i] }, null)</center>
+                    </div>
+                }
+                for (int i = 0; i < singles.Count; i++)
+                {
+                    <div class="myLink" title="Tag">
+                        <center>@Html.ActionLink(singles[i], "Tags", "Home", new { myTag = singles[i] }, null)</center>
+                    </div>
+                }
         }
+    </div>
+    @{
+        string[] monthNames = System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.MonthGenitiveNames;
     }
+
+
+    <div class="myContentRight">
+        <center><div><i class="fa fa-search" aria-hidden="true" style="color:cornflowerblue"></i><h4>Search by month</h4></div></center>
+
+        @*@Html.DropDownListFor(model => Model.BlogPosts[0].TimePosted, new SelectList(
+                    Enumerable.Range(1, 12)
+                            .Select(r => new
+                            {
+                                Text = new DateTime(2000, r, 1).ToString("MMM"),
+                                Value = r.ToString()
+                            }),
+            "Value", "Text", Model.BlogPosts[0].TimePosted))*@
+
+        @{
+//string[] monthNames = System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.MonthGenitiveNames;
+        }
+
+
+
+        <div class="myDropdown" style="position:absolute">
+            <div class="btn-group">
+                    <a class="btn btn-default dropdown-toggle btn-blog " data-toggle="dropdown" href="#" id="dropdownMenu1" style="width:110%;">
+                        <span class="selection pull-left">Select </span>
+                        <span class="pull-right caret" style="float:right;margin-top:10px;"></span>
+                    </a>
+                    
+                        <ul class="dropdown-menu myDropdown2" role="menu" aria-labelledby="dropdownMenu1">
+                            @foreach (var item in monthNames)
+                            {
+
+                                <li>
+                                    @*<a href="/home/search?myMonth=@item" data-value=@item>
+                                <h4>@item</h4>
+                            </a>*@
+                                    @Html.ActionLink(@item, "Month", "Home", new { myMonth = @item }, null)
+                                </li>
+                            }
+                        </ul>                    
+            </div>
+        </div>
+
+
+        <br />
+        <br />
+
+    </div>
 </div>
 
-</div>
+
+<script>
+    $(".dropdown-menu").on('click', 'li a', function () {
+        var selText = $(this).children("h4").html();
+        $(this).parent('li').siblings().removeClass('active');
+        $('#vl').val($(this).attr('data-value'));
+        $(this).parents('.btn-group').find('.selection').html(selText);
+        $(this).parents('li').addClass("active");
+
+
+        var dropDownTop = button.offset().top + button.outerHeight();
+        dropdown.css('top', dropDownTop + "px");
+        dropdown.css('left', button.offset().left + "px");
+    });
+
+
+    @* Dropdown list *@
+    //Dropdown list
+    //https://css-tricks.com/long-dropdowns-solution/
+    var maxHeight = 400;
+
+    $(function () {
+        $(".dropdown > li").hover(function () {
+            var $container = $(this),
+            $list = $container.find("ul"),
+            $anchor = $container.find("a"),
+            height = $list.height() * 1.1,       // make sure there is enough room at the bottom
+            multiplier = height / maxHeight;     // needs to move faster if list is taller
+
+            // need to save height here so it can revert on mouseout
+            $container.data("origHeight", $container.height());
+
+            // so it can retain it's rollover color all the while the dropdown is open
+            $anchor.addClass("hover");
+
+            // make sure dropdown appears directly below parent list item
+            $list
+            .show()
+            .css({
+                paddingTop: $container.data("origHeight")
+            });
+
+            // don't do any animation if list shorter than max
+            if (multiplier > 1) {
+                $container
+                .css({
+                    height: maxHeight,
+                    overflow: "hidden"
+                })
+                .mousemove(function (e) {
+                    var offset = $container.offset();
+                    var relativeY = ((e.pageY - offset.top) * multiplier) - ($container.data("origHeight") * multiplier);
+                    if (relativeY > $container.data("origHeight")) {
+                        $list.css("top", -relativeY + $container.data("origHeight"));
+                    };
+                });
+            }
+
+        }, function () {
+
+            var $el = $(this);
+
+            // put things back to normal
+            $el
+            .height($(this).data("origHeight"))
+            .find("ul")
+            .css({ top: 0 })
+            .hide()
+            .end()
+            .find("a")
+            .removeClass("hover");
+
+        });
+
+        // Add down arrow only to menu items with submenus
+        $(".dropdown > li:has('ul')").each(function () {
+            $(this).find("a:first").append("<img src='images/down-arrow.png' />");
+        });
+
+    });
+</script>

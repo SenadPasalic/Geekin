@@ -299,5 +299,11 @@ namespace Geekin.Controllers
         {
             return View();
         }
+        //Search
+        public IActionResult Month(string myMonth)
+        {
+            var model = repository.SelectMonth(myMonth);
+            return View(model);
+        }
     }
 }

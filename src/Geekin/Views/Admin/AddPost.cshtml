@@ -159,13 +159,18 @@
                 });
 
                 //hide-show
-                $(document).ready(function () {
-                    $("#plusButton1").click(function () {
-                        $(this).find('span').toggleClass('fa-plus fa-times');
-                        $(this).toggleClass('btn-success btn-danger');
-                        $(".hideMe").toggle("slide");
-                    });
-                });                
+                //$(document).ready(function () {
+                //    $("#plusButton1").click(function () {
+                //        $(this).find('span').toggleClass('fa-plus fa-times');
+                //        $(this).toggleClass('btn-success btn-danger');
+                //        $(".hideMe").toggle("slide");
+                //    });
+                //});
+                $("#plusButton1").click(function () {
+                    $(this).find('span').toggleClass('fa-plus fa-times');
+                    $(this).toggleClass('btn-success btn-danger');
+                    $(".hideMe").toggle("slide");
+                });
             </script>
 
             <br />
