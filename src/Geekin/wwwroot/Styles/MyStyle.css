@@ -68,8 +68,8 @@ img.resizeHeader {
 #nav ul {
     list-style: none;
     height: 30px;
-    padding: 0px 1px;
-    margin: 0px;
+    padding: 0 1px;
+    margin: 0;
 }
 
 #nav ul li {
