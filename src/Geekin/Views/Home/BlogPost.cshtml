@@ -124,9 +124,10 @@
             }
             <br />
             <br />
-            <div id="button-panel">
-                <div id="button-panel" style="color: #999999"><i class="fa fa-clock-o" aria-hidden="true"></i> @item.TimePosted.ToString("HH:mm dd-MM-yyyy") by @item.PostedBy</div>
-            </div>
+            
+                var myMonth = @item.TimePosted.ToString("MMMM").ToUpper().First() + String.Join("", @item.TimePosted.ToString("MMMM").Skip(1));
+                <div id="button-panel" style="color: #999999"><i class="fa fa-clock-o" aria-hidden="true"></i> @item.TimePosted.ToString("HH:mm - dd " + @myMonth + ", yyyy") by @item.PostedBy</div>
+            
             <br />
             
             <br />
@@ -145,22 +146,6 @@
             //Fb comments
             <div class="fb-comments" data-href="http://keepongeekin.azurewebsites.net/Home/BlogPost?myTitle=@item.Title" data-width="100%" data-numposts="5"></div>
 
-            @*<div class="heartLike">
-                    <i class="fa fa-heart" aria-hidden="true" onclick="heartLike(@item.LikeCounter)"></i>
-                    <p><a id="likes">@item.LikeCounter</a></p>
-                </div>*@
-            @*<div>Share this page</div>
-                    <div class="shareDiv">
-                        <a href="#" type="fb">
-                            <div class="fa fa-facebook"></div>
-                        </a>
-                        <a href="#" type="tweet">
-                            <i class="fa fa-twitter"></i>
-                        </a>
-                        <a href="#" type="gplus">
-                            <i class="fa fa-google-plus"></i>
-                        </a>
-                </div>*@
             <hr class="style-six">
             <br />
             <br />

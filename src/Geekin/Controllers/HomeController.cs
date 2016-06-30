@@ -261,15 +261,20 @@ namespace Geekin.Controllers
 
                 using (var smtp = new SmtpClient())
                 {
+                    smtp.UseDefaultCredentials = false;                    
+
                     var credential = new NetworkCredential
                     {
                         UserName = "keepgeeking@gmail.com",  // replace with valid value
                         Password = "dinmAmma!!11!!"  // replace with valid value
                     };
                     smtp.Credentials = credential;
-                    smtp.Host = "smtp-mail.outlook.com";
+                    smtp.Host = "smtp.gmail.com"; //"smtp-mail.outlook.com";
                     smtp.Port = 587;
                     smtp.EnableSsl = true;
+
+                    smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+
                     await smtp.SendMailAsync(message);
                     return RedirectToAction("Sent");
                 }
@@ -281,6 +286,24 @@ namespace Geekin.Controllers
         public ActionResult Sent()
         {
             return View();
+        }
+
+        //About
+        public IActionResult About()
+        {
+            return View();
+        }
+
+        //Advertising
+        public IActionResult Advertising()
+        {
+            return View();
+        }
+        //Search
+        public IActionResult Month(string myMonth)
+        {
+            var model = repository.SelectMonth(myMonth);
+            return View(model);
         }
     }
 }

@@ -2,6 +2,7 @@
 using Microsoft.AspNet.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -20,6 +21,7 @@ namespace Geekin.Models
         void UpdateBlogPost(PostListVM model);
         void DeleteBlogPost(int postId);
         PostListVM[] GetSearch(string search);
+        PostListVM[] SelectMonth(string myMonth);
     }
 
     public class DbPostsRepository : IPostsRepository
@@ -186,6 +188,35 @@ namespace Geekin.Models
                     TimePosted = o.TimePosted,
                     //LikeCounter = o.LikeCounter
                     Category = o.Category
+                })
+                .ToArray();
+        }
+
+        //Hämta alla poster från en tag
+        public PostListVM[] SelectMonth(string myMonth)
+        {
+
+            System.Threading.Thread.CurrentThread.CurrentCulture = new CultureInfo("en-CA");
+            string month = DateTime.ParseExact(myMonth, "MMMM", CultureInfo.CurrentCulture).Month.ToString();
+
+            month = "-0" + month + "-";
+
+
+            return _context.Posts
+                .OrderByDescending(o => o.TimePosted)
+                //.Where(o => o.Id == myTag)
+                .Where(o => o.TimePosted.ToString().Contains(month))
+                .Select(o => new PostListVM
+                {
+                    Id = o.Id,
+                    Title = o.Title,
+                    Text = o.Text,
+                    Link = o.Link,
+                    TimePosted = o.TimePosted,
+                    Category = o.Category,
+                    PostedBy = o.PostedBy,
+                    Tags = o.Tags
+                    //LikeCounter = o.LikeCounter
                 })
                 .ToArray();
         }

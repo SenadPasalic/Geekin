@@ -89,117 +89,142 @@
     <title>@ViewBag.Title</title>
 </head>
 <body>
-    <div id="header"><img src="~/pictures/geeking header lunapic 2.png" class="resizeHeader" /></div>
+    <div id="header" title="KeepOnGeekin"><img src="~/pictures/geeking header-01 optimized.png" class="resizeHeader" /></div>
     <div class="container-fluid">
         @* id="container" *@
         @* Navbar *@
         <div class="row">
-            <nav class="navbar navbar-inverse" id="myNavbar">
-                @* navbar-fixed-top *@
-                <div class="container-fluid">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <a class="navbar-brand" href="/home/index"> <img src="~/pictures/geekinlogo.jpg" class="resize" /> </a>
+            <div class="nav-wrapper" style="height:60px;">
+                <nav class="navbar navbar-inverse" id="myNavbar">
+                    <a class="navbar-brand" href="/home/index" title="Home"> <img src="~/pictures/geekinlogo.jpg" class="resize" /> </a>
+                    @* navbar-fixed-top *@
+                    <div class="container-fluid">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <div class="myNavbarCenter hidden-sm">
+                                <div><a class="navbar-brand navbar-center1 fa fa-gamepad fa-lg" href="/Home/Category?myCategory=Games" id="myNavbarItemsGames"> Games</a></div>
+                                <div><a class="navbar-brand navbar-center2 fa fa-film fa-lg" href="/Home/Category?myCategory=Movies" id="myNavbarItemsMovies"> Movies</a></div>
+                                <div><a class="navbar-brand navbar-center3 fa fa-music fa-lg" href="/Home/Category?myCategory=Music" id="myNavbarItemsMusic"> Music</a></div>
+                                <div><a class="navbar-brand navbar-center4 fa fa-desktop fa-lg" href="/Home/Category?myCategory=Series" id="myNavbarItemsSeries"> Series</a></div>
+                            </div>
+                        </div>
+
+                            
+                        <div class="navbar-collapse collapse " id="myNavbarCollapsed">
+                            @* Navbar buttons *@
+                            <ul class="nav navbar-nav nav-pills navbar-left">
+                                @*<li><a class="navbar-brand" href="/home/index" title="Home"> <img src="~/pictures/geekinlogo.jpg" class="resize" /> </a></li>*@
+
+                                @*<li class="active"><a href="/home/index">Home</a></li>*@
+                                <li class="dropdown" id="myNavbarItems">
+                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Categories <span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        @*<li><a href="#">Page 1-1</a></li>
+                                            <li><a href="#">Page 1-2</a></li>
+                                            <li><a href="#">Page 1-3</a></li>*@
+                                        @*@foreach (var item in Model)
+                                            {
+                                                <li>
+                                                    <a href="#" data-value=@item.Category>
+                                                        <h5>@item.Category</h5>
+                                                    </a>
+                                                </li>
+                                            }*@
+                                        @Component.Invoke("CategoryList")
+                                    </ul>
+                                </li>
+                                
+                                @*<li><a href="#">Page 2</a></li>
+                                    <li><a href="#">Page 3</a></li>*@
+                            </ul>                            
+
+                            @* Social media links *@
+                            <ul class="nav navbar-nav navbar-right">
+                                @* Search box *@
+                                <li>
+                                    <div class="searchbox">
+                                        @* col-md-5 *@
+                                        <form action="" class="search-form" title="Search">
+                                            <div class="form-group has-feedback">
+                                                <label for="search" class="sr-only">Search</label>
+                                                <input type="text" class="form-control" name="search" id="search" placeholder="search">
+                                                <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </li>
+                                <li><a href="http://facebook.com/keepongeekin" title="Facebook"><span class="fa fa-facebook-official fa-1x"></span></a></li>
+                                <li><a href="https://www.instagram.com/geekeenboy/" title="Instagram"><span class="fa fa-instagram"></span></a></li>
+                                <li><a href="http://twitter.com/geekeenboy" title="Twitter"><span class="fa fa-twitter"></span></a></li>
+                                @* Register and Login button *@
+                                @*<li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                                    <li><a href="/home/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>*@
+
+                                @* If user logged in *@
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    var user = User.Identity.Name;
+                                    <li><div class="navbar-text"><b>@user</b></div></li>
+
+                                    <li><a href='@Url.Action("AddPost", "Admin")'><span class="fa fa-upload"></span> New post</a></li>
+                                    <li><a href='@Url.Action("LogOut", "Admin")'><span class="fa fa-sign-out"></span> Logout</a></li>
+                                }
+                            </ul>
+                        </div>
                     </div>
-                    <div class="navbar-collapse collapse" id="myNavbarCollapsed">
-                        @* Navbar buttons *@
-                        <ul class="nav navbar-nav nav-pills" id="myNavbarItems">
-                            @*<li class="active"><a href="/home/index">Home</a></li>*@
-                            <li class="dropdown">
-                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Categories <span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                    @*<li><a href="#">Page 1-1</a></li>
-                                        <li><a href="#">Page 1-2</a></li>
-                                        <li><a href="#">Page 1-3</a></li>*@
-                                    @*@foreach (var item in Model)
-                                        {
-                                            <li>
-                                                <a href="#" data-value=@item.Category>
-                                                    <h5>@item.Category</h5>
-                                                </a>
-                                            </li>
-                                        }*@
-                                    @Component.Invoke("CategoryList")
-                                </ul>
-                            </li>
-                            <li><a href="#">Page 2</a></li>
-                            <li><a href="#">Page 3</a></li>
-                        </ul>
-
-                        @* Social media links *@
-                        <ul class="nav navbar-nav navbar-right">
-                            @* Search box *@
-                            <li>
-                                <div class="searchbox">
-                                    @* col-md-5 *@
-                                    <form action="" class="search-form">
-                                        <div class="form-group has-feedback">
-                                            <label for="search" class="sr-only">Search</label>
-                                            <input type="text" class="form-control" name="search" id="search" placeholder="search">
-                                            <span class="glyphicon glyphicon-search form-control-feedback"></span>
-                                        </div>
-                                    </form>
-                                </div>
-                            </li>
-                            <li><a href="http://facebook.com/keepongeekin"><span class="fa fa-facebook-official fa-1x"></span></a></li>
-                            <li><a href="https://www.instagram.com/geekeenboy/"><span class="fa fa-instagram"></span></a></li>
-                            <li><a href="http://twitter.com/geekeenboy"><span class="fa fa-twitter"></span></a></li>
-                            @* Register and Login button *@
-                            @*<li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                                <li><a href="/home/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>*@
-
-                            @* If user logged in *@
-                            @if (User.Identity.IsAuthenticated)
-                            {
-                                var user = User.Identity.Name;
-                                <li><div class="navbar-text"><b>@user</b></div></li>
-
-                                <li><a href='@Url.Action("AddPost", "Admin")'><span class="fa fa-upload"></span> New post</a></li>
-                                <li><a href='@Url.Action("LogOut", "Admin")'><span class="fa fa-sign-out"></span> Logout</a></li>
-                            }
-                        </ul>
-                    </div>
-                </div>
-            </nav>
+                </nav>
+            </div>
         </div>
     </div>
 
     <div id="main">
         <div id="main_left">@RenderBody()</div>
         <div id="main_right"></div>
-    </div>    
-        <div class="footer">
-            <p><a href="/home/contact" class="footerLink">CONTACT US</a>  |  <a href="#" class="footerLink">ABOUT</a></p>
-            <p>Copyright © 2016</p>
-        </div>
+    </div>
+    <div class="footer">
+        <p><a href="/home/contact" class="footerLink">CONTACT US</a>  |  <a href="/home/about" class="footerLink">ABOUT</a>  |  <a href="/home/advertising" class="footerLink">ADVERTISING</a></p>
+        <p>Copyright © 2016</p>
+    </div>
 
-        <div>
+    <div>
 
-        </div>
-        <script type="text/javascript">
-            /* Floating BackToTop button */
-            // create the back to top button
-            $('body').prepend('<a href="#" class="back-to-top">Back to Top</a>');
-            var amountScrolled = 300;
+    </div>
+    <script type="text/javascript">
+        /* Floating BackToTop button */
+        // create the back to top button
+        $('body').prepend('<a href="#" class="back-to-top" title="Back to top">Back to Top</a>');
+        var amountScrolled = 300;
 
-            $(window).scroll(function () {
-                if ($(window).scrollTop() > amountScrolled) {
-                    $('a.back-to-top').fadeIn('slow');
-                } else {
-                    $('a.back-to-top').fadeOut('slow');
-                }
-            });
+        $(window).scroll(function () {
+            if ($(window).scrollTop() > amountScrolled) {
+                $('a.back-to-top').fadeIn('slow');
+            } else {
+                $('a.back-to-top').fadeOut('slow');
+            }
+        });
 
-            $('a.back-to-top, a.simple-back-to-top').click(function () {
-                $('html, body').animate({
-                    scrollTop: 0
-                }, 700);
-                return false;
-            });
-        </script>
+        $('a.back-to-top, a.simple-back-to-top').click(function () {
+            $('html, body').animate({
+                scrollTop: 0
+            }, 700);
+            return false;
+        });
+
+
+        /*GOOGLE ANALYTICS*/
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-80039015-1', 'auto');
+        ga('create', 'UA-79584592-1', 'auto', 'clientTracker');
+        ga('send', 'pageview');
+        ga('clientTracker.send', 'pageview');
+    </script>
 </body>
 </html>
