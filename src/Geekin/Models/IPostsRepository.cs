@@ -46,8 +46,8 @@ namespace Geekin.Models
                     TimePosted = o.TimePosted,
                     Category = o.Category,
                     PostedBy = o.PostedBy,
-                    Tags = o.Tags
-                    //LikeCounter = o.LikeCounter
+                    Tags = o.Tags,
+                    Image = o.Image
                 })
                 .ToArray();
         }
@@ -65,8 +65,8 @@ namespace Geekin.Models
                     Link = o.Link,
                     TimePosted = o.TimePosted,
                     Category = o.Category,
-                    PostedBy = o.PostedBy
-                    //LikeCounter = o.LikeCounter
+                    PostedBy = o.PostedBy,
+                    Image = o.Image
                 })
                 .ToArray();
         }
@@ -86,8 +86,8 @@ namespace Geekin.Models
                     TimePosted = o.TimePosted,
                     Category = o.Category,
                     PostedBy = o.PostedBy,
-                    Tags = myTag
-                    //LikeCounter = o.LikeCounter
+                    Tags = myTag,
+                    Image = o.Image
                 })
                 .ToArray();
         }
@@ -103,9 +103,9 @@ namespace Geekin.Models
                     Text = o.Text,
                     Link = o.Link,
                     TimePosted = o.TimePosted,
-                    //LikeCounter = o.LikeCounter
                     Category = o.Category,
-                    PostedBy = o.PostedBy
+                    PostedBy = o.PostedBy,
+                    Image = o.Image
                 })
                 .ToArray();
         }
@@ -138,9 +138,9 @@ namespace Geekin.Models
                 Link = viewModel.Link,
                 TimePosted = DateTime.Now,
                 Category = viewModel.Category,
-                LikeCounter = 0,
                 PostedBy = viewModel.PostedBy,
-                Tags = viewModel.Tags
+                Tags = viewModel.Tags,
+                Image = viewModel.Image
             });
             _context.SaveChanges();
         }
@@ -161,6 +161,7 @@ namespace Geekin.Models
             post.Text = model.Text;
             post.Link = model.Link;
             post.Tags = model.Tags;
+            post.Image = model.Image;
             _context.SaveChanges();
         }
         //Delete BlogPost
@@ -186,8 +187,8 @@ namespace Geekin.Models
                     Text = o.Text,
                     Link = o.Link,
                     TimePosted = o.TimePosted,
-                    //LikeCounter = o.LikeCounter
-                    Category = o.Category
+                    Category = o.Category,
+                    Image = o.Image
                 })
                 .ToArray();
         }
@@ -215,8 +216,8 @@ namespace Geekin.Models
                     TimePosted = o.TimePosted,
                     Category = o.Category,
                     PostedBy = o.PostedBy,
-                    Tags = o.Tags
-                    //LikeCounter = o.LikeCounter
+                    Tags = o.Tags,
+                    Image = o.Image
                 })
                 .ToArray();
         }

@@ -155,14 +155,22 @@
             {
                 @Html.Raw(item.Text);
             }
-
+            //Video
             @if (@item.Link != null)
             {
                 <br />
                 <br />
-                //Video
                 <div class="videoWrapper">
                     <iframe width="560" height="314" src="@item.Link" target="_top" allowfullscreen="allowfullscreen" frameBorder="0"></iframe>
+                </div>
+            }
+            //Image
+            @if (@item.Image != null)
+            {
+                <br />
+                <br />
+                <div class="imageWrapper">
+                    <img src="@item.Image" alt="Image" style="width:560px; height:314px;">
                 </div>
             }
             <br />
@@ -206,7 +214,7 @@
             var myMonth = @item.TimePosted.ToString("MMMM").ToUpper().First() + String.Join("", @item.TimePosted.ToString("MMMM").Skip(1));
             <div id="button-panel" style="color: #999999"><i class="fa fa-clock-o" aria-hidden="true"></i> @item.TimePosted.ToString("HH:mm - dd " + @myMonth + ", yyyy") by @item.PostedBy</div>
             <br />
-            <hr class="style-six" style="width:40%">
+            <hr class="style-six">
             <br />
         }
     </div>
@@ -280,23 +288,23 @@
             <br />
 
             @*for (int i = 0; i < all.Count; i++)
-            {
-                <div class="myLink" title="Tag">
-                    <center>@Html.ActionLink(all[i], "Tags", "Home", new { myTag = all[i] }, null)</center>
-                </div>
-            }*@
-            for (int i = 0; i < duplicates.Count; i++)
                 {
                     <div class="myLink" title="Tag">
-                        <center>@Html.ActionLink(duplicates[i], "Tags", "Home", new { myTag = duplicates[i] }, null)</center>
+                        <center>@Html.ActionLink(all[i], "Tags", "Home", new { myTag = all[i] }, null)</center>
                     </div>
-                }
-                for (int i = 0; i < singles.Count; i++)
-                {
-                    <div class="myLink" title="Tag">
-                        <center>@Html.ActionLink(singles[i], "Tags", "Home", new { myTag = singles[i] }, null)</center>
-                    </div>
-                }
+                }*@
+        for (int i = 0; i < duplicates.Count; i++)
+        {
+            <div class="myLink" title="Tag">
+                <center>@Html.ActionLink(duplicates[i], "Tags", "Home", new { myTag = duplicates[i] }, null)</center>
+            </div>
+        }
+        for (int i = 0; i < singles.Count; i++)
+        {
+            <div class="myLink" title="Tag">
+                <center>@Html.ActionLink(singles[i], "Tags", "Home", new { myTag = singles[i] }, null)</center>
+            </div>
+            }
         }
     </div>
     @{
@@ -324,23 +332,23 @@
 
         <div class="myDropdown" style="position:absolute">
             <div class="btn-group">
-                    <a class="btn btn-default dropdown-toggle btn-blog " data-toggle="dropdown" href="#" id="dropdownMenu1" style="width:110%;">
-                        <span class="selection pull-left">Select </span>
-                        <span class="pull-right caret" style="float:right;margin-top:10px;"></span>
-                    </a>
-                    
-                        <ul class="dropdown-menu myDropdown2" role="menu" aria-labelledby="dropdownMenu1">
-                            @foreach (var item in monthNames)
-                            {
+                <a class="btn btn-default dropdown-toggle btn-blog " data-toggle="dropdown" href="#" id="dropdownMenu1" style="width:110%;">
+                    <span class="selection pull-left">Select </span>
+                    <span class="pull-right caret" style="float:right;margin-top:10px;"></span>
+                </a>
 
-                                <li>
-                                    @*<a href="/home/search?myMonth=@item" data-value=@item>
-                                <h4>@item</h4>
-                            </a>*@
-                                    @Html.ActionLink(@item, "Month", "Home", new { myMonth = @item }, null)
-                                </li>
-                            }
-                        </ul>                    
+                <ul class="dropdown-menu myDropdown2" role="menu" aria-labelledby="dropdownMenu1">
+                    @foreach (var item in monthNames)
+                    {
+
+                        <li>
+                            @*<a href="/home/search?myMonth=@item" data-value=@item>
+                                    <h4>@item</h4>
+                                </a>*@
+                            @Html.ActionLink(@item, "Month", "Home", new { myMonth = @item }, null)
+                        </li>
+                    }
+                </ul>
             </div>
         </div>
 
@@ -349,6 +357,7 @@
         <br />
 
     </div>
+
 </div>
 
 

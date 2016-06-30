@@ -15,7 +15,6 @@ namespace Geekin.ViewModels
         public string Link { get; set; }
         public string PostedBy { get; set; }
         public DateTime TimePosted { get; set; }
-        public int LikeCounter { get; set; }
 
         public string Category { get; set; }
 
@@ -23,5 +22,7 @@ namespace Geekin.ViewModels
 
         public string Tags { get; set; }
         public string[] TagSplit { get; set; }
+
+        public string Image { get; set; }
     }
 }

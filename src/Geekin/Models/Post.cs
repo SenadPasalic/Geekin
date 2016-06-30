@@ -15,15 +15,13 @@ namespace Geekin.Models
         //public string PostedByFirstName { get; set; }
         //public string PostedByLastName { get; set; }
         public DateTime TimePosted { get; set; }
-        //public string UserID { get; set; }
-        //public virtual User User { get; set; }
-        public int LikeCounter { get; set; }
+        
         public string Category { get; set; }
 
         public string PostedBy { get; set; }
 
         public string Tags { get; set; }
-        //public IEnumerable<SelectListItem> Category { get; set; }
-        //public string SelectedValue { get; set; }
+
+        public string Image { get; set; }
     }
 }

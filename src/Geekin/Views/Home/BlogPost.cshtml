@@ -99,14 +99,30 @@
         @foreach (var item in Model.BlogPosts)
         {
             <h3><b>@item.Title</b></h3>
+            //Text
             @Html.Raw(item.Text)
+            //Video
             @if (@item.Link != null)
-                { <br />
+            {
+                <br />
                 <br />
                 <div class="videoWrapper">
                     <iframe width="560" height="314" src="@item.Link" target="_top" allowfullscreen="allowfullscreen" frameBorder="0"></iframe>
                 </div>
             }
+            //Image
+            @if (@item.Image != null)
+            {
+                <br />
+                <br />
+                <div class="imageWrapper">
+                    <img src="@item.Image" alt="Image" style="width:560px; height:314px;">
+                </div>
+            }
+            <br />
+            <br />
+
+            //Admin buttons
             @if (User.Identity.IsAuthenticated)
             {
                 <div id="button-panel">
@@ -124,14 +140,14 @@
             }
             <br />
             <br />
-            
-                var myMonth = @item.TimePosted.ToString("MMMM").ToUpper().First() + String.Join("", @item.TimePosted.ToString("MMMM").Skip(1));
-                <div id="button-panel" style="color: #999999"><i class="fa fa-clock-o" aria-hidden="true"></i> @item.TimePosted.ToString("HH:mm - dd " + @myMonth + ", yyyy") by @item.PostedBy</div>
-            
-            <br />
-            
-            <br />
-            <br />
+
+            var myMonth = @item.TimePosted.ToString("MMMM").ToUpper().First() + String.Join("", @item.TimePosted.ToString("MMMM").Skip(1));
+            <div id="button-panel" style="color: #999999"><i class="fa fa-clock-o" aria-hidden="true"></i> @item.TimePosted.ToString("HH:mm - dd " + @myMonth + ", yyyy") by @item.PostedBy</div>
+
+                <br />
+
+                <br />
+                <br />
             //Share and like
             <div id="share-panel">
                 <div style="color: #999999">Share this post</div>

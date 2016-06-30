@@ -23,6 +23,11 @@
             <input asp-for="Text" />
             <span asp-validation-for="Text"></span>*@
         <br />
+        <label asp-for="Image"></label>
+        <br />
+        <input asp-for="Image" placeholder="Picture link" style="width:70%;" />
+        <span asp-validation-for="Image"></span>
+        <br />
         <label asp-for="Link"></label>
         <br />
         <input asp-for="Link" placeholder="YouTube link" style="width:70%;" />
@@ -72,8 +77,6 @@
             </div>
 
             @*@Model.PostedBy = User.Identity.Name*@
-
-
 
             <input asp-for="@Model.PostedBy" type="text" hidden="hidden" value="@User.Identity.Name" />
 
