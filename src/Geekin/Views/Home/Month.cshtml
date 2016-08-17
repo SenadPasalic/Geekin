@@ -26,8 +26,13 @@
             <li><a href="/Home/Index">Home</a></li>
             @if (Model.Any())
             {
+                int count = 0;
+                @foreach (var item in Model)
+                {
+                    count++;
+                }
                 var myMonth = @Model[0].TimePosted.ToString("MMMM").ToUpper().First() + String.Join("", @Model[0].TimePosted.ToString("MMMM").Skip(1));
-                <li class="active">@myMonth</li>
+                <li class="active">@myMonth (@count)</li>
             }
         </ol>
 
@@ -47,7 +52,9 @@
             @* Skriver ut alla posts *@
             @foreach (var item in Model)
             {
+                //Title
                 <div class="myLink"><h3><b>@Html.ActionLink(@item.Title, "BlogPost", "Home", new { myTitle = @item.Id }, null)</b></h3></div>
+                //Text
                 @if (item.Text.Length > 300)
                 {
                     @Html.Raw(item.Text.Substring(0, 300));
@@ -57,13 +64,37 @@
                 {
                     @Html.Raw(item.Text);
                 }
+                //Video
                 @if (@item.Link != null)
-                { <br />
-                <br />
-                <div class="videoWrapper">
-                    <iframe width="560" height="314" src="@item.Link" target="_top" allowfullscreen="allowfullscreen" frameBorder="0"></iframe>
-                </div>
+                {
+                    <br />
+                    <br />
+                    <div class="videoWrapper">
+                        <iframe width="560" height="314" src="@item.Link" target="_top" allowfullscreen="allowfullscreen" frameBorder="0"></iframe>
+                    </div>
                 }
+                //Image
+                @if (@item.Image != null)
+                {
+                    <br />
+                    <br />
+                    <div class="imageWrapper">
+                        <img src="@item.Image" alt="Image" style="width:560px; height:314px;">
+                    </div>
+                }
+                //Tags
+                @if (item.Tags != null)
+                {
+                    string[] splitTags = item.Tags.Split(null);
+
+                    for (int i = 0; i < splitTags.Length; i++)
+                    {
+                        <div class="tag myLink" title="Tag">
+                            @Html.ActionLink(splitTags[i], "Tags", "Home", new { myTag = splitTags[i] }, null)
+                        </div>
+                    }
+                }
+                //Admin buttons
                 @if (User.Identity.IsAuthenticated)
                 {
                     <div id="button-panel">
@@ -81,8 +112,9 @@
                 }
                 <br />
                 <br />
-                var myMonth = @Model[0].TimePosted.ToString("MMMM").ToUpper().First() + String.Join("", @Model[0].TimePosted.ToString("MMMM").Skip(1));
-                <div id="button-panel" style="color: #999999"><i class="fa fa-clock-o" aria-hidden="true"></i> @item.TimePosted.ToString("HH:mm - dd " + myMonth + " yyyy") by @item.PostedBy</div>
+                //Time posted
+                var myMonth = @Model[0].TimePosted.ToString("MMMM").ToUpper().First() + String.Join("", @Model[0].TimePosted.ToString("MMM").Skip(1));
+                <div id="button-panel" style="color: #999999"><i class="fa fa-clock-o" aria-hidden="true"></i> @item.TimePosted.ToString("HH:mm - dd " + myMonth + " yyyy") by <a href="/home/author/?myAuthor=@item.PostedBy">@item.PostedBy</a></div>
                 <br />
                 <hr class="style-six">
                 <br />

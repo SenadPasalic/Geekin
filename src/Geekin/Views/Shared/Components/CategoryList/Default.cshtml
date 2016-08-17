@@ -2,6 +2,28 @@
 @model MasterOneVM
 @addTagHelper "*, Microsoft.AspNet.Mvc.TagHelpers"
 
+
+@{ 
+//List<string> allCategories = new List<string>();
+//List<string> singles = new List<string>();
+
+//foreach (var item in Model.BlogPosts)
+//{
+//    //    allCategories.Add(item.Category);
+//}
+
+//for (int i = 0; i < allCategories.Count; i++)
+//{
+//singles = allCategories.GroupBy(n => n)
+//                     .Where(g => g.Count() == 1)
+//                     .Select(g => g.Key)
+//                     .ToList();
+//}
+
+}
+
+
+
 @foreach (var item in Model.Categories)
 {
     <li>

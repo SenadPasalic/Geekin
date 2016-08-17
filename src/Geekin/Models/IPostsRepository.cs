@@ -22,6 +22,7 @@ namespace Geekin.Models
         void DeleteBlogPost(int postId);
         PostListVM[] GetSearch(string search);
         PostListVM[] SelectMonth(string myMonth);
+        PostListVM[] SelectAuthor(string myAuthor);
     }
 
     public class DbPostsRepository : IPostsRepository
@@ -128,6 +129,7 @@ namespace Geekin.Models
             if (viewModel.Link != null)
             {
                 viewModel.Link = viewModel.Link.Replace("watch?v=", "embed/");
+                viewModel.Link = viewModel.Link + "?rel=0&amp;fs=0&amp;showinfo=0";
             }
             
             //var user = _context.Users.
@@ -136,7 +138,7 @@ namespace Geekin.Models
                 Title = viewModel.Title,
                 Text = viewModel.Text,
                 Link = viewModel.Link,
-                TimePosted = DateTime.Now,
+                TimePosted = DateTime.Now.AddHours(2),
                 Category = viewModel.Category,
                 PostedBy = viewModel.PostedBy,
                 Tags = viewModel.Tags,
@@ -179,7 +181,9 @@ namespace Geekin.Models
                 .OrderByDescending(o => o.TimePosted)
                 .Where(o => o.Title.Contains(search)                
                         || o.Text.Contains(search)
-                        || o.Category.Contains(search))
+                        || o.Category.Contains(search)
+                        || o.Tags.Contains(search)
+                        || o.PostedBy.Contains(search))
                 .Select(o => new PostListVM
                 {
                     Id = o.Id,
@@ -187,6 +191,26 @@ namespace Geekin.Models
                     Text = o.Text,
                     Link = o.Link,
                     TimePosted = o.TimePosted,
+                    PostedBy = o.PostedBy,
+                    Category = o.Category,
+                    Image = o.Image
+                })
+                .ToArray();
+        }
+        //Get Author
+        public PostListVM[] SelectAuthor(string myAuthor)
+        {
+            return _context.Posts
+                .OrderByDescending(o => o.TimePosted)
+                .Where(o => o.PostedBy.Contains(myAuthor))  
+                .Select(o => new PostListVM
+                {
+                    Id = o.Id,
+                    Title = o.Title,
+                    Text = o.Text,
+                    Link = o.Link,
+                    TimePosted = o.TimePosted,
+                    PostedBy = o.PostedBy,
                     Category = o.Category,
                     Image = o.Image
                 })

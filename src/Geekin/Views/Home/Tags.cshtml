@@ -43,7 +43,9 @@
             @* Skriver ut alla posts *@
             @foreach (var item in Model)
             {
+                //Title
                 <h3><b>@Html.ActionLink(@item.Title, "BlogPost", "Home", new { myTitle = @item.Id }, null)</b></h3>
+                //Text
                 @if (item.Text.Length > 300)
                 {
                     @Html.Raw(item.Text.Substring(0, 300));
@@ -55,17 +57,57 @@
                 {
                     @Html.Raw(item.Text);
                 }
+                //Video
                 @if (@item.Link != null)
-                { <br />
-                <br />
-                <div class="videoWrapper">
-                    <iframe width="560" height="314" src="@item.Link" target="_top" allowfullscreen="allowfullscreen"></iframe>
-                </div>
+                {
+                    <br />
+                    <br />
+                    <div class="videoWrapper">
+                        <iframe width="560" height="314" src="@item.Link" target="_top" allowfullscreen="allowfullscreen"></iframe>
+                    </div>
                 }
+                //Image
+                @if (@item.Image != null)
+                {
+                    <br />
+                    <br />
+                    <div class="imageWrapper">
+                        <img src="@item.Image" alt="Image" style="width:560px; height:314px;">
+                    </div>
+                }
+                //Tags
+                @if (item.Tags != null)
+                {
+                    string[] splitTags = item.Tags.Split(null);
 
+                    for (int i = 0; i < splitTags.Length; i++)
+                    {
+                        <div class="tag myLink" title="Tag">
+                            @Html.ActionLink(splitTags[i], "Tags", "Home", new { myTag = splitTags[i] }, null)
+                        </div>
+                    }
+                }
+                //Admin buttons
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <div id="button-panel">
+                        <form asp-controller="Home" asp-action="DeleteBlogPost">
+                            <input type="hidden" name="postId" value="@item.Id" />
+                            <button type="submit" class="btn btn-danger" style="display: inline;"><span class="fa fa-trash"></span></button>
+                        </form>
+                    </div>
+                    <div id="button-panel">
+                        <form asp-controller="Home" asp-action="EditBlogPost">
+                            <input type="hidden" name="postId" value="@item.Id" />
+                            <button type="submit" class="btn btn-warning" style="display: inline;"><span class="fa fa-pencil"></span></button>
+                        </form>
+                    </div>
+                }
                 <br />
                 <br />
-                <div id="button-panel" style="color: #999999"><i class="fa fa-clock-o" aria-hidden="true"></i> @item.TimePosted.ToString("HH:mm dd-MM-yyyy") by @item.PostedBy</div>
+                //Time posted
+                var myMonth = @Model[0].TimePosted.ToString("MMMM").ToUpper().First() + String.Join("", @Model[0].TimePosted.ToString("MMM").Skip(1));
+                <div id="button-panel" style="color: #999999"><i class="fa fa-clock-o" aria-hidden="true"></i> @item.TimePosted.ToString("HH:mm - dd " + myMonth + " yyyy") by <a href="/home/author/?myAuthor=@item.PostedBy">@item.PostedBy</a></div>
                 <br />
                 <hr class="style-six">
             }

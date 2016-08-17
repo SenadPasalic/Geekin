@@ -8,7 +8,7 @@
     @if (Model.Any())
     {
         // Category will return error if empty
-        ViewBag.Title = @Model[0].Category;
+        ViewBag.Title = @Model[0].PostedBy;
     }
 }
 
@@ -18,11 +18,11 @@
         @*<center><h2 style="font-weight: 700; color: #555555; text-decoration: none">@(ViewContext.RouteData.Values["myCategory"])</h2></center>*@
         @if (Model.Any())
         {
-            <center><h2 style="font-weight: 700; color: #555555; text-decoration: none">@Model[0].Category</h2></center>
+            <center><h2 style="font-weight: 700; color: #555555; text-decoration: none">@Model[0].PostedBy</h2></center>
         }
         @* Breadcrumb *@
         <ol class="breadcrumb">
-            <li><a href="/Home/Index" title="Home">Home</a></li>
+            <li><a title="Home" href="/Home/Index">Home</a></li>
             @if (Model.Any())
             {
                 int count = 0;
@@ -30,10 +30,9 @@
                 {
                     count++;
                 }
-                <li class="active">@Model[0].Category (@count)</li>
+                <li title="Author" class="active">@Model[0].PostedBy (@count)</li>
             }
         </ol>
-
 
         @if (!Model.Any())
         {
@@ -52,11 +51,16 @@
             {
                 //Title
                 <div class="myLink"><h3><b>@Html.ActionLink(@item.Title, "BlogPost", "Home", new { myTitle = @item.Id }, null)</b></h3></div>
+                //Category
+                @if (@item.Category != null)
+                {
+                    <div class="categoryLink" title="Category"><h5><b>@Html.ActionLink(@item.Category, "Category", "Home", new { myCategory = @item.Category }, null)</b></h5></div>
+                }
                 //Text
                 @if (item.Text.Length > 300)
                 {
                     @Html.Raw(item.Text.Substring(0, 300));
-                    <div class="myLink" title="See more"><b>@Html.ActionLink(" ... See More", "BlogPost", "Home", new { myTitle = @item.Id }, null)</b></div>
+                    <div title="See more" class="myLink"><b>@Html.ActionLink(" ... See More", "BlogPost", "Home", new { myTitle = @item.Id }, null)</b></div>
                 }
                 else
                 {
@@ -64,11 +68,12 @@
                 }
                 //Video
                 @if (@item.Link != null)
-                { <br />
-                <br />
-                <div class="videoWrapper">
-                    <iframe width="560" height="314" src="@item.Link" target="_top" allowfullscreen="allowfullscreen" frameBorder="0"></iframe>
-                </div>
+                {
+                    <br />
+                    <br />
+                    <div class="videoWrapper">
+                        <iframe width="560" height="314" src="@item.Link" target="_top" allowfullscreen="allowfullscreen" frameBorder="0"></iframe>
+                    </div>
                 }
                 //Image
                 @if (@item.Image != null)
@@ -113,7 +118,7 @@
                 <br />
                 //Time posted
                 var myMonth = @item.TimePosted.ToString("MMMM").ToUpper().First() + String.Join("", @item.TimePosted.ToString("MMM").Skip(1));
-                <div id="button-panel" style="color: #999999"><i class="fa fa-clock-o" aria-hidden="true"></i> @item.TimePosted.ToString("HH:mm - dd " + @myMonth + ", yyyy") by <a href="/home/author/?myAuthor=@item.PostedBy" title="@item.PostedBy">@item.PostedBy</a></div>
+                <div id="button-panel" style="color: #999999"><i class="fa fa-clock-o" aria-hidden="true"></i> @item.TimePosted.ToString("HH:mm - dd " + @myMonth + ", yyyy") by @item.PostedBy</div>
                 <br />
                 <hr class="style-six">
                 <br />

@@ -1,4 +1,7 @@
-﻿@addTagHelper "*, Microsoft.AspNet.Mvc.TagHelpers"
+﻿<? ob_start("ob_gzhandler"); ?> 
+
+
+@addTagHelper "*, Microsoft.AspNet.Mvc.TagHelpers"
 
 <!DOCTYPE html>
 <html>
@@ -6,21 +9,22 @@
     @*<meta name="viewport" content="width=device-width" />*@
     @* Bootstrap *@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    @* Navbar *@
+    <!-- Navbar -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    @*<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">*@
     <!-- jQery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <!-- Bootstrap -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script async type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <!-- FontAwesome icons -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
     <!-- Tab icon -->
     <link rel="icon" href="~/pictures/geekin.png">
     <!-- TinyMce -->
-    <script src='//cdn.tinymce.com/4/tinymce.min.js'></script>
-    <script>
+    <script type="text/javascript" src='//cdn.tinymce.com/4/tinymce.min.js'></script>
+
+
+    <script type="text/javascript">
         /* TinyMCE */
         tinymce.init({
             selector: 'textarea#mytextarea',
@@ -45,7 +49,8 @@
                     'insertdatetime media table contextmenu paste code',
                     'textcolor colorpicker'
             ],
-            toolbar: 'forecolor backcolor | undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | media',
+            toolbar: 'forecolor backcolor | undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent',
+            // | link image | media',
             //Tar bort <p> et i nedre raden i TinyMCE editorn
             forced_root_block: "",
             //Tar bort File->New Document
@@ -73,23 +78,30 @@
         $(document).ready(function () {
             $('.dropdown-toggle').dropdown();
         });
-
-        //Change navbar color
-        $(document).ready(function () {
-            var a = document.getElementById("gameColor");
-
-            a.onclick = function () {
-
-            }
-        });
     </script>
+
     @* CSS *@
     <link href="~/styles/mystyle.css" rel="stylesheet" />
 
     <title>@ViewBag.Title</title>
+
 </head>
+
 <body>
-    <div id="header" title="KeepOnGeekin"><img src="~/pictures/geeking header-01 optimized.png" class="resizeHeader" /></div>
+    <!-- Google Tag Manager -->
+    <noscript>
+        <iframe src="//www.googletagmanager.com/ns.html?id=GTM-KGT3FL"
+                height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <script>
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window, document, 'script', 'dataLayer', 'GTM-KGT3FL');
+    </script>
+    <!-- End Google Tag Manager -->
+    <div id="header" title="KeepOnGeekin"><img src="~/Pictures/geeking header-01 optimized_1160.19x155.68.png" class="resizeHeader"/></div>
     <div class="container-fluid">
         @* id="container" *@
         @* Navbar *@
@@ -106,10 +118,10 @@
                                 <span class="icon-bar"></span>
                             </button>
                             <div class="myNavbarCenter hidden-sm">
-                                <div><a class="navbar-brand navbar-center1 fa fa-gamepad fa-lg" href="/Home/Category?myCategory=Games" id="myNavbarItemsGames"> Games</a></div>
-                                <div><a class="navbar-brand navbar-center2 fa fa-film fa-lg" href="/Home/Category?myCategory=Movies" id="myNavbarItemsMovies"> Movies</a></div>
-                                <div><a class="navbar-brand navbar-center3 fa fa-music fa-lg" href="/Home/Category?myCategory=Music" id="myNavbarItemsMusic"> Music</a></div>
-                                <div><a class="navbar-brand navbar-center4 fa fa-desktop fa-lg" href="/Home/Category?myCategory=Series" id="myNavbarItemsSeries"> Series</a></div>
+                                <div><a class="navbar-brand navbar-center1 fa fa-gamepad fa-lg" href="/Home/Category?myCategory=Games" id="myNavbarItemsGames" title="Games"> Games</a></div>
+                                <div><a class="navbar-brand navbar-center2 fa fa-film fa-lg" href="/Home/Category?myCategory=Movies" id="myNavbarItemsMovies" title="Movies"> Movies</a></div>
+                                <div><a class="navbar-brand navbar-center3 fa fa-music fa-lg" href="/Home/Category?myCategory=Music" id="myNavbarItemsMusic" title="Music"> Music</a></div>
+                                <div><a class="navbar-brand navbar-center4 fa fa-desktop fa-lg" href="/Home/Category?myCategory=Series" id="myNavbarItemsSeries" title="Series"> Series</a></div>
                             </div>
                         </div>
 
@@ -118,6 +130,14 @@
                             @* Navbar buttons *@
                             <ul class="nav navbar-nav nav-pills navbar-left">
                                 @*<li><a class="navbar-brand" href="/home/index" title="Home"> <img src="~/pictures/geekinlogo.jpg" class="resize" /> </a></li>*@
+                               
+                                @* If user logged in *@
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    var user = User.Identity.Name;
+                                    <li><div class="navbar-text"><b>@user</b></div></li>
+                                    <li><a href='@Url.Action("AddPost", "Admin")'><span class="fa fa-upload"></span> New post</a></li>
+                                }
 
                                 @*<li class="active"><a href="/home/index">Home</a></li>*@
                                 <li class="dropdown" id="myNavbarItems">
@@ -137,6 +157,7 @@
                                         @Component.Invoke("CategoryList")
                                     </ul>
                                 </li>
+
                                 
                                 @*<li><a href="#">Page 2</a></li>
                                     <li><a href="#">Page 3</a></li>*@
@@ -147,7 +168,6 @@
                                 @* Search box *@
                                 <li>
                                     <div class="searchbox">
-                                        @* col-md-5 *@
                                         <form action="" class="search-form" title="Search">
                                             <div class="form-group has-feedback">
                                                 <label for="search" class="sr-only">Search</label>
@@ -157,9 +177,12 @@
                                         </form>
                                     </div>
                                 </li>
-                                <li><a href="http://facebook.com/keepongeekin" title="Facebook"><span class="fa fa-facebook-official fa-1x"></span></a></li>
-                                <li><a href="https://www.instagram.com/geekeenboy/" title="Instagram"><span class="fa fa-instagram"></span></a></li>
-                                <li><a href="http://twitter.com/geekeenboy" title="Twitter"><span class="fa fa-twitter"></span></a></li>
+                                @if (!User.Identity.IsAuthenticated)
+                                {
+                                    <li><a href="http://facebook.com/keepongeekin" title="Facebook"><span class="fa fa-facebook-official fa-1x"></span></a></li>
+                                    <li><a href="https://www.instagram.com/geekeenboy/" title="Instagram"><span class="fa fa-instagram"></span></a></li>
+                                    <li><a href="http://twitter.com/geekeenboy" title="Twitter"><span class="fa fa-twitter"></span></a></li>
+                                }
                                 @* Register and Login button *@
                                 @*<li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
                                     <li><a href="/home/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>*@
@@ -167,10 +190,6 @@
                                 @* If user logged in *@
                                 @if (User.Identity.IsAuthenticated)
                                 {
-                                    var user = User.Identity.Name;
-                                    <li><div class="navbar-text"><b>@user</b></div></li>
-
-                                    <li><a href='@Url.Action("AddPost", "Admin")'><span class="fa fa-upload"></span> New post</a></li>
                                     <li><a href='@Url.Action("LogOut", "Admin")'><span class="fa fa-sign-out"></span> Logout</a></li>
                                 }
                             </ul>
@@ -193,7 +212,7 @@
     <div>
 
     </div>
-    <script type="text/javascript">
+    <script async type="text/javascript">
         /* Floating BackToTop button */
         // create the back to top button
         $('body').prepend('<a href="#" class="back-to-top" title="Back to top">Back to Top</a>');

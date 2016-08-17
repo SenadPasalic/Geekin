@@ -6,13 +6,20 @@
     ViewBag.Title = "Keep On Geekin'";
 }
 
+
+<div id="fb-root"></div>
+@* Facebook comments *@
 <script>
-    //Heart Like
-    var likes = 0;
-    function heartLike(likes) {
-        likes += 1;
-        document.getElementById("likes").innerHTML = likes;
-    };
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.6";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<script>
     //Timer Slider
     //$(document).ready(function () {
     //    //Events that reset and restart the timer animation when the slides change
@@ -65,8 +72,8 @@
                         {
                             <div class="item active embed-responsive embed-responsive-16by9">
                                 <iframe id="youtube" src="@item.Link"></iframe>
-                                <div class="carousel-caption">
-                                    <h3>@item.Title</h3>
+                                <div class="carousel-caption categoryDrop" title="Title">
+                                    <h2>@Html.ActionLink(@item.Title, "BlogPost", "Home", new { myTitle = @item.Id }, null)</h2>
                                 </div>
                             </div>
                         }
@@ -74,13 +81,14 @@
                         {
                             <div class="item embed-responsive embed-responsive-16by9">
                                 <iframe src="@item.Link"></iframe>
-                                <div class="carousel-caption">
-                                    <h3>@item.Title</h3>
+                                <div class="carousel-caption categoryDrop" title="Title">
+                                    <h2>@Html.ActionLink(@item.Title, "BlogPost", "Home", new { myTitle = @item.Id }, null)</h2>
                                 </div>
                             </div>
                         }
                         countToFour++;
                     }
+
                     if (countToFour == 4)
                     {
                         break;
@@ -130,12 +138,24 @@
 
             Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.*@
 
+        <ol class="newsHeaderWidth breadcrumb">
+            <li class="active"><h3><i class="newsHeader fa fa-newspaper-o fa-lg" aria-hidden="true"> News</i></h3></li>
+        </ol>
+        <br />
+        <br />
+        <br />
+        <br />
+
+
         @* Skriver ut alla posts *@
         @foreach (var item in Model.BlogPosts)
         {
             @*<h3><b>@item.Title</b></h3>*@
             //<h3><b><a href="/home/blogpost/?myParam=@item.Title">@item.Title</a></b></h3>
+
+            //Title
             <div class="myLink" title="Title"><h3><b>@Html.ActionLink(@item.Title, "BlogPost", "Home", new { myTitle = @item.Id }, null)</b></h3></div>
+            //Category
             @if (@item.Category != null)
             {
                 <div class="categoryLink" title="Category"><h5><b>@Html.ActionLink(@item.Category, "Category", "Home", new { myCategory = @item.Category }, null)</b></h5></div>
@@ -144,10 +164,11 @@
             @*<div style="color: #999999"><p>@item.PostedBy</p></div>*@
             <hr />
 
+            //Text
             @if (item.Text.Length > 300)
             {
                 <div class="myLink">
-                    @Html.Raw(item.Text.Substring(0, 300));
+                    @Html.Raw(item.Text.Substring(0, 300))
                 </div>
                 <div class="myLink" title="See more"><b>@Html.ActionLink("... See More", "BlogPost", "Home", new { myTitle = @item.Id }, null)</b></div>
             }
@@ -170,7 +191,7 @@
                 <br />
                 <br />
                 <div class="imageWrapper">
-                    <img src="@item.Image" alt="Image" style="width:560px; height:314px;">
+                    <img src="@item.Image" alt="Image" style="width:560px; height:auto;">
                 </div>
             }
             <br />
@@ -197,13 +218,13 @@
             @if (User.Identity.IsAuthenticated)
             {
                 <div id="button-panel">
-                    <form asp-controller="Home" asp-action="DeleteBlogPost">
+                    <form asp-controller="Home" asp-action="DeleteBlogPost" title="Delete">
                         <input type="hidden" name="postId" value="@item.Id" />
                         <button type="submit" class="btn btn-danger" style="display: inline;"><span class="fa fa-trash"></span></button>
                     </form>
                 </div>
                 <div id="button-panel">
-                    <form asp-controller="Home" asp-action="EditBlogPost">
+                    <form asp-controller="Home" asp-action="EditBlogPost" title="Edit">
                         <input type="hidden" name="postId" value="@item.Id" />
                         <button type="submit" class="btn btn-warning" style="display: inline;"><span class="fa fa-pencil"></span></button>
                     </form>
@@ -211,13 +232,29 @@
             }
             <br />
             <br />
-            var myMonth = @item.TimePosted.ToString("MMMM").ToUpper().First() + String.Join("", @item.TimePosted.ToString("MMMM").Skip(1));
-            <div id="button-panel" style="color: #999999"><i class="fa fa-clock-o" aria-hidden="true"></i> @item.TimePosted.ToString("HH:mm - dd " + @myMonth + ", yyyy") by @item.PostedBy</div>
+            //Time posted
+            var myMonth = @item.TimePosted.ToString("MMMM").ToUpper().First() + String.Join("", @item.TimePosted.ToString("MMM").Skip(1));
+            <div id="button-panel" style="color: #999999"><i class="fa fa-clock-o" aria-hidden="true"></i> @item.TimePosted.ToString("HH:mm - dd " + @myMonth + ", yyyy") by <a href="/home/author/?myAuthor=@item.PostedBy" title="@item.PostedBy">@item.PostedBy</a></div>
+            //<div class="myLink" title="Title">@Html.ActionLink(@item.PostedBy, "Author", "Home", new { myAuthor = @item.PostedBy }, null)</div>
+
+            //Comments
+            <a href="http://keepongeekin.azurewebsites.net/Home/BlogPost?myTitle=@item.Id" class="myComments">
+                <span class="fb-comments-count" data-href="http://keepongeekin.azurewebsites.net/Home/BlogPost?myTitle=@item.Title">0</span> comments
+            </a>
+
             <br />
             <hr class="style-six">
             <br />
         }
     </div>
+    @* Breaking News *@
+    <div class="myContentRight" style="margin-top:2.2%">
+        <center><div><i class="fa fa-exclamation" aria-hidden="true" style="color:orangered"></i><h4>BREAKING NEWS</h4></div></center>
+        <p>KeepOnGeekin is finally up and running! :D</p>
+        <p>The website is under its beta phase and might have some flaws, so please have some patience while the continuous improvements are being realized. Until then enjoy your Geek news and feel free to leave a comment or contact us.</p>
+        <p>-The KeepOnGeekin staff</p>
+    </div>
+    @* Featured tags *@
     <div class="myContentRight">
         <center><div><i class="fa fa-tags" aria-hidden="true" style="color:cornflowerblue"></i><h4>Featured tags</h4></div></center>
         @{
@@ -235,17 +272,21 @@
             }
 
 
-            string[][] result = new string[200][];
+            string[][] result = new string[2000][];
 
-            result[0] = new string[20];
+            result[0] = new string[2000];
             int k = 0;
-            for (int i = 0; i < splitTags3.Count; i++)
+
+            @if (splitTags3.Count > 0)
             {
-                for (int j = 0; j < splitTags3[i].Length; j++)
+                for (int i = 0; i < splitTags3.Count; i++)
                 {
-                    result[0][k] = result[0][k] + string.Join(" ", splitTags3[i][j]);
-                    //result[0][0] = result[0][0] + " ";
-                    k++;
+                    for (int j = 0; j < splitTags3[i].Length; j++)
+                    {
+                        result[0][k] = result[0][k] + string.Join(" ", splitTags3[i][j]);
+                        //result[0][0] = result[0][0] + " ";
+                        k++;
+                    }
                 }
             }
 
@@ -295,15 +336,15 @@
                 }*@
         for (int i = 0; i < duplicates.Count; i++)
         {
-            <div class="myLink" title="Tag">
-                <center>@Html.ActionLink(duplicates[i], "Tags", "Home", new { myTag = duplicates[i] }, null)</center>
-            </div>
+            <span class="myLink" title="@duplicates[i]">
+                @Html.ActionLink(duplicates[i], "Tags", "Home", new { myTag = duplicates[i] }, null)
+            </span>
         }
         for (int i = 0; i < singles.Count; i++)
         {
-            <div class="myLink" title="Tag">
-                <center>@Html.ActionLink(singles[i], "Tags", "Home", new { myTag = singles[i] }, null)</center>
-            </div>
+            <span class="myLink" title="@singles[i]">
+                @Html.ActionLink(singles[i], "Tags", "Home", new { myTag = singles[i] }, null)
+            </span>
             }
         }
     </div>
@@ -311,9 +352,9 @@
         string[] monthNames = System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.MonthGenitiveNames;
     }
 
-
+    @* Search by month *@
     <div class="myContentRight">
-        <center><div><i class="fa fa-search" aria-hidden="true" style="color:cornflowerblue"></i><h4>Search by month</h4></div></center>
+        <center><div><i class="fa fa-calendar" aria-hidden="true" style="color:cornflowerblue"></i><h4>Search by month</h4></div></center>
 
         @*@Html.DropDownListFor(model => Model.BlogPosts[0].TimePosted, new SelectList(
                     Enumerable.Range(1, 12)
@@ -325,39 +366,114 @@
             "Value", "Text", Model.BlogPosts[0].TimePosted))*@
 
         @{
-//string[] monthNames = System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.MonthGenitiveNames;
+            //string[] monthNames = System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.MonthGenitiveNames;
         }
-
 
 
         <div class="myDropdown" style="position:absolute">
             <div class="btn-group">
-                <a class="btn btn-default dropdown-toggle btn-blog " data-toggle="dropdown" href="#" id="dropdownMenu1" style="width:110%;">
+                <a class="btn btn-default dropdown-toggle btn-blog " data-toggle="dropdown" href="#" id="dropdownMenu1" style="width:110%;margin-left:30px;">
                     <span class="selection pull-left">Select </span>
                     <span class="pull-right caret" style="float:right;margin-top:10px;"></span>
                 </a>
 
-                <ul class="dropdown-menu myDropdown2" role="menu" aria-labelledby="dropdownMenu1">
+                <ul class="dropdown-menu myDropdown2" role="menu" aria-labelledby="dropdownMenu1" style="width:50%;margin-left:10px;">
                     @foreach (var item in monthNames)
                     {
 
-                        <li>
-                            @*<a href="/home/search?myMonth=@item" data-value=@item>
-                                    <h4>@item</h4>
-                                </a>*@
-                            @Html.ActionLink(@item, "Month", "Home", new { myMonth = @item }, null)
+                        <li title="@item">
+                            <center>
+                                @*<a href="/home/search?myMonth=@item" data-value=@item>
+                                        <h4>@item</h4>
+                                    </a>*@
+                                @Html.ActionLink(@item, "Month", "Home", new { myMonth = @item }, null)
+                            </center>
                         </li>
                     }
                 </ul>
             </div>
         </div>
-
-
         <br />
         <br />
-
     </div>
+    @* Authors *@
+    <div class="myContentRight">
+        <center><div><i class="fa fa-users" aria-hidden="true" style="color:cornflowerblue"></i><h4>Authors</h4></div></center>
 
+        @*@{
+                List<string> allAuthors = new List<string>();
+                List<string> singlesAuthor = new List<string>();
+
+                foreach (var item in Model.BlogPosts)
+                {
+                    allAuthors.Add(item.PostedBy);
+                }
+
+                singlesAuthor = allAuthors.GroupBy(n => n)
+                                        .Where(g => g.Count() == 1)
+                                        .Select(g => g.Key)
+                                        .ToList();
+
+                for (int i = 0; i < singlesAuthor.Count; i++)
+                {
+
+                }
+
+            }*@
+
+        @{
+            List<string> allAuthors = new List<string>();
+
+            foreach (var item in Model.BlogPosts)
+            {
+                allAuthors.Add(item.PostedBy);
+            }
+
+            duplicates = allAuthors.GroupBy(x => x)
+                             .Where(g => g.Count() > 1)
+                             .Select(g => g.Key)
+                             .ToList();
+
+
+            singles = allAuthors.GroupBy(n => n)
+                            .Where(g => g.Count() == 1)
+                            .Select(g => g.Key)
+                            .ToList();
+        }
+
+
+        <div class="myDropdown" style="position:absolute">
+            <div class="btn-group">
+                <a class="btn btn-default dropdown-toggle btn-blog " data-toggle="dropdown" href="#" id="dropdownMenu1" style="width:150%;margin-left:20px;">
+                    <span class="selection pull-left">Select </span>
+                    <span class="pull-right caret" style="float:right;margin-top:10px;"></span>
+                </a>
+
+                <ul class="dropdown-menu myDropdown2" role="menu" aria-labelledby="dropdownMenu1" style="margin-left:10px;">
+                    <li>
+                        <center>
+                            @{
+                                for (int i = 0; i < duplicates.Count; i++)
+                                {
+                                    <div title="@duplicates[i]">
+                                        <center><a href="/home/author/?myAuthor=@duplicates[i]" title="@duplicates[i]">@duplicates[i]</a></center>
+                                    </div>
+                                }
+                                for (int i = 0; i < singles.Count; i++)
+                                {
+                                    <div title="@singles[i]">
+                                        <center><a href="/home/author/?myAuthor=@singles[i]" title="@singles[i]">@singles[i]</a></center>
+                                    </div>
+                                }
+                            }
+                        </center>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <br />
+        <br />
+    </div>
 </div>
 
 

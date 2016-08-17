@@ -13,6 +13,7 @@ using Microsoft.AspNet.Authorization;
 using MVCEmail.Models;
 using System.Net;
 using System.Net.Mail;
+using System.Web.Security;
 
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
@@ -116,8 +117,8 @@ namespace Geekin.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginVM viewModel)
         {
-            if (!ModelState.IsValid)
-                return View(viewModel);
+            //if (!ModelState.IsValid)
+            //    return View(viewModel);
 
             // Skapa DB-schemat
             //await context.Database.EnsureCreatedAsync();
@@ -153,14 +154,14 @@ namespace Geekin.Controllers
 
                         //Logga in
                         await signInManager.PasswordSignInAsync(
-                            viewModel.UserName, viewModel.Password, false, false);
+                            viewModel.UserName, viewModel.Password, false, false);            
 
 
-           // var user2 = dbContext.Users.Single(o => o.UserName == viewModel.UserName); //namnet på den inloggade
+            // var user2 = dbContext.Users.Single(o => o.UserName == viewModel.UserName); //namnet på den inloggade
             //var currentUser = dbContext.Users.Single(o => o.Id == viewModel.UserName); //namnet på den inloggade
             var user = User.Identity.Name; //namnet på den inloggade
-            //var userId = await userManager.FindByIdAsync(User.Identity.GetUserId());
-            //string currentUserId = User.Identity.GetUserId();
+                                           //var userId = await userManager.FindByIdAsync(User.Identity.GetUserId());
+                                           //string currentUserId = User.Identity.GetUserId();
 
             //Roles.AddUserToRole(user, "Admin");
 
@@ -170,7 +171,22 @@ namespace Geekin.Controllers
 
 
 
+
+            //Validate User & Password
+            //if (!ModelState.IsValid)
+            //{
+            //    return View(viewModel);
+            //}
+            //if (!Membership.ValidateUser(viewModel.UserName, viewModel.Password))
+            //{
+            //    ModelState.AddModelError("ErrorMsg", "The user name or password is incorrect");
+            //    return View(viewModel);
+            //}
+
+
+
             return RedirectToAction(nameof(HomeController.Index)); //då du blivit inloggad, hoppa till ... //.Index
+            
 
 
             //var owner = User.Identity.Name; //namnet på den inloggade
@@ -223,6 +239,7 @@ namespace Geekin.Controllers
                     Id = postId,
                     Title = o.Title,
                     Text = o.Text,
+                    Image = o.Image,
                     Link = o.Link,
                     Tags = o.Tags
                 })
@@ -303,6 +320,12 @@ namespace Geekin.Controllers
         public IActionResult Month(string myMonth)
         {
             var model = repository.SelectMonth(myMonth);
+            return View(model);
+        }
+        //Author
+        public IActionResult Author(string myAuthor)
+        {
+            var model = repository.SelectAuthor(myAuthor);
             return View(model);
         }
     }

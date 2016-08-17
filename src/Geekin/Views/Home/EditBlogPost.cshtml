@@ -24,9 +24,15 @@
             <input asp-for="Text" />
             <span asp-validation-for="Text"></span>*@
         <br />
+        <label asp-for="Image"></label>
+        <br />
+        <input asp-for="Image" placeholder="Picture link" style="width:70%;" />
+        <span asp-validation-for="Image"></span>
+        <br />
+        <br />
         <label asp-for="Link"></label>
         <br />
-        <input asp-for="Link" placeholder="YouTube link" style="width:300px;" />
+        <input asp-for="Link" placeholder="YouTube link" style="width:70%;" />
         <span asp-validation-for="Link"></span>
         <br />
         <label asp-for="Tags"></label>
@@ -38,10 +44,13 @@
         <br />
         <br />        
 
-        <input asp-for="Id" type="hidden" value="@Model.Id" />
-        <div id="button-panel">
-            <button type="submit" value="Post" class="btn btn-success" data-dismiss="modal"><span class="fa fa-upload" aria-hidden="true"></span> Publish</button>
-        </div>  
+
+
+
+            <input asp-for="Id" type="hidden" value="@Model.Id" />
+            <div id="button-panel">
+                <button type="submit" value="Post" class="btn btn-success" data-dismiss="modal"><span class="fa fa-upload" aria-hidden="true"></span> Publish</button>
+            </div>
 </form>
 </div>
     <script src="~/scripts/jquery.min.js"></script>

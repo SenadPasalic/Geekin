@@ -98,7 +98,13 @@
         @* Skriver ut alla posts *@
         @foreach (var item in Model.BlogPosts)
         {
+            //Title
             <h3><b>@item.Title</b></h3>
+            //Category
+            @if (@item.Category != null)
+            {
+                <div class="categoryLink" title="Category"><h5><b>@Html.ActionLink(@item.Category, "Category", "Home", new { myCategory = @item.Category }, null)</b></h5></div>
+            }
             //Text
             @Html.Raw(item.Text)
             //Video
@@ -121,9 +127,20 @@
             }
             <br />
             <br />
+            //Tags
+            @if (item.Tags != null)
+            {
+                string[] splitTags = item.Tags.Split(null);
 
+                for (int i = 0; i < splitTags.Length; i++)
+                {
+                    <div class="tag myLink" title="Tag">
+                        @Html.ActionLink(splitTags[i], "Tags", "Home", new { myTag = splitTags[i] }, null)
+                    </div>
+                }
+            }
             //Admin buttons
-            @if (User.Identity.IsAuthenticated)
+            @*@if (User.Identity.IsAuthenticated)
             {
                 <div id="button-panel">
                     <form asp-controller="Home" asp-action="DeleteBlogPost">
@@ -137,11 +154,12 @@
                         <button type="submit" class="btn btn-warning" style="display: inline;"><span class="fa fa-pencil"></span></button>
                     </form>
                 </div>
-            }
+            }*@
             <br />
             <br />
 
-            var myMonth = @item.TimePosted.ToString("MMMM").ToUpper().First() + String.Join("", @item.TimePosted.ToString("MMMM").Skip(1));
+            //Time posted
+            var myMonth = @item.TimePosted.ToString("MMMM").ToUpper().First() + String.Join("", @item.TimePosted.ToString("MMM").Skip(1));
             <div id="button-panel" style="color: #999999"><i class="fa fa-clock-o" aria-hidden="true"></i> @item.TimePosted.ToString("HH:mm - dd " + @myMonth + ", yyyy") by @item.PostedBy</div>
 
                 <br />

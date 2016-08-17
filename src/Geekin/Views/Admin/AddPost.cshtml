@@ -43,7 +43,7 @@
             <div class="categoryLine">
                 <label asp-for="Category"></label>
                 <br />
-                <div class="myDropdown">
+                <div class="myDropdown" style="position:absolute">
                     <div class="btn-group">
                         <a class="btn btn-default dropdown-toggle btn-blog " data-toggle="dropdown" href="#" id="dropdownMenu1" style="width:200px;">
                             <span class="selection pull-left">Select a category </span>
@@ -84,9 +84,17 @@
             @*<span asp-validation-for="@Model.Categories[0].CategoryName"></span>*@
             @*@Html.ValidationMessageFor(x => x.Category)
                 <asp:RequiredFieldValidator ID="dropdownMenu1" runat="server" ControlToValidate="dropdown-menu" InitialValue="Please select" ErrorMessage="Please select something" />*@
+            <br />
+            <br />
+            <div id="button-panel">
+                <button type="submit" name="command" value="submit1" class="btn btn-success" data-dismiss="modal"><span class="fa fa-upload" aria-hidden="true"></span> Publish</button>
+            </div>
+    </form>
+</div>
 
-            @* Add a new Category *@
-            <script>
+
+@* Add a new Category *@
+<script>
                 $(".dropdown-menu").on('click', 'li a', function () {
                     var selText = $(this).children("h4").html();
                     $(this).parent('li').siblings().removeClass('active');
@@ -174,15 +182,8 @@
                     $(this).toggleClass('btn-success btn-danger');
                     $(".hideMe").toggle("slide");
                 });
-            </script>
+</script>
 
-            <br />
-            <br />
-            <div id="button-panel">
-                <button type="submit" name="command" value="submit1" class="btn btn-success" data-dismiss="modal"><span class="fa fa-upload" aria-hidden="true"></span> Publish</button>
-            </div>
-    </form>
-</div>
 
 @*<script src="~/scripts/jquery.min.js"></script>
     <script src="~/scripts/jquery.validate.min.js"></script>
