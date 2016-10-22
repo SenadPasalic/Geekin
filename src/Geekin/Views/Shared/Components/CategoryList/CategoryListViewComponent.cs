@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Geekin.Views.Shared.Components.CategoryList
 {
+
     public class CategoryListViewComponent : ViewComponent
     {
         IPostsRepository _postsRepository;
